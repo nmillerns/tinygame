@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module tinygame.character_display</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="tinygame.html"><font color="#ffffff">tinygame</font></a>.character_display</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:../tinygame/character_display.py">../tinygame/character_display.py</a></font></td></tr></table>
+    <p><tt>character_display<br>
+A&nbsp;submodule&nbsp;of&nbsp;tinygame&nbsp;for&nbsp;a&nbsp;virtual&nbsp;video&nbsp;game&nbsp;display&nbsp;consisting&nbsp;of&nbsp;only&nbsp;characters<br>
+You&nbsp;may&nbsp;manipulate&nbsp;it&nbsp;and&nbsp;change&nbsp;character&nbsp;cells.&nbsp;Typically&nbsp;as&nbsp;the&nbsp;your&nbsp;game&nbsp;takes&nbsp;place&nbsp;it&nbsp;will&nbsp;update&nbsp;the&nbsp;data&nbsp;in&nbsp;the&nbsp;screen&nbsp;character&nbsp;map&nbsp;showing&nbsp;the&nbsp;current&nbsp;state&nbsp;of&nbsp;the&nbsp;game&nbsp;UI.<br>
+You&nbsp;continually&nbsp;update&nbsp;the&nbsp;character&nbsp;map&nbsp;and&nbsp;show&nbsp;it&nbsp;once&nbsp;per&nbsp;time&nbsp;slice&nbsp;/&nbsp;frame&nbsp;of&nbsp;game&nbsp;time&nbsp;or&nbsp;whenever&nbsp;you&nbsp;want&nbsp;to&nbsp;show&nbsp;an&nbsp;update.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="tinygame.character_map.html#CharacterMap">tinygame.character_map.CharacterMap</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="tinygame.character_display.html#CharacterDisplay">CharacterDisplay</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CharacterDisplay">class <strong>CharacterDisplay</strong></a>(<a href="tinygame.character_map.html#CharacterMap">tinygame.character_map.CharacterMap</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;class&nbsp;representing&nbsp;a&nbsp;virtual&nbsp;video&nbsp;game&nbsp;display&nbsp;consisting&nbsp;of&nbsp;only&nbsp;characters&nbsp;(it&nbsp;extends&nbsp;the&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a>&nbsp;class)<br>
+it&nbsp;can&nbsp;have&nbsp;a&nbsp;user&nbsp;specified&nbsp;width&nbsp;and&nbsp;height<br>
+It&nbsp;is&nbsp;a&nbsp;special&nbsp;form&nbsp;of&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a>&nbsp;which&nbsp;can&nbsp;be&nbsp;showed&nbsp;on&nbsp;screen&nbsp;by&nbsp;calling&nbsp;<a href="#CharacterDisplay-show">show</a>().&nbsp;When&nbsp;shown&nbsp;it&nbsp;appears&nbsp;on&nbsp;the&nbsp;user's&nbsp;console<br>
+You&nbsp;may&nbsp;manipulate&nbsp;it&nbsp;and&nbsp;change&nbsp;cells&nbsp;like&nbsp;any&nbsp;regular&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a>.&nbsp;See&nbsp;character_map.py<br>
+Typically&nbsp;as&nbsp;your&nbsp;game&nbsp;takes&nbsp;place&nbsp;it&nbsp;will&nbsp;update&nbsp;the&nbsp;data&nbsp;in&nbsp;the&nbsp;screen&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a>&nbsp;showing&nbsp;the&nbsp;current&nbsp;state&nbsp;of&nbsp;the&nbsp;game&nbsp;UI.<br>
+You&nbsp;continually&nbsp;update&nbsp;the&nbsp;character&nbsp;map&nbsp;and&nbsp;.<a href="#CharacterDisplay-show">show</a>()&nbsp;it&nbsp;once&nbsp;per&nbsp;time&nbsp;slice&nbsp;/&nbsp;frame&nbsp;of&nbsp;game&nbsp;time.&nbsp;You&nbsp;generally&nbsp;only&nbsp;want&nbsp;to&nbsp;.<a href="#CharacterDisplay-show">show</a>()&nbsp;once&nbsp;per&nbsp;frame&nbsp;to&nbsp;avoid&nbsp;flickering<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="CharacterDisplay-__init__"><strong>__init__</strong></a>(self, width<font color="#909090">=80</font>, height<font color="#909090">=24</font>)</dt><dd><tt>Creates&nbsp;a&nbsp;character&nbsp;display&nbsp;screen&nbsp;of&nbsp;specified&nbsp;width&nbsp;and&nbsp;height<br>
+&nbsp;<br>
+width:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;representing&nbsp;the&nbsp;desired&nbsp;width&nbsp;of&nbsp;the&nbsp;display<br>
+height:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;representing&nbsp;the&nbsp;desired&nbsp;height&nbsp;of&nbsp;the&nbsp;display</tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-__setitem__"><strong>__setitem__</strong></a>(self, (x, y), value)</dt><dd><tt>Same&nbsp;as&nbsp;setting&nbsp;a&nbsp;value&nbsp;in&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-draw"><strong>draw</strong></a>(self, x, y, other, chromakey<font color="#909090">=None</font>)</dt><dd><tt>Same&nbsp;as&nbsp;drawing&nbsp;onto&nbsp;a&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-fill"><strong>fill</strong></a>(self, character)</dt><dd><tt>Same&nbsp;as&nbsp;filling&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-scroll_left"><strong>scroll_left</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Same&nbsp;as&nbsp;scrolling&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-scroll_up"><strong>scroll_up</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Same&nbsp;as&nbsp;scrolling&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-show"><strong>show</strong></a>(self)</dt><dd><tt>Updates&nbsp;the&nbsp;user's&nbsp;console&nbsp;with&nbsp;the&nbsp;current&nbsp;state&nbsp;of&nbsp;the&nbsp;screen<br>
+&nbsp;<br>
+You&nbsp;should&nbsp;do&nbsp;this&nbsp;exactly&nbsp;once&nbsp;per&nbsp;time&nbsp;slice.&nbsp;There&nbsp;is&nbsp;no&nbsp;cost&nbsp;to&nbsp;calling&nbsp;this&nbsp;many&nbsp;times&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;change&nbsp;in&nbsp;the&nbsp;display&nbsp;as&nbsp;the&nbsp;dirty&nbsp;bit&nbsp;tracks&nbsp;if&nbsp;it&nbsp;needs&nbsp;to&nbsp;actually&nbsp;be&nbsp;pushed&nbsp;on&nbsp;screen.<br>
+WARNING!&nbsp;If&nbsp;you&nbsp;change&nbsp;and&nbsp;show&nbsp;the&nbsp;screen&nbsp;too&nbsp;oftern&nbsp;flickering&nbsp;may&nbsp;result.&nbsp;Only&nbsp;.<a href="#CharacterDisplay-show">show</a>()&nbsp;when&nbsp;you&nbsp;finalize&nbsp;how&nbsp;the&nbsp;screen&nbsp;should&nbsp;look.</tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-write_text"><strong>write_text</strong></a>(self, x, y, text)</dt><dd><tt>Same&nbsp;as&nbsp;write_text&nbsp;on&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="tinygame.character_map.html#CharacterMap">tinygame.character_map.CharacterMap</a>:<br>
+<dl><dt><a name="CharacterDisplay-__getitem__"><strong>__getitem__</strong></a>(self, (x, y))</dt><dd><tt>An&nbsp;item&nbsp;getter&nbsp;operator&nbsp;override.&nbsp;&nbsp;It&nbsp;overrides&nbsp;the&nbsp;square&nbsp;bracket&nbsp;index&nbsp;operator.&nbsp;<br>
+&nbsp;<br>
+The&nbsp;(x,y)&nbsp;pair&nbsp;argument&nbsp;lets&nbsp;you&nbsp;call&nbsp;it&nbsp;with&nbsp;a&nbsp;coordinate&nbsp;in&nbsp;the&nbsp;brackets.<br>
+eg<br>
+peek&nbsp;=&nbsp;mymap[10,12]&nbsp;#&nbsp;calls&nbsp;this&nbsp;method&nbsp;with&nbsp;x=10,y=12<br>
+&nbsp;<br>
+(x,y):&nbsp;an&nbsp;integer&nbsp;pair&nbsp;specifing&nbsp;the&nbsp;coordinate&nbsp;you&nbsp;want&nbsp;to&nbsp;get<br>
+return:&nbsp;a&nbsp;single&nbsp;character&nbsp;string&nbsp;representing&nbsp;the&nbsp;value&nbsp;in&nbsp;the&nbsp;character&nbsp;map.&nbsp;eg&nbsp;'*'</tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-__str__"><strong>__str__</strong></a>(self)</dt><dd><tt>String&nbsp;operator&nbsp;overload.&nbsp;Converts&nbsp;the&nbsp;content&nbsp;of&nbsp;the&nbsp;character&nbsp;map&nbsp;to&nbsp;a&nbsp;string.<br>
+&nbsp;<br>
+Use&nbsp;newline&nbsp;characters&nbsp;to&nbsp;seperate&nbsp;the&nbsp;rows<br>
+This&nbsp;is&nbsp;called&nbsp;whenever&nbsp;you&nbsp;call:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str(my_charactermap)<br>
+&nbsp;<br>
+return:&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;this&nbsp;map</tt></dd></dl>
+
+<dl><dt><a name="CharacterDisplay-clone"><strong>clone</strong></a>(self)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;copy&nbsp;of&nbsp;this&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a>&nbsp;of&nbsp;the&nbsp;same&nbsp;width&nbsp;and&nbsp;height.&nbsp;<br>
+&nbsp;<br>
+A&nbsp;new&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a>&nbsp;of&nbsp;the&nbsp;same&nbsp;heght&nbsp;and&nbsp;width&nbsp;returned&nbsp;and&nbsp;all&nbsp;the&nbsp;data&nbsp;of&nbsp;self&nbsp;is&nbsp;copied&nbsp;to&nbsp;it</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-initialize"><strong>initialize</strong></a>()</dt></dl>
+ <dl><dt><a name="-quit"><strong>quit</strong></a>()</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>CSI</strong> = '<font color="#c040c0">\x1b</font>['<br>
+<strong>ESCAPE</strong> = '<font color="#c040c0">\x1b</font>'<br>
+<strong>HIDE_CURSOR_SEQUENCE</strong> = '<font color="#c040c0">\x1b</font>[?25l'<br>
+<strong>MOVE_HOME_SEQUENCE</strong> = '<font color="#c040c0">\x1b</font>[H'<br>
+<strong>SHOW_CURSOR_SEQUENCE</strong> = '<font color="#c040c0">\x1b</font>[?25h'</td></tr></table>
+</body></html>

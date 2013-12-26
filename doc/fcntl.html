@@ -1,0 +1,167 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: built-in module fcntl</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>fcntl</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br>(built-in)</font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;performs&nbsp;file&nbsp;control&nbsp;and&nbsp;I/O&nbsp;control&nbsp;on&nbsp;file&nbsp;<br>
+descriptors.&nbsp;&nbsp;It&nbsp;is&nbsp;an&nbsp;interface&nbsp;to&nbsp;the&nbsp;<a href="#-fcntl">fcntl</a>()&nbsp;and&nbsp;<a href="#-ioctl">ioctl</a>()&nbsp;Unix<br>
+routines.&nbsp;&nbsp;File&nbsp;descriptors&nbsp;can&nbsp;be&nbsp;obtained&nbsp;with&nbsp;the&nbsp;fileno()&nbsp;method&nbsp;of<br>
+a&nbsp;file&nbsp;or&nbsp;socket&nbsp;object.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-fcntl"><strong>fcntl</strong></a>(...)</dt><dd><tt><a href="#-fcntl">fcntl</a>(fd,&nbsp;opt,&nbsp;[arg])<br>
+&nbsp;<br>
+Perform&nbsp;the&nbsp;requested&nbsp;operation&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.&nbsp;&nbsp;The&nbsp;operation<br>
+is&nbsp;defined&nbsp;by&nbsp;op&nbsp;and&nbsp;is&nbsp;operating&nbsp;system&nbsp;dependent.&nbsp;&nbsp;These&nbsp;constants&nbsp;are<br>
+available&nbsp;from&nbsp;the&nbsp;fcntl&nbsp;module.&nbsp;&nbsp;The&nbsp;argument&nbsp;arg&nbsp;is&nbsp;optional,&nbsp;and<br>
+defaults&nbsp;to&nbsp;0;&nbsp;it&nbsp;may&nbsp;be&nbsp;an&nbsp;int&nbsp;or&nbsp;a&nbsp;string.&nbsp;&nbsp;If&nbsp;arg&nbsp;is&nbsp;given&nbsp;as&nbsp;a&nbsp;string,<br>
+the&nbsp;return&nbsp;value&nbsp;of&nbsp;fcntl&nbsp;is&nbsp;a&nbsp;string&nbsp;of&nbsp;that&nbsp;length,&nbsp;containing&nbsp;the<br>
+resulting&nbsp;value&nbsp;put&nbsp;in&nbsp;the&nbsp;arg&nbsp;buffer&nbsp;by&nbsp;the&nbsp;operating&nbsp;system.&nbsp;&nbsp;The&nbsp;length<br>
+of&nbsp;the&nbsp;arg&nbsp;string&nbsp;is&nbsp;not&nbsp;allowed&nbsp;to&nbsp;exceed&nbsp;1024&nbsp;bytes.&nbsp;&nbsp;If&nbsp;the&nbsp;arg&nbsp;given<br>
+is&nbsp;an&nbsp;integer&nbsp;or&nbsp;if&nbsp;none&nbsp;is&nbsp;specified,&nbsp;the&nbsp;result&nbsp;value&nbsp;is&nbsp;an&nbsp;integer<br>
+corresponding&nbsp;to&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;the&nbsp;fcntl&nbsp;call&nbsp;in&nbsp;the&nbsp;C&nbsp;code.</tt></dd></dl>
+ <dl><dt><a name="-flock"><strong>flock</strong></a>(...)</dt><dd><tt><a href="#-flock">flock</a>(fd,&nbsp;operation)<br>
+&nbsp;<br>
+Perform&nbsp;the&nbsp;lock&nbsp;operation&nbsp;op&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.&nbsp;&nbsp;See&nbsp;the&nbsp;Unix&nbsp;<br>
+manual&nbsp;page&nbsp;for&nbsp;<a href="#-flock">flock</a>(3)&nbsp;for&nbsp;details.&nbsp;&nbsp;(On&nbsp;some&nbsp;systems,&nbsp;this&nbsp;function&nbsp;is<br>
+emulated&nbsp;using&nbsp;<a href="#-fcntl">fcntl</a>().)</tt></dd></dl>
+ <dl><dt><a name="-ioctl"><strong>ioctl</strong></a>(...)</dt><dd><tt><a href="#-ioctl">ioctl</a>(fd,&nbsp;opt[,&nbsp;arg[,&nbsp;mutate_flag]])<br>
+&nbsp;<br>
+Perform&nbsp;the&nbsp;requested&nbsp;operation&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.&nbsp;&nbsp;The&nbsp;operation&nbsp;is<br>
+defined&nbsp;by&nbsp;opt&nbsp;and&nbsp;is&nbsp;operating&nbsp;system&nbsp;dependent.&nbsp;&nbsp;Typically&nbsp;these&nbsp;codes&nbsp;are<br>
+retrieved&nbsp;from&nbsp;the&nbsp;fcntl&nbsp;or&nbsp;termios&nbsp;library&nbsp;modules.<br>
+&nbsp;<br>
+The&nbsp;argument&nbsp;arg&nbsp;is&nbsp;optional,&nbsp;and&nbsp;defaults&nbsp;to&nbsp;0;&nbsp;it&nbsp;may&nbsp;be&nbsp;an&nbsp;int&nbsp;or&nbsp;a<br>
+buffer&nbsp;containing&nbsp;character&nbsp;data&nbsp;(most&nbsp;likely&nbsp;a&nbsp;string&nbsp;or&nbsp;an&nbsp;array).&nbsp;<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;a&nbsp;mutable&nbsp;buffer&nbsp;(such&nbsp;as&nbsp;an&nbsp;array)&nbsp;and&nbsp;if&nbsp;the<br>
+mutate_flag&nbsp;argument&nbsp;(which&nbsp;is&nbsp;only&nbsp;allowed&nbsp;in&nbsp;this&nbsp;case)&nbsp;is&nbsp;true&nbsp;then&nbsp;the<br>
+buffer&nbsp;is&nbsp;(in&nbsp;effect)&nbsp;passed&nbsp;to&nbsp;the&nbsp;operating&nbsp;system&nbsp;and&nbsp;changes&nbsp;made&nbsp;by<br>
+the&nbsp;OS&nbsp;will&nbsp;be&nbsp;reflected&nbsp;in&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;buffer&nbsp;after&nbsp;the&nbsp;call&nbsp;has<br>
+returned.&nbsp;&nbsp;The&nbsp;return&nbsp;value&nbsp;is&nbsp;the&nbsp;integer&nbsp;returned&nbsp;by&nbsp;the&nbsp;ioctl&nbsp;system<br>
+call.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;a&nbsp;mutable&nbsp;buffer&nbsp;and&nbsp;the&nbsp;mutable_flag&nbsp;argument&nbsp;is&nbsp;not<br>
+passed&nbsp;or&nbsp;is&nbsp;false,&nbsp;the&nbsp;behavior&nbsp;is&nbsp;as&nbsp;if&nbsp;a&nbsp;string&nbsp;had&nbsp;been&nbsp;passed.&nbsp;&nbsp;This<br>
+behavior&nbsp;will&nbsp;change&nbsp;in&nbsp;future&nbsp;releases&nbsp;of&nbsp;Python.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;argument&nbsp;is&nbsp;an&nbsp;immutable&nbsp;buffer&nbsp;(most&nbsp;likely&nbsp;a&nbsp;string)&nbsp;then&nbsp;a&nbsp;copy<br>
+of&nbsp;the&nbsp;buffer&nbsp;is&nbsp;passed&nbsp;to&nbsp;the&nbsp;operating&nbsp;system&nbsp;and&nbsp;the&nbsp;return&nbsp;value&nbsp;is&nbsp;a<br>
+string&nbsp;of&nbsp;the&nbsp;same&nbsp;length&nbsp;containing&nbsp;whatever&nbsp;the&nbsp;operating&nbsp;system&nbsp;put&nbsp;in<br>
+the&nbsp;buffer.&nbsp;&nbsp;The&nbsp;length&nbsp;of&nbsp;the&nbsp;arg&nbsp;buffer&nbsp;in&nbsp;this&nbsp;case&nbsp;is&nbsp;not&nbsp;allowed&nbsp;to<br>
+exceed&nbsp;1024&nbsp;bytes.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;arg&nbsp;given&nbsp;is&nbsp;an&nbsp;integer&nbsp;or&nbsp;if&nbsp;none&nbsp;is&nbsp;specified,&nbsp;the&nbsp;result&nbsp;value&nbsp;is<br>
+an&nbsp;integer&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;the&nbsp;ioctl&nbsp;call&nbsp;in&nbsp;the&nbsp;C<br>
+code.</tt></dd></dl>
+ <dl><dt><a name="-lockf"><strong>lockf</strong></a>(...)</dt><dd><tt>lockf&nbsp;(fd,&nbsp;operation,&nbsp;length=0,&nbsp;start=0,&nbsp;whence=0)<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;essentially&nbsp;a&nbsp;wrapper&nbsp;around&nbsp;the&nbsp;<a href="#-fcntl">fcntl</a>()&nbsp;locking&nbsp;calls.&nbsp;&nbsp;fd&nbsp;is&nbsp;the<br>
+file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;lock&nbsp;or&nbsp;unlock,&nbsp;and&nbsp;operation&nbsp;is&nbsp;one&nbsp;of&nbsp;the<br>
+following&nbsp;values:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;LOCK_UN&nbsp;-&nbsp;unlock<br>
+&nbsp;&nbsp;&nbsp;&nbsp;LOCK_SH&nbsp;-&nbsp;acquire&nbsp;a&nbsp;shared&nbsp;lock<br>
+&nbsp;&nbsp;&nbsp;&nbsp;LOCK_EX&nbsp;-&nbsp;acquire&nbsp;an&nbsp;exclusive&nbsp;lock<br>
+&nbsp;<br>
+When&nbsp;operation&nbsp;is&nbsp;LOCK_SH&nbsp;or&nbsp;LOCK_EX,&nbsp;it&nbsp;can&nbsp;also&nbsp;be&nbsp;bitwise&nbsp;ORed&nbsp;with<br>
+LOCK_NB&nbsp;to&nbsp;avoid&nbsp;blocking&nbsp;on&nbsp;lock&nbsp;acquisition.&nbsp;&nbsp;If&nbsp;LOCK_NB&nbsp;is&nbsp;used&nbsp;and&nbsp;the<br>
+lock&nbsp;cannot&nbsp;be&nbsp;acquired,&nbsp;an&nbsp;IOError&nbsp;will&nbsp;be&nbsp;raised&nbsp;and&nbsp;the&nbsp;exception&nbsp;will<br>
+have&nbsp;an&nbsp;errno&nbsp;attribute&nbsp;set&nbsp;to&nbsp;EACCES&nbsp;or&nbsp;EAGAIN&nbsp;(depending&nbsp;on&nbsp;the&nbsp;operating<br>
+system&nbsp;--&nbsp;for&nbsp;portability,&nbsp;check&nbsp;for&nbsp;either&nbsp;value).<br>
+&nbsp;<br>
+length&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;bytes&nbsp;to&nbsp;lock,&nbsp;with&nbsp;the&nbsp;default&nbsp;meaning&nbsp;to&nbsp;lock&nbsp;to<br>
+EOF.&nbsp;&nbsp;start&nbsp;is&nbsp;the&nbsp;byte&nbsp;offset,&nbsp;relative&nbsp;to&nbsp;whence,&nbsp;to&nbsp;that&nbsp;the&nbsp;lock<br>
+starts.&nbsp;&nbsp;whence&nbsp;is&nbsp;as&nbsp;with&nbsp;fileobj.seek(),&nbsp;specifically:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;-&nbsp;relative&nbsp;to&nbsp;the&nbsp;start&nbsp;of&nbsp;the&nbsp;file&nbsp;(SEEK_SET)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;-&nbsp;relative&nbsp;to&nbsp;the&nbsp;current&nbsp;buffer&nbsp;position&nbsp;(SEEK_CUR)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;-&nbsp;relative&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;(SEEK_END)</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>DN_ACCESS</strong> = 1<br>
+<strong>DN_ATTRIB</strong> = 32<br>
+<strong>DN_CREATE</strong> = 4<br>
+<strong>DN_DELETE</strong> = 8<br>
+<strong>DN_MODIFY</strong> = 2<br>
+<strong>DN_MULTISHOT</strong> = 2147483648<br>
+<strong>DN_RENAME</strong> = 16<br>
+<strong>FASYNC</strong> = 8192<br>
+<strong>FD_CLOEXEC</strong> = 1<br>
+<strong>F_DUPFD</strong> = 0<br>
+<strong>F_EXLCK</strong> = 4<br>
+<strong>F_GETFD</strong> = 1<br>
+<strong>F_GETFL</strong> = 3<br>
+<strong>F_GETLEASE</strong> = 1025<br>
+<strong>F_GETLK</strong> = 5<br>
+<strong>F_GETLK64</strong> = 5<br>
+<strong>F_GETOWN</strong> = 9<br>
+<strong>F_GETSIG</strong> = 11<br>
+<strong>F_NOTIFY</strong> = 1026<br>
+<strong>F_RDLCK</strong> = 0<br>
+<strong>F_SETFD</strong> = 2<br>
+<strong>F_SETFL</strong> = 4<br>
+<strong>F_SETLEASE</strong> = 1024<br>
+<strong>F_SETLK</strong> = 6<br>
+<strong>F_SETLK64</strong> = 6<br>
+<strong>F_SETLKW</strong> = 7<br>
+<strong>F_SETLKW64</strong> = 7<br>
+<strong>F_SETOWN</strong> = 8<br>
+<strong>F_SETSIG</strong> = 10<br>
+<strong>F_SHLCK</strong> = 8<br>
+<strong>F_UNLCK</strong> = 2<br>
+<strong>F_WRLCK</strong> = 1<br>
+<strong>I_ATMARK</strong> = 21279<br>
+<strong>I_CANPUT</strong> = 21282<br>
+<strong>I_CKBAND</strong> = 21277<br>
+<strong>I_FDINSERT</strong> = 21264<br>
+<strong>I_FIND</strong> = 21259<br>
+<strong>I_FLUSH</strong> = 21253<br>
+<strong>I_FLUSHBAND</strong> = 21276<br>
+<strong>I_GETBAND</strong> = 21278<br>
+<strong>I_GETCLTIME</strong> = 21281<br>
+<strong>I_GETSIG</strong> = 21258<br>
+<strong>I_GRDOPT</strong> = 21255<br>
+<strong>I_GWROPT</strong> = 21268<br>
+<strong>I_LINK</strong> = 21260<br>
+<strong>I_LIST</strong> = 21269<br>
+<strong>I_LOOK</strong> = 21252<br>
+<strong>I_NREAD</strong> = 21249<br>
+<strong>I_PEEK</strong> = 21263<br>
+<strong>I_PLINK</strong> = 21270<br>
+<strong>I_POP</strong> = 21251<br>
+<strong>I_PUNLINK</strong> = 21271<br>
+<strong>I_PUSH</strong> = 21250<br>
+<strong>I_RECVFD</strong> = 21262<br>
+<strong>I_SENDFD</strong> = 21265<br>
+<strong>I_SETCLTIME</strong> = 21280<br>
+<strong>I_SETSIG</strong> = 21257<br>
+<strong>I_SRDOPT</strong> = 21254<br>
+<strong>I_STR</strong> = 21256<br>
+<strong>I_SWROPT</strong> = 21267<br>
+<strong>I_UNLINK</strong> = 21261<br>
+<strong>LOCK_EX</strong> = 2<br>
+<strong>LOCK_MAND</strong> = 32<br>
+<strong>LOCK_NB</strong> = 4<br>
+<strong>LOCK_READ</strong> = 64<br>
+<strong>LOCK_RW</strong> = 192<br>
+<strong>LOCK_SH</strong> = 1<br>
+<strong>LOCK_UN</strong> = 8<br>
+<strong>LOCK_WRITE</strong> = 128</td></tr></table>
+</body></html>

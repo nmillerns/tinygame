@@ -1,0 +1,365 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module termios</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>termios</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.7/lib-dynload/termios.x86_64-linux-gnu.so">/usr/lib/python2.7/lib-dynload/termios.x86_64-linux-gnu.so</a><br><a href="http://docs.python.org/library/termios">Module Docs</a></font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;provides&nbsp;an&nbsp;interface&nbsp;to&nbsp;the&nbsp;Posix&nbsp;calls&nbsp;for&nbsp;tty&nbsp;I/O&nbsp;control.<br>
+For&nbsp;a&nbsp;complete&nbsp;description&nbsp;of&nbsp;these&nbsp;calls,&nbsp;see&nbsp;the&nbsp;Posix&nbsp;or&nbsp;Unix&nbsp;manual<br>
+pages.&nbsp;It&nbsp;is&nbsp;only&nbsp;available&nbsp;for&nbsp;those&nbsp;Unix&nbsp;versions&nbsp;that&nbsp;support&nbsp;Posix<br>
+termios&nbsp;style&nbsp;tty&nbsp;I/O&nbsp;control.<br>
+&nbsp;<br>
+All&nbsp;functions&nbsp;in&nbsp;this&nbsp;module&nbsp;take&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;fd&nbsp;as&nbsp;their&nbsp;first<br>
+argument.&nbsp;This&nbsp;can&nbsp;be&nbsp;an&nbsp;integer&nbsp;file&nbsp;descriptor,&nbsp;such&nbsp;as&nbsp;returned&nbsp;by<br>
+sys.stdin.fileno(),&nbsp;or&nbsp;a&nbsp;file&nbsp;object,&nbsp;such&nbsp;as&nbsp;sys.stdin&nbsp;itself.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="termios.html#error">error</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="error">class <strong>error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="termios.html#error">error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#error-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="error-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="error-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="error-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="error-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="error-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="error-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="error-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="error-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="error-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="error-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-tcdrain"><strong>tcdrain</strong></a>(...)</dt><dd><tt><a href="#-tcdrain">tcdrain</a>(fd)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Wait&nbsp;until&nbsp;all&nbsp;output&nbsp;written&nbsp;to&nbsp;file&nbsp;descriptor&nbsp;fd&nbsp;has&nbsp;been&nbsp;transmitted.</tt></dd></dl>
+ <dl><dt><a name="-tcflow"><strong>tcflow</strong></a>(...)</dt><dd><tt><a href="#-tcflow">tcflow</a>(fd,&nbsp;action)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Suspend&nbsp;or&nbsp;resume&nbsp;input&nbsp;or&nbsp;output&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.<br>
+The&nbsp;action&nbsp;argument&nbsp;can&nbsp;be&nbsp;termios.TCOOFF&nbsp;to&nbsp;suspend&nbsp;output,<br>
+termios.TCOON&nbsp;to&nbsp;restart&nbsp;output,&nbsp;termios.TCIOFF&nbsp;to&nbsp;suspend&nbsp;input,<br>
+or&nbsp;termios.TCION&nbsp;to&nbsp;restart&nbsp;input.</tt></dd></dl>
+ <dl><dt><a name="-tcflush"><strong>tcflush</strong></a>(...)</dt><dd><tt><a href="#-tcflush">tcflush</a>(fd,&nbsp;queue)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Discard&nbsp;queued&nbsp;data&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.<br>
+The&nbsp;queue&nbsp;selector&nbsp;specifies&nbsp;which&nbsp;queue:&nbsp;termios.TCIFLUSH&nbsp;for&nbsp;the&nbsp;input<br>
+queue,&nbsp;termios.TCOFLUSH&nbsp;for&nbsp;the&nbsp;output&nbsp;queue,&nbsp;or&nbsp;termios.TCIOFLUSH&nbsp;for<br>
+both&nbsp;queues.</tt></dd></dl>
+ <dl><dt><a name="-tcgetattr"><strong>tcgetattr</strong></a>(...)</dt><dd><tt><a href="#-tcgetattr">tcgetattr</a>(fd)&nbsp;-&gt;&nbsp;list_of_attrs<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;tty&nbsp;attributes&nbsp;for&nbsp;file&nbsp;descriptor&nbsp;fd,&nbsp;as&nbsp;follows:<br>
+[iflag,&nbsp;oflag,&nbsp;cflag,&nbsp;lflag,&nbsp;ispeed,&nbsp;ospeed,&nbsp;cc]&nbsp;where&nbsp;cc&nbsp;is&nbsp;a&nbsp;list<br>
+of&nbsp;the&nbsp;tty&nbsp;special&nbsp;characters&nbsp;(each&nbsp;a&nbsp;string&nbsp;of&nbsp;length&nbsp;1,&nbsp;except&nbsp;the&nbsp;items<br>
+with&nbsp;indices&nbsp;VMIN&nbsp;and&nbsp;VTIME,&nbsp;which&nbsp;are&nbsp;integers&nbsp;when&nbsp;these&nbsp;fields&nbsp;are<br>
+defined).&nbsp;&nbsp;The&nbsp;interpretation&nbsp;of&nbsp;the&nbsp;flags&nbsp;and&nbsp;the&nbsp;speeds&nbsp;as&nbsp;well&nbsp;as&nbsp;the<br>
+indexing&nbsp;in&nbsp;the&nbsp;cc&nbsp;array&nbsp;must&nbsp;be&nbsp;done&nbsp;using&nbsp;the&nbsp;symbolic&nbsp;constants&nbsp;defined<br>
+in&nbsp;this&nbsp;module.</tt></dd></dl>
+ <dl><dt><a name="-tcsendbreak"><strong>tcsendbreak</strong></a>(...)</dt><dd><tt><a href="#-tcsendbreak">tcsendbreak</a>(fd,&nbsp;duration)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Send&nbsp;a&nbsp;break&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.<br>
+A&nbsp;zero&nbsp;duration&nbsp;sends&nbsp;a&nbsp;break&nbsp;for&nbsp;0.25-0.5&nbsp;seconds;&nbsp;a&nbsp;nonzero&nbsp;duration<br>
+has&nbsp;a&nbsp;system&nbsp;dependent&nbsp;meaning.</tt></dd></dl>
+ <dl><dt><a name="-tcsetattr"><strong>tcsetattr</strong></a>(...)</dt><dd><tt><a href="#-tcsetattr">tcsetattr</a>(fd,&nbsp;when,&nbsp;attributes)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Set&nbsp;the&nbsp;tty&nbsp;attributes&nbsp;for&nbsp;file&nbsp;descriptor&nbsp;fd.<br>
+The&nbsp;attributes&nbsp;to&nbsp;be&nbsp;set&nbsp;are&nbsp;taken&nbsp;from&nbsp;the&nbsp;attributes&nbsp;argument,&nbsp;which<br>
+is&nbsp;a&nbsp;list&nbsp;like&nbsp;the&nbsp;one&nbsp;returned&nbsp;by&nbsp;<a href="#-tcgetattr">tcgetattr</a>().&nbsp;The&nbsp;when&nbsp;argument<br>
+determines&nbsp;when&nbsp;the&nbsp;attributes&nbsp;are&nbsp;changed:&nbsp;termios.TCSANOW&nbsp;to<br>
+change&nbsp;immediately,&nbsp;termios.TCSADRAIN&nbsp;to&nbsp;change&nbsp;after&nbsp;transmitting&nbsp;all<br>
+queued&nbsp;output,&nbsp;or&nbsp;termios.TCSAFLUSH&nbsp;to&nbsp;change&nbsp;after&nbsp;transmitting&nbsp;all<br>
+queued&nbsp;output&nbsp;and&nbsp;discarding&nbsp;all&nbsp;queued&nbsp;input.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>B0</strong> = 0<br>
+<strong>B110</strong> = 3<br>
+<strong>B115200</strong> = 4098<br>
+<strong>B1200</strong> = 9<br>
+<strong>B134</strong> = 4<br>
+<strong>B150</strong> = 5<br>
+<strong>B1800</strong> = 10<br>
+<strong>B19200</strong> = 14<br>
+<strong>B200</strong> = 6<br>
+<strong>B230400</strong> = 4099<br>
+<strong>B2400</strong> = 11<br>
+<strong>B300</strong> = 7<br>
+<strong>B38400</strong> = 15<br>
+<strong>B460800</strong> = 4100<br>
+<strong>B4800</strong> = 12<br>
+<strong>B50</strong> = 1<br>
+<strong>B57600</strong> = 4097<br>
+<strong>B600</strong> = 8<br>
+<strong>B75</strong> = 2<br>
+<strong>B9600</strong> = 13<br>
+<strong>BRKINT</strong> = 2<br>
+<strong>BS0</strong> = 0<br>
+<strong>BS1</strong> = 8192<br>
+<strong>BSDLY</strong> = 8192<br>
+<strong>CBAUD</strong> = 4111<br>
+<strong>CBAUDEX</strong> = 4096<br>
+<strong>CDSUSP</strong> = 25<br>
+<strong>CEOF</strong> = 4<br>
+<strong>CEOL</strong> = 0<br>
+<strong>CEOT</strong> = 4<br>
+<strong>CERASE</strong> = 127<br>
+<strong>CFLUSH</strong> = 15<br>
+<strong>CIBAUD</strong> = 269418496<br>
+<strong>CINTR</strong> = 3<br>
+<strong>CKILL</strong> = 21<br>
+<strong>CLNEXT</strong> = 22<br>
+<strong>CLOCAL</strong> = 2048<br>
+<strong>CQUIT</strong> = 28<br>
+<strong>CR0</strong> = 0<br>
+<strong>CR1</strong> = 512<br>
+<strong>CR2</strong> = 1024<br>
+<strong>CR3</strong> = 1536<br>
+<strong>CRDLY</strong> = 1536<br>
+<strong>CREAD</strong> = 128<br>
+<strong>CRPRNT</strong> = 18<br>
+<strong>CRTSCTS</strong> = 2147483648<br>
+<strong>CS5</strong> = 0<br>
+<strong>CS6</strong> = 16<br>
+<strong>CS7</strong> = 32<br>
+<strong>CS8</strong> = 48<br>
+<strong>CSIZE</strong> = 48<br>
+<strong>CSTART</strong> = 17<br>
+<strong>CSTOP</strong> = 19<br>
+<strong>CSTOPB</strong> = 64<br>
+<strong>CSUSP</strong> = 26<br>
+<strong>CWERASE</strong> = 23<br>
+<strong>ECHO</strong> = 8<br>
+<strong>ECHOCTL</strong> = 512<br>
+<strong>ECHOE</strong> = 16<br>
+<strong>ECHOK</strong> = 32<br>
+<strong>ECHOKE</strong> = 2048<br>
+<strong>ECHONL</strong> = 64<br>
+<strong>ECHOPRT</strong> = 1024<br>
+<strong>EXTA</strong> = 14<br>
+<strong>EXTB</strong> = 15<br>
+<strong>FF0</strong> = 0<br>
+<strong>FF1</strong> = 32768<br>
+<strong>FFDLY</strong> = 32768<br>
+<strong>FIOASYNC</strong> = 21586<br>
+<strong>FIOCLEX</strong> = 21585<br>
+<strong>FIONBIO</strong> = 21537<br>
+<strong>FIONCLEX</strong> = 21584<br>
+<strong>FIONREAD</strong> = 21531<br>
+<strong>FLUSHO</strong> = 4096<br>
+<strong>HUPCL</strong> = 1024<br>
+<strong>ICANON</strong> = 2<br>
+<strong>ICRNL</strong> = 256<br>
+<strong>IEXTEN</strong> = 32768<br>
+<strong>IGNBRK</strong> = 1<br>
+<strong>IGNCR</strong> = 128<br>
+<strong>IGNPAR</strong> = 4<br>
+<strong>IMAXBEL</strong> = 8192<br>
+<strong>INLCR</strong> = 64<br>
+<strong>INPCK</strong> = 16<br>
+<strong>IOCSIZE_MASK</strong> = 1073676288<br>
+<strong>IOCSIZE_SHIFT</strong> = 16<br>
+<strong>ISIG</strong> = 1<br>
+<strong>ISTRIP</strong> = 32<br>
+<strong>IUCLC</strong> = 512<br>
+<strong>IXANY</strong> = 2048<br>
+<strong>IXOFF</strong> = 4096<br>
+<strong>IXON</strong> = 1024<br>
+<strong>NCC</strong> = 8<br>
+<strong>NCCS</strong> = 32<br>
+<strong>NL0</strong> = 0<br>
+<strong>NL1</strong> = 256<br>
+<strong>NLDLY</strong> = 256<br>
+<strong>NOFLSH</strong> = 128<br>
+<strong>N_MOUSE</strong> = 2<br>
+<strong>N_PPP</strong> = 3<br>
+<strong>N_SLIP</strong> = 1<br>
+<strong>N_STRIP</strong> = 4<br>
+<strong>N_TTY</strong> = 0<br>
+<strong>OCRNL</strong> = 8<br>
+<strong>OFDEL</strong> = 128<br>
+<strong>OFILL</strong> = 64<br>
+<strong>OLCUC</strong> = 2<br>
+<strong>ONLCR</strong> = 4<br>
+<strong>ONLRET</strong> = 32<br>
+<strong>ONOCR</strong> = 16<br>
+<strong>OPOST</strong> = 1<br>
+<strong>PARENB</strong> = 256<br>
+<strong>PARMRK</strong> = 8<br>
+<strong>PARODD</strong> = 512<br>
+<strong>PENDIN</strong> = 16384<br>
+<strong>TAB0</strong> = 0<br>
+<strong>TAB1</strong> = 2048<br>
+<strong>TAB2</strong> = 4096<br>
+<strong>TAB3</strong> = 6144<br>
+<strong>TABDLY</strong> = 6144<br>
+<strong>TCFLSH</strong> = 21515<br>
+<strong>TCGETA</strong> = 21509<br>
+<strong>TCGETS</strong> = 21505<br>
+<strong>TCIFLUSH</strong> = 0<br>
+<strong>TCIOFF</strong> = 2<br>
+<strong>TCIOFLUSH</strong> = 2<br>
+<strong>TCION</strong> = 3<br>
+<strong>TCOFLUSH</strong> = 1<br>
+<strong>TCOOFF</strong> = 0<br>
+<strong>TCOON</strong> = 1<br>
+<strong>TCSADRAIN</strong> = 1<br>
+<strong>TCSAFLUSH</strong> = 2<br>
+<strong>TCSANOW</strong> = 0<br>
+<strong>TCSBRK</strong> = 21513<br>
+<strong>TCSBRKP</strong> = 21541<br>
+<strong>TCSETA</strong> = 21510<br>
+<strong>TCSETAF</strong> = 21512<br>
+<strong>TCSETAW</strong> = 21511<br>
+<strong>TCSETS</strong> = 21506<br>
+<strong>TCSETSF</strong> = 21508<br>
+<strong>TCSETSW</strong> = 21507<br>
+<strong>TCXONC</strong> = 21514<br>
+<strong>TIOCCONS</strong> = 21533<br>
+<strong>TIOCEXCL</strong> = 21516<br>
+<strong>TIOCGETD</strong> = 21540<br>
+<strong>TIOCGICOUNT</strong> = 21597<br>
+<strong>TIOCGLCKTRMIOS</strong> = 21590<br>
+<strong>TIOCGPGRP</strong> = 21519<br>
+<strong>TIOCGSERIAL</strong> = 21534<br>
+<strong>TIOCGSOFTCAR</strong> = 21529<br>
+<strong>TIOCGWINSZ</strong> = 21523<br>
+<strong>TIOCINQ</strong> = 21531<br>
+<strong>TIOCLINUX</strong> = 21532<br>
+<strong>TIOCMBIC</strong> = 21527<br>
+<strong>TIOCMBIS</strong> = 21526<br>
+<strong>TIOCMGET</strong> = 21525<br>
+<strong>TIOCMIWAIT</strong> = 21596<br>
+<strong>TIOCMSET</strong> = 21528<br>
+<strong>TIOCM_CAR</strong> = 64<br>
+<strong>TIOCM_CD</strong> = 64<br>
+<strong>TIOCM_CTS</strong> = 32<br>
+<strong>TIOCM_DSR</strong> = 256<br>
+<strong>TIOCM_DTR</strong> = 2<br>
+<strong>TIOCM_LE</strong> = 1<br>
+<strong>TIOCM_RI</strong> = 128<br>
+<strong>TIOCM_RNG</strong> = 128<br>
+<strong>TIOCM_RTS</strong> = 4<br>
+<strong>TIOCM_SR</strong> = 16<br>
+<strong>TIOCM_ST</strong> = 8<br>
+<strong>TIOCNOTTY</strong> = 21538<br>
+<strong>TIOCNXCL</strong> = 21517<br>
+<strong>TIOCOUTQ</strong> = 21521<br>
+<strong>TIOCPKT</strong> = 21536<br>
+<strong>TIOCPKT_DATA</strong> = 0<br>
+<strong>TIOCPKT_DOSTOP</strong> = 32<br>
+<strong>TIOCPKT_FLUSHREAD</strong> = 1<br>
+<strong>TIOCPKT_FLUSHWRITE</strong> = 2<br>
+<strong>TIOCPKT_NOSTOP</strong> = 16<br>
+<strong>TIOCPKT_START</strong> = 8<br>
+<strong>TIOCPKT_STOP</strong> = 4<br>
+<strong>TIOCSCTTY</strong> = 21518<br>
+<strong>TIOCSERCONFIG</strong> = 21587<br>
+<strong>TIOCSERGETLSR</strong> = 21593<br>
+<strong>TIOCSERGETMULTI</strong> = 21594<br>
+<strong>TIOCSERGSTRUCT</strong> = 21592<br>
+<strong>TIOCSERGWILD</strong> = 21588<br>
+<strong>TIOCSERSETMULTI</strong> = 21595<br>
+<strong>TIOCSERSWILD</strong> = 21589<br>
+<strong>TIOCSER_TEMT</strong> = 1<br>
+<strong>TIOCSETD</strong> = 21539<br>
+<strong>TIOCSLCKTRMIOS</strong> = 21591<br>
+<strong>TIOCSPGRP</strong> = 21520<br>
+<strong>TIOCSSERIAL</strong> = 21535<br>
+<strong>TIOCSSOFTCAR</strong> = 21530<br>
+<strong>TIOCSTI</strong> = 21522<br>
+<strong>TIOCSWINSZ</strong> = 21524<br>
+<strong>TOSTOP</strong> = 256<br>
+<strong>VDISCARD</strong> = 13<br>
+<strong>VEOF</strong> = 4<br>
+<strong>VEOL</strong> = 11<br>
+<strong>VEOL2</strong> = 16<br>
+<strong>VERASE</strong> = 2<br>
+<strong>VINTR</strong> = 0<br>
+<strong>VKILL</strong> = 3<br>
+<strong>VLNEXT</strong> = 15<br>
+<strong>VMIN</strong> = 6<br>
+<strong>VQUIT</strong> = 1<br>
+<strong>VREPRINT</strong> = 12<br>
+<strong>VSTART</strong> = 8<br>
+<strong>VSTOP</strong> = 9<br>
+<strong>VSUSP</strong> = 10<br>
+<strong>VSWTC</strong> = 7<br>
+<strong>VSWTCH</strong> = 7<br>
+<strong>VT0</strong> = 0<br>
+<strong>VT1</strong> = 16384<br>
+<strong>VTDLY</strong> = 16384<br>
+<strong>VTIME</strong> = 5<br>
+<strong>VWERASE</strong> = 14<br>
+<strong>XCASE</strong> = 4<br>
+<strong>XTABS</strong> = 6144</td></tr></table>
+</body></html>

@@ -1,0 +1,64 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module tinygame.keyboard</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="tinygame.html"><font color="#ffffff">tinygame</font></a>.keyboard</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:../tinygame/keyboard.py">../tinygame/keyboard.py</a></font></td></tr></table>
+    <p><tt>keyboard<br>
+A&nbsp;submodule&nbsp;inside&nbsp;tinygame&nbsp;that&nbsp;provides&nbsp;more&nbsp;game&nbsp;like&nbsp;keyboard&nbsp;input<br>
+This&nbsp;code&nbsp;is&nbsp;based&nbsp;largley&nbsp;on&nbsp;the&nbsp;post&nbsp;at&nbsp;<a href="http://effbot.org/pyfaq/how-do-i-get-a-single-keypress-at-a-time.htm">http://effbot.org/pyfaq/how-do-i-get-a-single-keypress-at-a-time.htm</a></tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="fcntl.html">fcntl</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="select.html">select</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="termios.html">termios</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-getch"><strong>getch</strong></a>(timeout<font color="#909090">=0</font>)</dt><dd><tt>Reads&nbsp;one&nbsp;most&nbsp;resent&nbsp;key&nbsp;hit&nbsp;by&nbsp;the&nbsp;user.<br>
+&nbsp;<br>
+Styled&nbsp;after&nbsp;the&nbsp;<a href="#-getch">getch</a>()&nbsp;function&nbsp;in&nbsp;&lt;conio.h&gt;&nbsp;in&nbsp;C<br>
+It&nbsp;is&nbsp;a&nbsp;nonblocking&nbsp;call&nbsp;to&nbsp;read&nbsp;the&nbsp;keyboard.&nbsp;You&nbsp;call&nbsp;it&nbsp;and&nbsp;wait&nbsp;for&nbsp;a&nbsp;maximum&nbsp;amount&nbsp;of&nbsp;time&nbsp;for&nbsp;a&nbsp;key&nbsp;press.&nbsp;If&nbsp;a&nbsp;key&nbsp;has&nbsp;already&nbsp;been&nbsp;pressed&nbsp;it&nbsp;returns&nbsp;immediately.<br>
+The&nbsp;name&nbsp;can&nbsp;be&nbsp;misleading&nbsp;sinc&nbsp;key&nbsp;hits&nbsp;are&nbsp;sometimes&nbsp;escape&nbsp;sequences&nbsp;containing&nbsp;several&nbsp;characters.&nbsp;eg&nbsp;ESC[A&nbsp;is&nbsp;the&nbsp;Up&nbsp;key.&nbsp;Nevertheless&nbsp;the&nbsp;most&nbsp;recent&nbsp;full&nbsp;key&nbsp;character&nbsp;string&nbsp;is&nbsp;returned<br>
+&nbsp;<br>
+timeout:&nbsp;a&nbsp;floating&nbsp;point&nbsp;value&nbsp;representing&nbsp;the&nbsp;maximum&nbsp;amount&nbsp;of&nbsp;time&nbsp;(in&nbsp;second&nbsp;units)&nbsp;to&nbsp;wait&nbsp;for&nbsp;a&nbsp;key&nbsp;press.&nbsp;If&nbsp;it&nbsp;is&nbsp;0,&nbsp;the&nbsp;function&nbsp;returns&nbsp;immediately&nbsp;and&nbsp;reports&nbsp;the&nbsp;most&nbsp;recent&nbsp;key<br>
+return:&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;key&nbsp;pressed&nbsp;may&nbsp;be&nbsp;None&nbsp;if&nbsp;no&nbsp;key&nbsp;was&nbsp;pressed.&nbsp;eg&nbsp;'x'&nbsp;for&nbsp;the&nbsp;x&nbsp;key&nbsp;or&nbsp;'ESC[A'&nbsp;for&nbsp;the&nbsp;up&nbsp;arrow&nbsp;key</tt></dd></dl>
+ <dl><dt><a name="-initialize"><strong>initialize</strong></a>()</dt><dd><tt>Initializes&nbsp;the&nbsp;keyboard&nbsp;submodule.&nbsp;<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;important&nbsp;since&nbsp;we&nbsp;need&nbsp;to&nbsp;change&nbsp;the&nbsp;mode&nbsp;of&nbsp;the&nbsp;keyboard&nbsp;attributes&nbsp;to&nbsp;read&nbsp;non-blocking&nbsp;etc</tt></dd></dl>
+ <dl><dt><a name="-quit"><strong>quit</strong></a>()</dt><dd><tt>De-initializes&nbsp;the&nbsp;keyboard&nbsp;module.&nbsp;This&nbsp;is&nbsp;important&nbsp;since&nbsp;we&nbsp;need&nbsp;to&nbsp;restore&nbsp;the&nbsp;keyboard&nbsp;attributes</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>CSI</strong> = '<font color="#c040c0">\x1b</font>['<br>
+<strong>ESCAPE</strong> = '<font color="#c040c0">\x1b</font>'<br>
+<strong>KEY_BACKSPACE</strong> = '<font color="#c040c0">\x7f</font>'<br>
+<strong>KEY_DELETE</strong> = '<font color="#c040c0">\x1b</font>[3~'<br>
+<strong>KEY_DOWN</strong> = '<font color="#c040c0">\x1b</font>[B'<br>
+<strong>KEY_ENTER</strong> = '<font color="#c040c0">\n</font>'<br>
+<strong>KEY_ESCAPE</strong> = '<font color="#c040c0">\x1b</font>'<br>
+<strong>KEY_LEFT</strong> = '<font color="#c040c0">\x1b</font>[D'<br>
+<strong>KEY_RIGHT</strong> = '<font color="#c040c0">\x1b</font>[C'<br>
+<strong>KEY_TAB</strong> = '<font color="#c040c0">\t</font>'<br>
+<strong>KEY_UP</strong> = '<font color="#c040c0">\x1b</font>[A'</td></tr></table>
+</body></html>

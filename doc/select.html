@@ -1,0 +1,221 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: built-in module select</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>select</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br>(built-in)</font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;supports&nbsp;asynchronous&nbsp;I/O&nbsp;on&nbsp;multiple&nbsp;file&nbsp;descriptors.<br>
+&nbsp;<br>
+***&nbsp;IMPORTANT&nbsp;NOTICE&nbsp;***<br>
+On&nbsp;Windows&nbsp;and&nbsp;OpenVMS,&nbsp;only&nbsp;sockets&nbsp;are&nbsp;supported;&nbsp;on&nbsp;Unix,&nbsp;all&nbsp;file&nbsp;descriptors.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="select.html#epoll">epoll</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="select.html#error">error</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="epoll">class <strong>epoll</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>select.<a href="#epoll">epoll</a>([sizehint=-1])<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;epolling&nbsp;<a href="__builtin__.html#object">object</a><br>
+&nbsp;<br>
+sizehint&nbsp;must&nbsp;be&nbsp;a&nbsp;positive&nbsp;integer&nbsp;or&nbsp;-1&nbsp;for&nbsp;the&nbsp;default&nbsp;size.&nbsp;The<br>
+sizehint&nbsp;is&nbsp;used&nbsp;to&nbsp;optimize&nbsp;internal&nbsp;data&nbsp;structures.&nbsp;It&nbsp;doesn't&nbsp;limit<br>
+the&nbsp;maximum&nbsp;number&nbsp;of&nbsp;monitored&nbsp;events.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="epoll-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#epoll-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="epoll-close"><strong>close</strong></a>(...)</dt><dd><tt><a href="#epoll-close">close</a>()&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Close&nbsp;the&nbsp;<a href="#epoll">epoll</a>&nbsp;control&nbsp;file&nbsp;descriptor.&nbsp;Further&nbsp;operations&nbsp;on&nbsp;the&nbsp;<a href="#epoll">epoll</a><br>
+<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception.</tt></dd></dl>
+
+<dl><dt><a name="epoll-fileno"><strong>fileno</strong></a>(...)</dt><dd><tt><a href="#epoll-fileno">fileno</a>()&nbsp;-&gt;&nbsp;int<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;<a href="#epoll">epoll</a>&nbsp;control&nbsp;file&nbsp;descriptor.</tt></dd></dl>
+
+<dl><dt><a name="epoll-fromfd"><strong>fromfd</strong></a>(...)</dt><dd><tt><a href="#epoll-fromfd">fromfd</a>(fd)&nbsp;-&gt;&nbsp;<a href="#epoll">epoll</a><br>
+&nbsp;<br>
+Create&nbsp;an&nbsp;<a href="#epoll">epoll</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;from&nbsp;a&nbsp;given&nbsp;control&nbsp;fd.</tt></dd></dl>
+
+<dl><dt><a name="epoll-modify"><strong>modify</strong></a>(...)</dt><dd><tt><a href="#epoll-modify">modify</a>(fd,&nbsp;eventmask)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+fd&nbsp;is&nbsp;the&nbsp;target&nbsp;file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;operation<br>
+events&nbsp;is&nbsp;a&nbsp;bit&nbsp;set&nbsp;composed&nbsp;of&nbsp;the&nbsp;various&nbsp;EPOLL&nbsp;constants</tt></dd></dl>
+
+<dl><dt><a name="epoll-poll"><strong>poll</strong></a>(...)</dt><dd><tt><a href="#epoll-poll">poll</a>([timeout=-1[,&nbsp;maxevents=-1]])&nbsp;-&gt;&nbsp;[(fd,&nbsp;events),&nbsp;(...)]<br>
+&nbsp;<br>
+Wait&nbsp;for&nbsp;events&nbsp;on&nbsp;the&nbsp;<a href="#epoll">epoll</a>&nbsp;file&nbsp;descriptor&nbsp;for&nbsp;a&nbsp;maximum&nbsp;time&nbsp;of&nbsp;timeout<br>
+in&nbsp;seconds&nbsp;(as&nbsp;float).&nbsp;-1&nbsp;makes&nbsp;poll&nbsp;wait&nbsp;indefinitely.<br>
+Up&nbsp;to&nbsp;maxevents&nbsp;are&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller.</tt></dd></dl>
+
+<dl><dt><a name="epoll-register"><strong>register</strong></a>(...)</dt><dd><tt><a href="#epoll-register">register</a>(fd[,&nbsp;eventmask])&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Registers&nbsp;a&nbsp;new&nbsp;fd&nbsp;or&nbsp;raises&nbsp;an&nbsp;IOError&nbsp;if&nbsp;the&nbsp;fd&nbsp;is&nbsp;already&nbsp;registered.<br>
+fd&nbsp;is&nbsp;the&nbsp;target&nbsp;file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;operation.<br>
+events&nbsp;is&nbsp;a&nbsp;bit&nbsp;set&nbsp;composed&nbsp;of&nbsp;the&nbsp;various&nbsp;EPOLL&nbsp;constants;&nbsp;the&nbsp;default<br>
+is&nbsp;EPOLL_IN&nbsp;|&nbsp;EPOLL_OUT&nbsp;|&nbsp;EPOLL_PRI.<br>
+&nbsp;<br>
+The&nbsp;<a href="#epoll">epoll</a>&nbsp;interface&nbsp;supports&nbsp;all&nbsp;file&nbsp;descriptors&nbsp;that&nbsp;support&nbsp;poll.</tt></dd></dl>
+
+<dl><dt><a name="epoll-unregister"><strong>unregister</strong></a>(...)</dt><dd><tt><a href="#epoll-unregister">unregister</a>(fd)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+fd&nbsp;is&nbsp;the&nbsp;target&nbsp;file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;operation.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>closed</strong></dt>
+<dd><tt>True&nbsp;if&nbsp;the&nbsp;epoll&nbsp;handler&nbsp;is&nbsp;closed</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#epoll-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="error">class <strong>error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="select.html#error">error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="error-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__init__">__init__</a>(...)&nbsp;initializes&nbsp;x;&nbsp;see&nbsp;help(type(x))&nbsp;for&nbsp;signature</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#error-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="error-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="error-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="error-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="error-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="error-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="error-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="error-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="error-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="error-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#error-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="error-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-poll"><strong>poll</strong></a>(...)</dt><dd><tt>Returns&nbsp;a&nbsp;polling&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;which&nbsp;supports&nbsp;registering&nbsp;and<br>
+unregistering&nbsp;file&nbsp;descriptors,&nbsp;and&nbsp;then&nbsp;polling&nbsp;them&nbsp;for&nbsp;I/O&nbsp;events.</tt></dd></dl>
+ <dl><dt><a name="-select"><strong>select</strong></a>(...)</dt><dd><tt><a href="#-select">select</a>(rlist,&nbsp;wlist,&nbsp;xlist[,&nbsp;timeout])&nbsp;-&gt;&nbsp;(rlist,&nbsp;wlist,&nbsp;xlist)<br>
+&nbsp;<br>
+Wait&nbsp;until&nbsp;one&nbsp;or&nbsp;more&nbsp;file&nbsp;descriptors&nbsp;are&nbsp;ready&nbsp;for&nbsp;some&nbsp;kind&nbsp;of&nbsp;I/O.<br>
+The&nbsp;first&nbsp;three&nbsp;arguments&nbsp;are&nbsp;sequences&nbsp;of&nbsp;file&nbsp;descriptors&nbsp;to&nbsp;be&nbsp;waited&nbsp;for:<br>
+rlist&nbsp;--&nbsp;wait&nbsp;until&nbsp;ready&nbsp;for&nbsp;reading<br>
+wlist&nbsp;--&nbsp;wait&nbsp;until&nbsp;ready&nbsp;for&nbsp;writing<br>
+xlist&nbsp;--&nbsp;wait&nbsp;for&nbsp;an&nbsp;``exceptional&nbsp;condition''<br>
+If&nbsp;only&nbsp;one&nbsp;kind&nbsp;of&nbsp;condition&nbsp;is&nbsp;required,&nbsp;pass&nbsp;[]&nbsp;for&nbsp;the&nbsp;other&nbsp;lists.<br>
+A&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;either&nbsp;a&nbsp;socket&nbsp;or&nbsp;file&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;or&nbsp;a&nbsp;small&nbsp;integer<br>
+gotten&nbsp;from&nbsp;a&nbsp;fileno()&nbsp;method&nbsp;call&nbsp;on&nbsp;one&nbsp;of&nbsp;those.<br>
+&nbsp;<br>
+The&nbsp;optional&nbsp;4th&nbsp;argument&nbsp;specifies&nbsp;a&nbsp;timeout&nbsp;in&nbsp;seconds;&nbsp;it&nbsp;may&nbsp;be<br>
+a&nbsp;floating&nbsp;point&nbsp;number&nbsp;to&nbsp;specify&nbsp;fractions&nbsp;of&nbsp;seconds.&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;absent<br>
+or&nbsp;None,&nbsp;the&nbsp;call&nbsp;will&nbsp;never&nbsp;time&nbsp;out.<br>
+&nbsp;<br>
+The&nbsp;return&nbsp;value&nbsp;is&nbsp;a&nbsp;tuple&nbsp;of&nbsp;three&nbsp;lists&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;first&nbsp;three<br>
+arguments;&nbsp;each&nbsp;contains&nbsp;the&nbsp;subset&nbsp;of&nbsp;the&nbsp;corresponding&nbsp;file&nbsp;descriptors<br>
+that&nbsp;are&nbsp;ready.<br>
+&nbsp;<br>
+***&nbsp;IMPORTANT&nbsp;NOTICE&nbsp;***<br>
+On&nbsp;Windows&nbsp;and&nbsp;OpenVMS,&nbsp;only&nbsp;sockets&nbsp;are&nbsp;supported;&nbsp;on&nbsp;Unix,&nbsp;all&nbsp;file<br>
+descriptors&nbsp;can&nbsp;be&nbsp;used.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>EPOLLERR</strong> = 8<br>
+<strong>EPOLLET</strong> = 2147483648<br>
+<strong>EPOLLHUP</strong> = 16<br>
+<strong>EPOLLIN</strong> = 1<br>
+<strong>EPOLLMSG</strong> = 1024<br>
+<strong>EPOLLONESHOT</strong> = 1073741824<br>
+<strong>EPOLLOUT</strong> = 4<br>
+<strong>EPOLLPRI</strong> = 2<br>
+<strong>EPOLLRDBAND</strong> = 128<br>
+<strong>EPOLLRDNORM</strong> = 64<br>
+<strong>EPOLLWRBAND</strong> = 512<br>
+<strong>EPOLLWRNORM</strong> = 256<br>
+<strong>PIPE_BUF</strong> = 4096<br>
+<strong>POLLERR</strong> = 8<br>
+<strong>POLLHUP</strong> = 16<br>
+<strong>POLLIN</strong> = 1<br>
+<strong>POLLMSG</strong> = 1024<br>
+<strong>POLLNVAL</strong> = 32<br>
+<strong>POLLOUT</strong> = 4<br>
+<strong>POLLPRI</strong> = 2<br>
+<strong>POLLRDBAND</strong> = 128<br>
+<strong>POLLRDNORM</strong> = 64<br>
+<strong>POLLWRBAND</strong> = 512<br>
+<strong>POLLWRNORM</strong> = 256</td></tr></table>
+</body></html>
