@@ -106,6 +106,10 @@ class HighScoresGUI():
 	"""
 	def __init__(self, highscoresDB):
 		"""
+		Constructs a GUI to handle and present High Scores for your game.
+		It is driven by a given database object for high scores. See HighScoresDB
+		
+		highscoresDB: a High Scores Database to save restore the high scores for this GUI
 		"""
 		self.highscoresDB = highscoresDB
 		self.highscoresDB.restore()
@@ -167,10 +171,11 @@ class HighScoresGUI():
 
 	def input_name(self, screen, maxlen=10):
 		"""
-		Type in the name for entry for high score
+		Prompts the user to type in the name for entry in the high scores
 		
 		screen: the screen to show stuff on
 		maxlen: the maximum number of characters allowed in the name (default 10)
+		return: a string of the name as typed in by the user
 		"""
 		def update_display():
 			"""
@@ -183,16 +188,16 @@ class HighScoresGUI():
 			screen.write_text(x,3, "Enter Name: " + name)
 			screen.show()
 
-		name = ""
-		ch = None
-		update_display()
+		name = "" # start with a blank name
+		ch = None # the character entered from the keyboard
+		update_display() # show the display to begin
 
-		while True:
-			ch = keyboard.getch(10000)
-			if ch == '\n': break
-			elif ch == keyboard.KEY_BACKSPACE: name = name[0:len(name)-1]
-			elif ch not in [',', ' ', None] and len(ch) == 1 and len(name) < maxlen: name += ch
-			update_display()
+		while True: # go until Enter is pressed
+			ch = keyboard.getch(10000) # get the next key board press
+			if ch == '\n': break # we are done when Enter = \n is pressed
+			elif ch == keyboard.KEY_BACKSPACE: name = name[0:len(name)-1] # if we hit bakspace use all but the latest character
+			elif ch not in [',', ' ', None] and len(ch) == 1 and len(name) < maxlen: name += ch # add the newest character unless it is whitespace, unprintable, or we go over our character limit
+			update_display() # keep updating the display
 
 		return name
 

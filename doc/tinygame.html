@@ -72,17 +72,21 @@ N:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;representing&nbsp;the&nbsp;number&nbsp
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="HighScoresGUI-__init__"><strong>__init__</strong></a>(self, highscoresDB)</dt></dl>
+<dl><dt><a name="HighScoresGUI-__init__"><strong>__init__</strong></a>(self, highscoresDB)</dt><dd><tt>Constructs&nbsp;a&nbsp;GUI&nbsp;to&nbsp;handle&nbsp;and&nbsp;present&nbsp;High&nbsp;Scores&nbsp;for&nbsp;your&nbsp;game.<br>
+It&nbsp;is&nbsp;driven&nbsp;by&nbsp;a&nbsp;given&nbsp;database&nbsp;object&nbsp;for&nbsp;high&nbsp;scores.&nbsp;See&nbsp;<a href="#HighScoresDB">HighScoresDB</a><br>
+&nbsp;<br>
+highscoresDB:&nbsp;a&nbsp;High&nbsp;Scores&nbsp;Database&nbsp;to&nbsp;save&nbsp;restore&nbsp;the&nbsp;high&nbsp;scores&nbsp;for&nbsp;this&nbsp;GUI</tt></dd></dl>
 
 <dl><dt><a name="HighScoresGUI-handle_new_score"><strong>handle_new_score</strong></a>(self, score, screen)</dt><dd><tt>Takes&nbsp;in&nbsp;a&nbsp;new&nbsp;score&nbsp;and&nbsp;chacks&nbsp;if&nbsp;it&nbsp;ranks,&nbsp;and&nbsp;if&nbsp;so&nbsp;get&nbsp;the&nbsp;user's&nbsp;name&nbsp;and&nbsp;show&nbsp;the&nbsp;new&nbsp;list&nbsp;including&nbsp;the&nbsp;new&nbsp;user's&nbsp;name<br>
 &nbsp;<br>
 score:&nbsp;a&nbsp;number&nbsp;representing&nbsp;the&nbsp;score&nbsp;the&nbsp;user&nbsp;achieved<br>
 screen:&nbsp;the&nbsp;screen&nbsp;to&nbsp;show&nbsp;stuff&nbsp;on</tt></dd></dl>
 
-<dl><dt><a name="HighScoresGUI-input_name"><strong>input_name</strong></a>(self, screen, maxlen<font color="#909090">=10</font>)</dt><dd><tt>Type&nbsp;in&nbsp;the&nbsp;name&nbsp;for&nbsp;entry&nbsp;for&nbsp;high&nbsp;score<br>
+<dl><dt><a name="HighScoresGUI-input_name"><strong>input_name</strong></a>(self, screen, maxlen<font color="#909090">=10</font>)</dt><dd><tt>Prompts&nbsp;the&nbsp;user&nbsp;to&nbsp;type&nbsp;in&nbsp;the&nbsp;name&nbsp;for&nbsp;entry&nbsp;in&nbsp;the&nbsp;high&nbsp;scores<br>
 &nbsp;<br>
 screen:&nbsp;the&nbsp;screen&nbsp;to&nbsp;show&nbsp;stuff&nbsp;on<br>
-maxlen:&nbsp;the&nbsp;maximum&nbsp;number&nbsp;of&nbsp;characters&nbsp;allowed&nbsp;in&nbsp;the&nbsp;name&nbsp;(default&nbsp;10)</tt></dd></dl>
+maxlen:&nbsp;the&nbsp;maximum&nbsp;number&nbsp;of&nbsp;characters&nbsp;allowed&nbsp;in&nbsp;the&nbsp;name&nbsp;(default&nbsp;10)<br>
+return:&nbsp;a&nbsp;string&nbsp;of&nbsp;the&nbsp;name&nbsp;as&nbsp;typed&nbsp;in&nbsp;by&nbsp;the&nbsp;user</tt></dd></dl>
 
 <dl><dt><a name="HighScoresGUI-scroll_on"><strong>scroll_on</strong></a>(self, screen, scroll_off<font color="#909090">=True</font>)</dt><dd><tt>Scrolls&nbsp;the&nbsp;rankings&nbsp;on&nbsp;to&nbsp;the&nbsp;screen&nbsp;to&nbsp;reveal&nbsp;the&nbsp;top&nbsp;scores&nbsp;one&nbsp;at&nbsp;a&nbsp;time<br>
 &nbsp;<br>
