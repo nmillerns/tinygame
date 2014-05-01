@@ -12,126 +12,6 @@ import character_display # import the character_display submodule. See character
 import character_map # import the character_map submodule. See character_map.py
 import time
 
-
-class HighScoresDB():
-	"""
-	A class implementing a Database (DB) for awarding the top scores and storing them.
-
-	Each score is stored as a pair of [name], [score]. There are N top scores where N is specified by the programmer. The scores are stored in increasing order. You may check if the ranking of
-	any given score. Thr ranking lies in 0 to N-1, or N if it does not fall in the top N scores. 
-	"""
-	def __init__(self, filename, N = 10):
-		self.filename = filename
-		self.N = N
-		self.data = [("None", 0) for i in xrange(0, self.N)]
-
-	def save(self):
-		f = open(self.filename, "w")
-		for name, score in self.data:
-			f.write("%s, %d\n"%(name, score))
-		f.close()
-
-	def restore(self):
-		try:
-			self.data = []
-			f = open(self.filename, "r")
-			lines = [line for line in f.read().split('\n') if line != ""]
-			for line in lines:
-				name, score_string = line.split(',')
-				self.data.append( (name, int(score_string)) )
-			f.close()
-
-		except IOError, e:
-			self.data = [("None", 0) for i in xrange(0, self.N)]
-			
-	def ranking(self, score):
-		return len([s for n,s in self.data if score <= s])
-
-	def insert(self, name, score):
-		self.data.append((name, score))
-		self.data.sort(key = lambda pair:-pair[1])
-		self.data = self.data[0:-1]
-
-class HighScoresGUI():
-	"""
-	"""
-	def __init__(self, highscoresDB):
-		"""
-		"""
-		self.highscoresDB = highscoresDB
-		self.highscoresDB.restore()
-
-	def scroll_on(self, screen, scroll_off = True):
-		"""
-		"""
-		ch = keyboard.getch(0)
-		plate = character_map.CharacterMap( screen.width, max(screen.height, self.highscoresDB.N+2) )
-		prev = screen.clone()
-		text = ""
-		maxlen = 0
-		i = 0
-		for name, score in self.highscoresDB.data:
-			i += 1
-			line = "%2d: %s ...... %d\n"%(i, name, score)
-			text += line
-			maxlen = max(maxlen, len(line))
-		x = plate.width / 2 - 9
-		plate.write_text(x, 0, "*** High Scores ***")
-		x = plate.width / 2 - maxlen / 2
-		plate.write_text(x, 2, text)
-
-		for i in xrange(0, plate.height):
-			screen.scroll_down()
-			screen.draw(0, i-plate.height+1, plate)
-			screen.show()
-			if keyboard.getch(.07) != None: return
-
-		if keyboard.getch(2) != None: return
-
-		if scroll_off:
-			for i in xrange(0, screen.height):
-				screen.scroll_down()
-				screen.draw(0, i-screen.height+1, prev)
-				screen.show()
-				if keyboard.getch(.07) != None: return
-	def handle_new_score(self, score, screen):
-		"""
-		"""
-		if self.highscoresDB.ranking(score) < self.highscoresDB.N:
-			name = self.input_name(screen)
-			self.highscoresDB.insert(name, score)
-			self.highscoresDB.save()
-			self.scroll_on(screen, scroll_off = False)
-			keyboard.getch(4)
-
-	def input_name(self, screen, maxlen=10):
-		"""
-		Type in the name for entry for high score
-		"""
-		def update_display():
-			"""
-			An inner helper function to refresh the screen display as the name is typed
-			"""
-			x = screen.width/2 - 7
-			screen.fill(' ')
-			screen.write_text(x, 1, "New High Score!")
-			x = screen.width/2 - (maxlen + 12)/2
-			screen.write_text(x,3, "Enter Name: " + name)
-			screen.show()
-
-		name = ""
-		ch = None
-		update_display()
-
-		while True:
-			ch = keyboard.getch(10000)
-			if ch == '\n': break
-			elif ch == keyboard.KEY_BACKSPACE: name = name[0:len(name)-1]
-			elif ch not in [',', ' ', None] and len(ch) == 1 and len(name) < maxlen: name += ch
-			update_display()
-
-		return name
-
 class Metronome():
 	"""
 	A class that behaves like the name suggests. It is a metronome that ticks with a regular beat.
@@ -220,3 +100,152 @@ def quit():
 	"""
 	keyboard.quit()
 	character_display.quit()
+
+class HighScoresDB():
+	"""
+	A class implementing a Database (DB) for awarding the top scores and storing them.
+
+	Each score is stored as a pair of [name], [score]. There are N top scores where N is specified by the programmer. The scores are stored in increasing order. You may check if the ranking of
+	any given score. Thr ranking lies in 0 to N-1, or N if it does not fall in the top N scores. 
+	"""
+	def __init__(self, filename, N = 10):
+		"""
+		Constructor for a High Score Database. It will be stored as plain text in filename. It will contain the top N scores (default N = 10)
+		
+		filename: a sting containing  path and filename of a plaintext file that will store the simple high scroes database
+		N: a positive integer representing the number of top entries you would like to store in the database
+		"""
+		self.filename = filename
+		self.N = N
+		self.data = [("None", 0) for i in xrange(0, self.N)]
+
+	def save(self):
+		"""
+		Saves this High Scores Database to a plaintext file. It uses self.filename provided at construction
+		"""
+		f = open(self.filename, "w")
+		for name, score in self.data:
+			f.write("%s, %d\n"%(name, score))
+		f.close()
+
+	def restore(self):
+		"""
+		Loads the High Scores Database back in from its plaintext file. If the file doesn't exist an empty high scores list results with N blank names and scores of 0
+		"""
+		try:
+			self.data = []
+			f = open(self.filename, "r")
+			lines = [line for line in f.read().split('\n') if line != ""]
+			for line in lines:
+				name, score_string = line.split(',')
+				self.data.append( (name, int(score_string)) )
+			f.close()
+
+		except IOError, e:
+			self.data = [("None", 0) for i in xrange(0, self.N)]
+			
+	def ranking(self, score):
+		"""
+		Determine the ranking of a new score in this database. In 0..N-1 if it ranks in the top N or N
+		"""
+		return len([s for n,s in self.data if score <= s])
+
+	def insert(self, name, score):
+		self.data.append((name, score))
+		self.data.sort(key = lambda pair:-pair[1])
+		self.data = self.data[0:-1]
+
+class HighScoresGUI():
+	"""
+	"""
+	def __init__(self, highscoresDB):
+		"""
+		"""
+		self.highscoresDB = highscoresDB
+		self.highscoresDB.restore()
+
+	def scroll_on(self, screen, scroll_off = True):
+		"""
+		Scrolls the rankings on to the screen to reveal the top scores one at a time
+
+		It scrolls until the last ranking appears at the bottom of the screen. If specified it will also.
+		If it is interrupted with a keypress the slow scrolling high scores screen showing is aborted
+		wait for 2 seconds and scroll back off the sreen revealing whatever was on the previous screen before showing the high scores screen
+		
+		scroll_off: boolean if true the high scores screen will wait 2 seconds and scroll back off (unless interrupted by a key hit)
+		"""
+		keyboard.getch(0) # clear all keys
+		plate = character_map.CharacterMap( screen.width, max(screen.height, self.highscoresDB.N+2) )
+		prev = screen.clone() # store the previous screen to restore it when we are done
+		text = "" # put the high score names and scores into text
+		maxlen = 0
+		i = 0
+		for name, score in self.highscoresDB.data: # put each line in text
+			i += 1
+			line = "%2d: %s ...... %d\n"%(i, name, score)
+			text += line
+			maxlen = max(maxlen, len(line))
+		x = plate.width / 2 - 9
+		plate.write_text(x, 0, "*** High Scores ***") # write the text into a high scores screen
+		x = plate.width / 2 - maxlen / 2
+		plate.write_text(x, 2, text)
+
+		for i in xrange(0, plate.height): # scroll the plate on one name at a time from the top
+			screen.scroll_down()
+			screen.draw(0, i-plate.height+1, plate) # draw the names plate in the gap you just scrolled off
+			screen.show()
+			if keyboard.getch(.07) != None: return # tick at 1/.07 = 14.286 fps
+
+		if keyboard.getch(2) != None: return # wait 2 seconds
+
+		if scroll_off: # scroll back off
+			for i in xrange(0, screen.height):
+				screen.scroll_down()
+				screen.draw(0, i-screen.height+1, prev)
+				screen.show()
+				if keyboard.getch(.07) != None: return
+	def handle_new_score(self, score, screen):
+		"""
+		Takes in a new score and chacks if it ranks, and if so get the user's name and show the new list including the new user's name
+		
+		score: a number representing the score the user achieved
+		screen: the screen to show stuff on 
+		"""
+		if self.highscoresDB.ranking(score) < self.highscoresDB.N: # determine the ranking and if it should be entered
+			name = self.input_name(screen) # get the name from the user
+			self.highscoresDB.insert(name, score) # subit the name in the database... It bumps off the old bottom ranker
+			self.highscoresDB.save() # re-save the scores in the database file
+			self.scroll_on(screen, scroll_off = False) # scroll away the name input screen to show the scores
+			keyboard.getch(4) # wait for a key hit for 4 seconds
+			# then we go back and normal gui control flow is resumed
+
+	def input_name(self, screen, maxlen=10):
+		"""
+		Type in the name for entry for high score
+		
+		screen: the screen to show stuff on
+		maxlen: the maximum number of characters allowed in the name (default 10)
+		"""
+		def update_display():
+			"""
+			An inner helper function to refresh the screen display as the name is typed
+			"""
+			x = screen.width/2 - 7
+			screen.fill(' ')
+			screen.write_text(x, 1, "New High Score!")
+			x = screen.width/2 - (maxlen + 12)/2
+			screen.write_text(x,3, "Enter Name: " + name)
+			screen.show()
+
+		name = ""
+		ch = None
+		update_display()
+
+		while True:
+			ch = keyboard.getch(10000)
+			if ch == '\n': break
+			elif ch == keyboard.KEY_BACKSPACE: name = name[0:len(name)-1]
+			elif ch not in [',', ' ', None] and len(ch) == 1 and len(name) < maxlen: name += ch
+			update_display()
+
+		return name

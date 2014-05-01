@@ -33,11 +33,65 @@ Example&nbsp;games&nbsp;reside&nbsp;in&nbsp;the&nbsp;examples/&nbsp;directory</t
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
-<dt><font face="helvetica, arial"><a href="tinygame.html#Metronome">Metronome</a>
-</font></dt><dt><font face="helvetica, arial"><a href="tinygame.html#TopScoresDB">TopScoresDB</a>
-</font></dt><dt><font face="helvetica, arial"><a href="tinygame.html#TopScoresGUI">TopScoresGUI</a>
+<dt><font face="helvetica, arial"><a href="tinygame.html#HighScoresDB">HighScoresDB</a>
+</font></dt><dt><font face="helvetica, arial"><a href="tinygame.html#HighScoresGUI">HighScoresGUI</a>
+</font></dt><dt><font face="helvetica, arial"><a href="tinygame.html#Metronome">Metronome</a>
 </font></dt></dl>
  <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HighScoresDB">class <strong>HighScoresDB</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;class&nbsp;implementing&nbsp;a&nbsp;Database&nbsp;(DB)&nbsp;for&nbsp;awarding&nbsp;the&nbsp;top&nbsp;scores&nbsp;and&nbsp;storing&nbsp;them.<br>
+&nbsp;<br>
+Each&nbsp;score&nbsp;is&nbsp;stored&nbsp;as&nbsp;a&nbsp;pair&nbsp;of&nbsp;[name],&nbsp;[score].&nbsp;There&nbsp;are&nbsp;N&nbsp;top&nbsp;scores&nbsp;where&nbsp;N&nbsp;is&nbsp;specified&nbsp;by&nbsp;the&nbsp;programmer.&nbsp;The&nbsp;scores&nbsp;are&nbsp;stored&nbsp;in&nbsp;increasing&nbsp;order.&nbsp;You&nbsp;may&nbsp;check&nbsp;if&nbsp;the&nbsp;ranking&nbsp;of<br>
+any&nbsp;given&nbsp;score.&nbsp;Thr&nbsp;ranking&nbsp;lies&nbsp;in&nbsp;0&nbsp;to&nbsp;N-1,&nbsp;or&nbsp;N&nbsp;if&nbsp;it&nbsp;does&nbsp;not&nbsp;fall&nbsp;in&nbsp;the&nbsp;top&nbsp;N&nbsp;scores.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="HighScoresDB-__init__"><strong>__init__</strong></a>(self, filename, N<font color="#909090">=10</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;a&nbsp;High&nbsp;Score&nbsp;Database.&nbsp;It&nbsp;will&nbsp;be&nbsp;stored&nbsp;as&nbsp;plain&nbsp;text&nbsp;in&nbsp;filename.&nbsp;It&nbsp;will&nbsp;contain&nbsp;the&nbsp;top&nbsp;N&nbsp;scores&nbsp;(default&nbsp;N&nbsp;=&nbsp;10)<br>
+&nbsp;<br>
+filename:&nbsp;a&nbsp;sting&nbsp;containing&nbsp;&nbsp;path&nbsp;and&nbsp;filename&nbsp;of&nbsp;a&nbsp;plaintext&nbsp;file&nbsp;that&nbsp;will&nbsp;store&nbsp;the&nbsp;simple&nbsp;high&nbsp;scroes&nbsp;database<br>
+N:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;representing&nbsp;the&nbsp;number&nbsp;of&nbsp;top&nbsp;entries&nbsp;you&nbsp;would&nbsp;like&nbsp;to&nbsp;store&nbsp;in&nbsp;the&nbsp;database</tt></dd></dl>
+
+<dl><dt><a name="HighScoresDB-insert"><strong>insert</strong></a>(self, name, score)</dt></dl>
+
+<dl><dt><a name="HighScoresDB-ranking"><strong>ranking</strong></a>(self, score)</dt><dd><tt>Determine&nbsp;the&nbsp;ranking&nbsp;of&nbsp;a&nbsp;new&nbsp;score&nbsp;in&nbsp;this&nbsp;database.&nbsp;In&nbsp;0..N-1&nbsp;if&nbsp;it&nbsp;ranks&nbsp;in&nbsp;the&nbsp;top&nbsp;N&nbsp;or&nbsp;N</tt></dd></dl>
+
+<dl><dt><a name="HighScoresDB-restore"><strong>restore</strong></a>(self)</dt><dd><tt>Loads&nbsp;the&nbsp;High&nbsp;Scores&nbsp;Database&nbsp;back&nbsp;in&nbsp;from&nbsp;its&nbsp;plaintext&nbsp;file.&nbsp;If&nbsp;the&nbsp;file&nbsp;doesn't&nbsp;exist&nbsp;an&nbsp;empty&nbsp;high&nbsp;scores&nbsp;list&nbsp;results&nbsp;with&nbsp;N&nbsp;blank&nbsp;names&nbsp;and&nbsp;scores&nbsp;of&nbsp;0</tt></dd></dl>
+
+<dl><dt><a name="HighScoresDB-save"><strong>save</strong></a>(self)</dt><dd><tt>Saves&nbsp;this&nbsp;High&nbsp;Scores&nbsp;Database&nbsp;to&nbsp;a&nbsp;plaintext&nbsp;file.&nbsp;It&nbsp;uses&nbsp;self.<strong>filename</strong>&nbsp;provided&nbsp;at&nbsp;construction</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HighScoresGUI">class <strong>HighScoresGUI</strong></a></font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="HighScoresGUI-__init__"><strong>__init__</strong></a>(self, highscoresDB)</dt></dl>
+
+<dl><dt><a name="HighScoresGUI-handle_new_score"><strong>handle_new_score</strong></a>(self, score, screen)</dt><dd><tt>Takes&nbsp;in&nbsp;a&nbsp;new&nbsp;score&nbsp;and&nbsp;chacks&nbsp;if&nbsp;it&nbsp;ranks,&nbsp;and&nbsp;if&nbsp;so&nbsp;get&nbsp;the&nbsp;user's&nbsp;name&nbsp;and&nbsp;show&nbsp;the&nbsp;new&nbsp;list&nbsp;including&nbsp;the&nbsp;new&nbsp;user's&nbsp;name<br>
+&nbsp;<br>
+score:&nbsp;a&nbsp;number&nbsp;representing&nbsp;the&nbsp;score&nbsp;the&nbsp;user&nbsp;achieved<br>
+screen:&nbsp;the&nbsp;screen&nbsp;to&nbsp;show&nbsp;stuff&nbsp;on</tt></dd></dl>
+
+<dl><dt><a name="HighScoresGUI-input_name"><strong>input_name</strong></a>(self, screen, maxlen<font color="#909090">=10</font>)</dt><dd><tt>Type&nbsp;in&nbsp;the&nbsp;name&nbsp;for&nbsp;entry&nbsp;for&nbsp;high&nbsp;score<br>
+&nbsp;<br>
+screen:&nbsp;the&nbsp;screen&nbsp;to&nbsp;show&nbsp;stuff&nbsp;on<br>
+maxlen:&nbsp;the&nbsp;maximum&nbsp;number&nbsp;of&nbsp;characters&nbsp;allowed&nbsp;in&nbsp;the&nbsp;name&nbsp;(default&nbsp;10)</tt></dd></dl>
+
+<dl><dt><a name="HighScoresGUI-scroll_on"><strong>scroll_on</strong></a>(self, screen, scroll_off<font color="#909090">=True</font>)</dt><dd><tt>Scrolls&nbsp;the&nbsp;rankings&nbsp;on&nbsp;to&nbsp;the&nbsp;screen&nbsp;to&nbsp;reveal&nbsp;the&nbsp;top&nbsp;scores&nbsp;one&nbsp;at&nbsp;a&nbsp;time<br>
+&nbsp;<br>
+It&nbsp;scrolls&nbsp;until&nbsp;the&nbsp;last&nbsp;ranking&nbsp;appears&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;screen.&nbsp;If&nbsp;specified&nbsp;it&nbsp;will&nbsp;also.<br>
+If&nbsp;it&nbsp;is&nbsp;interrupted&nbsp;with&nbsp;a&nbsp;keypress&nbsp;the&nbsp;slow&nbsp;scrolling&nbsp;high&nbsp;scores&nbsp;screen&nbsp;showing&nbsp;is&nbsp;aborted<br>
+wait&nbsp;for&nbsp;2&nbsp;seconds&nbsp;and&nbsp;scroll&nbsp;back&nbsp;off&nbsp;the&nbsp;sreen&nbsp;revealing&nbsp;whatever&nbsp;was&nbsp;on&nbsp;the&nbsp;previous&nbsp;screen&nbsp;before&nbsp;showing&nbsp;the&nbsp;high&nbsp;scores&nbsp;screen<br>
+&nbsp;<br>
+scroll_off:&nbsp;boolean&nbsp;if&nbsp;true&nbsp;the&nbsp;high&nbsp;scores&nbsp;screen&nbsp;will&nbsp;wait&nbsp;2&nbsp;seconds&nbsp;and&nbsp;scroll&nbsp;back&nbsp;off&nbsp;(unless&nbsp;interrupted&nbsp;by&nbsp;a&nbsp;key&nbsp;hit)</tt></dd></dl>
+
+</td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -74,45 +128,6 @@ period:&nbsp;a&nbsp;float&nbsp;representing&nbsp;the&nbsp;amount&nbsp;of&nbsp;ti
 <dl><dt><a name="Metronome-reset"><strong>reset</strong></a>(self)</dt><dd><tt>Resets&nbsp;the&nbsp;since&nbsp;tick&nbsp;in&nbsp;the&nbsp;metronome.&nbsp;The&nbsp;time&nbsp;of&nbsp;the&nbsp;most&nbsp;recent&nbsp;tick&nbsp;is&nbsp;set&nbsp;to&nbsp;now.</tt></dd></dl>
 
 <dl><dt><a name="Metronome-wait_for_tick"><strong>wait_for_tick</strong></a>(self)</dt><dd><tt>Sleeps&nbsp;until&nbsp;the&nbsp;next&nbsp;tick&nbsp;of&nbsp;the&nbsp;metronome.&nbsp;If&nbsp;a&nbsp;tick&nbsp;has&nbsp;already&nbsp;occured&nbsp;since&nbsp;last&nbsp;calling&nbsp;<a href="#Metronome-wait_for_tick">wait_for_tick</a>()&nbsp;an&nbsp;exception&nbsp;is&nbsp;caught&nbsp;and&nbsp;it&nbsp;returns&nbsp;immediately</tt></dd></dl>
-
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="TopScoresDB">class <strong>TopScoresDB</strong></a></font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>A&nbsp;class&nbsp;implementing&nbsp;a&nbsp;Database&nbsp;(DB)&nbsp;for&nbsp;awarding&nbsp;the&nbsp;top&nbsp;scores&nbsp;and&nbsp;storing&nbsp;them.<br>
-&nbsp;<br>
-Each&nbsp;score&nbsp;is&nbsp;stored&nbsp;as&nbsp;a&nbsp;pair&nbsp;of&nbsp;[name],&nbsp;[score].&nbsp;There&nbsp;are&nbsp;N&nbsp;top&nbsp;scores&nbsp;where&nbsp;N&nbsp;is&nbsp;specified&nbsp;by&nbsp;the&nbsp;programmer.&nbsp;The&nbsp;scores&nbsp;are&nbsp;stored&nbsp;in&nbsp;increasing&nbsp;order.&nbsp;You&nbsp;may&nbsp;check&nbsp;if&nbsp;the&nbsp;ranking&nbsp;of<br>
-any&nbsp;given&nbsp;score.&nbsp;Thr&nbsp;ranking&nbsp;lies&nbsp;in&nbsp;0&nbsp;to&nbsp;N-1,&nbsp;or&nbsp;N&nbsp;if&nbsp;it&nbsp;does&nbsp;not&nbsp;fall&nbsp;in&nbsp;the&nbsp;top&nbsp;N&nbsp;scores.<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%">Methods defined here:<br>
-<dl><dt><a name="TopScoresDB-__init__"><strong>__init__</strong></a>(self, filename, N<font color="#909090">=10</font>)</dt></dl>
-
-<dl><dt><a name="TopScoresDB-insert"><strong>insert</strong></a>(name, score)</dt></dl>
-
-<dl><dt><a name="TopScoresDB-ranking"><strong>ranking</strong></a>(self, score)</dt></dl>
-
-<dl><dt><a name="TopScoresDB-restore"><strong>restore</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="TopScoresDB-save"><strong>save</strong></a>(self)</dt></dl>
-
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="TopScoresGUI">class <strong>TopScoresGUI</strong></a></font></td></tr>
-    
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">Methods defined here:<br>
-<dl><dt><a name="TopScoresGUI-__init__"><strong>__init__</strong></a>(self, topscoresDB)</dt></dl>
-
-<dl><dt><a name="TopScoresGUI-handle_new_score"><strong>handle_new_score</strong></a>(self, score, screen)</dt></dl>
-
-<dl><dt><a name="TopScoresGUI-input_name"><strong>input_name</strong></a>(self, screen, maxlen<font color="#909090">=10</font>)</dt><dd><tt>Type&nbsp;in&nbsp;the&nbsp;name&nbsp;for&nbsp;entry&nbsp;for&nbsp;high&nbsp;score</tt></dd></dl>
-
-<dl><dt><a name="TopScoresGUI-scroll_on"><strong>scroll_on</strong></a>(self, screen)</dt></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
