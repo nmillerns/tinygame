@@ -1,6 +1,44 @@
 tinygame
 
-Nick Miller: nmillerns@hotmail.comy
+Nick Miller: nmillerns@hotmail.com
 
 
-A verylightweight educational library for creating simple text based games in Python. Intended for Raspberry Pi 
+A very lightweight educational library for creating simple text based games in Python. Intended for Raspberry Pi 
+
+
+1. Contents:
+
+./                          - The top level directory
+./doc/                      - Documentation for this tinygame game library 
+./doc/tinygame.html         - The entry point for the documentation. Load this in your browser
+./doc/Makefile              - The make file to rebuild documentation as the code changes
+./tinygame/                 - The library game code as a python module directory
+./tinygame/__init__.py      - The main definitions of the library 
+./tinygame/__main__.py      - The entry point for the module. It refers you to example games
+./examples/                 - Example games implemented in python using tinygame. See Section 2 on how to run
+./LICENSE                   - This is distributed with the MIT license
+
+
+2. Instructions to Play Examples:
+
+ - The example games are in the ./examples/ directory
+ - They are meant to be run from this top level directory ./
+ - e.g., navigate to this top level directory
+ - run
+   python examples/hello.py
+   
+   see examples/ for all the available example games including Tetris, Breakout, and Snake
+   
+3. Instructions to Build Documentation:
+  
+  - The documentation is built with gmake and pydoc
+  - From this top level directory ./ type:
+   make -f doc/Makefile clean
+   make -f doc/Makefile all
+
+4. Instructions to Code and Distribute tinygame games
+
+  - tinygame is lightweight. So it is best to copy the ./tinygame folder as a subfolder in your game project folder
+  - in your Python game code use "import tinygame" assuming your python code is at the top level of your folder
+  - You may need to add the path to tinygame otherwise, see the games in ./example/ in this case
+  - Happy coding! Feel free to email nmillerns@hotmail.com if to share anything you make
