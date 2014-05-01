@@ -12,6 +12,45 @@ import character_display # import the character_display submodule. See character
 import character_map # import the character_map submodule. See character_map.py
 import time
 
+def initialize():
+	"""
+	Initializes the whole tinygame library.
+
+	This should be called exactly once at the beginning of your game program when you are ready to use it.
+	It should always be complimented with a corresponding call to tinygame.quit() when your program quits.
+	If you fail to call tinygame.quit() you may get terminal printing issues.
+	Hence you should ensure you always call tinygame.quit() even when you leave on error using a try block:
+
+	eg
+
+	tinygame.initialize()
+	try:
+		... # game code
+	finally:
+		tinygame.quit()
+	"""
+	keyboard.initialize()
+	character_display.initialize()
+
+def quit():
+	"""
+	De-initializes the whole tinygame library.
+
+	It restores the screen and keyboard control modes.
+	If you fail to call tinygame.quit() you may get terminal printing issues.
+	Hence you should ensure you always call tinygame.quit() even when you leave on error using a try block:
+
+	eg
+
+	tinygame.initialize()
+	try:
+		... # game code
+	finally:
+		tinygame.quit()
+	"""
+	keyboard.quit()
+	character_display.quit()
+
 class Metronome():
 	"""
 	A class that behaves like the name suggests. It is a metronome that ticks with a regular beat.
@@ -61,99 +100,6 @@ class Metronome():
 			pass
 		finally:
 			self.reset() # always set the time of last tick to now
-
-def initialize():
-	"""
-	Initializes the whole tinygame library.
-
-	This should be called exactly once at the beginning of your game program when you are ready to use it.
-	It should always be complimented with a corresponding call to tinygame.quit() when your program quits.
-	If you fail to call tinygame.quit() you may get terminal printing issues.
-	Hence you should ensure you always call tinygame.quit() even when you leave on error using a try block:
-
-	eg
-
-	tinygame.initialize()
-	try:
-		... # game code
-	finally:
-		tinygame.quit()
-	"""
-	keyboard.initialize()
-	character_display.initialize()
-
-def quit():
-	"""
-	De-initializes the whole tinygame library.
-
-	It restores the screen and keyboard control modes.
-	If you fail to call tinygame.quit() you may get terminal printing issues.
-	Hence you should ensure you always call tinygame.quit() even when you leave on error using a try block:
-
-	eg
-
-	tinygame.initialize()
-	try:
-		... # game code
-	finally:
-		tinygame.quit()
-	"""
-	keyboard.quit()
-	character_display.quit()
-
-class HighScoresDB():
-	"""
-	A class implementing a Database (DB) for awarding the top scores and storing them.
-
-	Each score is stored as a pair of [name], [score]. There are N top scores where N is specified by the programmer. The scores are stored in increasing order. You may check if the ranking of
-	any given score. Thr ranking lies in 0 to N-1, or N if it does not fall in the top N scores. 
-	"""
-	def __init__(self, filename, N = 10):
-		"""
-		Constructor for a High Score Database. It will be stored as plain text in filename. It will contain the top N scores (default N = 10)
-		
-		filename: a sting containing  path and filename of a plaintext file that will store the simple high scroes database
-		N: a positive integer representing the number of top entries you would like to store in the database
-		"""
-		self.filename = filename
-		self.N = N
-		self.data = [("None", 0) for i in xrange(0, self.N)]
-
-	def save(self):
-		"""
-		Saves this High Scores Database to a plaintext file. It uses self.filename provided at construction
-		"""
-		f = open(self.filename, "w")
-		for name, score in self.data:
-			f.write("%s, %d\n"%(name, score))
-		f.close()
-
-	def restore(self):
-		"""
-		Loads the High Scores Database back in from its plaintext file. If the file doesn't exist an empty high scores list results with N blank names and scores of 0
-		"""
-		try:
-			self.data = []
-			f = open(self.filename, "r")
-			lines = [line for line in f.read().split('\n') if line != ""]
-			for line in lines:
-				name, score_string = line.split(',')
-				self.data.append( (name, int(score_string)) )
-			f.close()
-
-		except IOError, e:
-			self.data = [("None", 0) for i in xrange(0, self.N)]
-			
-	def ranking(self, score):
-		"""
-		Determine the ranking of a new score in this database. In 0..N-1 if it ranks in the top N or N
-		"""
-		return len([s for n,s in self.data if score <= s])
-
-	def insert(self, name, score):
-		self.data.append((name, score))
-		self.data.sort(key = lambda pair:-pair[1])
-		self.data = self.data[0:-1]
 
 class HighScoresGUI():
 	"""
@@ -249,3 +195,58 @@ class HighScoresGUI():
 			update_display()
 
 		return name
+
+class HighScoresDB():
+	"""
+	A class implementing a Database (DB) for awarding the top scores and storing them.
+
+	Each score is stored as a pair of [name], [score]. There are N top scores where N is specified by the programmer. The scores are stored in increasing order. You may check if the ranking of
+	any given score. Thr ranking lies in 0 to N-1, or N if it does not fall in the top N scores. 
+	"""
+	def __init__(self, filename, N = 10):
+		"""
+		Constructor for a High Score Database. It will be stored as plain text in filename. It will contain the top N scores (default N = 10)
+		
+		filename: a sting containing  path and filename of a plaintext file that will store the simple high scroes database
+		N: a positive integer representing the number of top entries you would like to store in the database
+		"""
+		self.filename = filename
+		self.N = N
+		self.data = [("None", 0) for i in xrange(0, self.N)]
+
+	def save(self):
+		"""
+		Saves this High Scores Database to a plaintext file. It uses self.filename provided at construction
+		"""
+		f = open(self.filename, "w")
+		for name, score in self.data:
+			f.write("%s, %d\n"%(name, score))
+		f.close()
+
+	def restore(self):
+		"""
+		Loads the High Scores Database back in from its plaintext file. If the file doesn't exist an empty high scores list results with N blank names and scores of 0
+		"""
+		try:
+			self.data = []
+			f = open(self.filename, "r")
+			lines = [line for line in f.read().split('\n') if line != ""]
+			for line in lines:
+				name, score_string = line.split(',')
+				self.data.append( (name, int(score_string)) )
+			f.close()
+
+		except IOError, e:
+			self.data = [("None", 0) for i in xrange(0, self.N)]
+			
+	def ranking(self, score):
+		"""
+		Determine the ranking of a new score in this database. In 0..N-1 if it ranks in the top N or N
+		"""
+		return len([s for n,s in self.data if score <= s])
+
+	def insert(self, name, score):
+		self.data.append((name, score))
+		self.data.sort(key = lambda pair:-pair[1])
+		self.data = self.data[0:-1]
+
