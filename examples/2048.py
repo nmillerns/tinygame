@@ -6,51 +6,52 @@ import random
 sys.path.extend(['.', '..'])
 import tinygame as tg
 
-B2 = tg.character_map.parse(" ---- " + "\n"\
-                            "|  2 |" + "\n"\
-                            " ---- " + "\n"\
-                           )
-B4 = tg.character_map.parse(" ---- " + "\n"\
-                            "|  4 |" + "\n"\
-                            " ---- " + "\n"\
-                           )
-B8 = tg.character_map.parse(" ---- " + "\n"\
-                            "|  8 |" + "\n"\
-                            " ---- " + "\n"\
-                           )
-B16 = tg.character_map.parse(" ---- " + "\n"\
-                             "| 16 |" + "\n"\
-                             " ---- " + "\n"\
-                           )
-B32 = tg.character_map.parse(" ---- " + "\n"\
-                             "| 32 |" + "\n"\
-                             " ---- " + "\n"\
-                           )
-B64 = tg.character_map.parse(" ---- " + "\n"\
-                             "| 64 |" + "\n"\
-                             " ---- " + "\n"\
-                           )
-B128 = tg.character_map.parse(" ---- " + "\n"\
-                              "| 128|" + "\n"\
-                              " ---- " + "\n"\
-                           )
-B256 = tg.character_map.parse(" ---- " + "\n"\
-                              "| 256|" + "\n"\
-                              " ---- " + "\n"\
-                           )
-B512 = tg.character_map.parse(" ---- " + "\n"\
-                              "| 512|" + "\n"\
-                              " ---- " + "\n"\
-                           )
-B1024 = tg.character_map.parse(" ---- " + "\n"\
-                               "|1024|" + "\n"\
-                               " ---- " + "\n"\
-                           )
-B2048 = tg.character_map.parse(" ---- " + "\n"\
-                               "|2048|" + "\n"\
-                               " ---- " + "\n"\
-                           )
-B = [B2, B4, B8, B16, B32, B64, B128, B256, B512, B1024, B2048]
+TILES = [
+    tg.character_map.parse(" ---- " + "\n"
+                           "|  2 |" + "\n"
+                           " ---- " + "\n"
+                          ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "|  4 |" + "\n"
+                           " ---- " + "\n"
+                          ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "|  8 |" + "\n"
+                           " ---- " + "\n"
+                          ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "| 16 |" + "\n"
+                           " ---- " + "\n"
+                         ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "| 32 |" + "\n"
+                           " ---- " + "\n"
+                         ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "| 64 |" + "\n"
+                           " ---- " + "\n"
+                         ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "| 128|" + "\n"
+                           " ---- " + "\n"
+                        ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "| 256|" + "\n"
+                           " ---- " + "\n"
+                        ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "| 512|" + "\n"
+                           " ---- " + "\n"
+                        ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "|1024|" + "\n"
+                           " ---- " + "\n"
+                       ),
+    tg.character_map.parse(" ---- " + "\n"
+                           "|2048|" + "\n"
+                           " ---- " + "\n"
+                       )
+]
 
 class TwentyFourtyEightGameUI():
 	"""
@@ -215,7 +216,7 @@ class TwentyFourtyEightGameUI():
 			for y in xrange(0, 4):
 				b = self.grid[x, y]
 				if b == ' ': continue
-				Bxy = B[int(b)]
+				Bxy = TILES[int(b)]
 				self.screen.draw(5*x+1, 2*y+1, Bxy)
 
 	def play(self):
