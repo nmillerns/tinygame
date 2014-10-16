@@ -223,57 +223,57 @@ class TwentyFourtyEightGameUI():
 		self.slide_up()
 		self.render_grid()
 		self.screen.show()
-		tg.keyboard.getch(self.delay)
+		tg.Metronome(self.delay).wait_for_tick()
 		self.combine_up()
 		self.render_grid()
 		self.screen.show()
-		tg.keyboard.getch(self.delay)
+		tg.Metronome(self.delay).wait_for_tick()
 		self.slide_up()
 		
 	def down(self):
 		self.slide_down()
 		self.render_grid()
 		self.screen.show()
-		tg.keyboard.getch(self.delay)
+		tg.Metronome(self.delay).wait_for_tick()
 		self.combine_down()
 		self.render_grid()
 		self.screen.show()
-		tg.keyboard.getch(self.delay)
+		tg.Metronome(self.delay).wait_for_tick()
 		self.slide_down()
 
 	def left(self):
 		self.slide_left()
 		self.render_grid()
 		self.screen.show()
-		tg.keyboard.getch(self.delay)
+		tg.Metronome(self.delay).wait_for_tick()
 		self.combine_left()
 		self.render_grid()
 		self.screen.show()
-		tg.keyboard.getch(self.delay)
+		tg.Metronome(self.delay).wait_for_tick()
 		self.slide_left()
 	def right(self):
 		self.slide_right()
 		self.render_grid()
 		self.screen.show()
-		tg.keyboard.getch(self.delay)
+		tg.Metronome(self.delay).wait_for_tick()
 		self.combine_right()
 		self.render_grid()
 		self.screen.show()
-		tg.keyboard.getch(self.delay)
+		tg.Metronome(self.delay).wait_for_tick()
 		self.slide_right()
 
 	def render_grid(self):
 		self.screen.fill(' ')
 
-		self.screen.write_text(0, 0, "Score: %d"%self.score)
-		self.screen.write_text(0, 1, " Best: %d"%max(self.highscore.highscoresDB.best(), self.score))
+		self.screen.write_text(1, 0, "Score: %d"%self.score)
+		self.screen.write_text(1, 1, "Best:  %d"%max(self.highscore.highscoresDB.best(), self.score))
 
 		for x in xrange(0, 4):
 			for y in xrange(0, 4):
 				b = self.grid[x, y]
 				if b == ' ': continue
 				Bxy = TILES[ord(b)]
-				self.screen.draw(5*x+1, 2*y+1 + 5, Bxy)
+				self.screen.draw(5*x, 2*y+2 , Bxy)
 
 	def play(self):
 		"""
