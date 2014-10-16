@@ -48,7 +48,7 @@ def getch(timeout = 0):
 
 	Styled after the getch() function in <conio.h> in C
 	It is a nonblocking call to read the keyboard. You call it and wait for a maximum amount of time for a key press. If a key has already been pressed it returns immediately.
-	The name can be misleading sinc key hits are sometimes escape sequences containing several characters. eg ESC[A is the Up key. Nevertheless the most recent full key character string is returned
+	The name can be misleading since key hits are sometimes escape sequences containing several characters. eg ESC[A is the Up key. Nevertheless the most recent full key character string is returned
 
 	timeout: a floating point value representing the maximum amount of time (in second units) to wait for a key press. If it is 0, the function returns immediately and reports the most recent key
 	return: a string representing the key pressed may be None if no key was pressed. eg 'x' for the x key or 'ESC[A' for the up arrow key

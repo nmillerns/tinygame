@@ -1,6 +1,6 @@
 import sys
 import random
-sys.path.append('.')
+sys.path.extend(['.', '..'])
 import tinygame as tg
 
 class Paddle():
@@ -216,7 +216,7 @@ class BreakoutGameUI():
 				falling.append(FallingBrick(x,y))
 
 			self.screen.write_text(5, 0, "Score: " + str(self.score))
-			self.screen.write_text(70,0, "Lives: " + str(self.total_bricks))
+			self.screen.write_text(68,0, "Bricks: " + str(self.total_bricks))
 			for f in falling:
 				if f.tick(self.screen): self.score += 15
 				f.draw(self.screen)

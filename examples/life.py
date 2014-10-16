@@ -5,7 +5,7 @@ A tinygame implementation of the famous life cellular automata simulation.
 Rules for implementation found from here: http://en.wikipedia.org/wiki/Conway%27s_life
 """
 import sys
-sys.path.append('.')
+sys.path.extend(['.', '..'])
 import tinygame as tg
 
 DEFAULT_START = """

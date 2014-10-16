@@ -1,6 +1,6 @@
 import sys
 import random
-sys.path.append('.')
+sys.path.extend(['.', '..'])
 import tinygame as tg
 
 class Apple():

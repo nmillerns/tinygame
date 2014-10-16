@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys
-sys.path.append('.')
+sys.path.extend(['.', '..'])
 import tinygame as tg
 
 def main():

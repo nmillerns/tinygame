@@ -4,7 +4,7 @@ Tetris
 import sys
 import random # use this module to get random next blocks
 import copy # use this module to make copies of the canonical Tetrominos
-sys.path.append('.')
+sys.path.extend(['.', '..'])
 import tinygame as tg
 
 class Tetromino():

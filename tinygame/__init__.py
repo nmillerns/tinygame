@@ -163,11 +163,12 @@ class HighScoresGUI():
 		"""
 		if self.highscoresDB.ranking(score) < self.highscoresDB.N: # determine the ranking and if it should be entered
 			name = self.input_name(screen) # get the name from the user
-			self.highscoresDB.insert(name, score) # subit the name in the database... It bumps off the old bottom ranker
-			self.highscoresDB.save() # re-save the scores in the database file
-			self.scroll_on(screen, scroll_off = False) # scroll away the name input screen to show the scores
-			keyboard.getch(4) # wait for a key hit for 4 seconds
-			# then we go back and normal gui control flow is resumed
+			if name != None: # Sometimes None is returned if the user presses Esc to skip adding their name
+				self.highscoresDB.insert(name, score) # subit the name in the database... It bumps off the old bottom ranker
+				self.highscoresDB.save() # re-save the scores in the database file
+				self.scroll_on(screen, scroll_off = False) # scroll away the name input screen to show the scores
+				keyboard.getch(4) # wait for a key hit for 4 seconds
+				# then we go back and normal gui control flow is resumed
 
 	def input_name(self, screen, maxlen=10):
 		"""
@@ -195,6 +196,7 @@ class HighScoresGUI():
 		while True: # go until Enter is pressed
 			ch = keyboard.getch(10000) # get the next key board press
 			if ch == '\n': break # we are done when Enter = \n is pressed
+			if ch == keyboard.KEY_ESCAPE: return None # The user can skip annoying name entry by hitting Esc
 			elif ch == keyboard.KEY_BACKSPACE: name = name[0:len(name)-1] # if we hit bakspace use all but the latest character
 			elif ch not in [',', ' ', None] and len(ch) == 1 and len(name) < maxlen: name += ch # add the newest character unless it is whitespace, unprintable, or we go over our character limit
 			update_display() # keep updating the display
@@ -250,6 +252,11 @@ class HighScoresDB():
 		"""
 		return len([s for n,s in self.data if score <= s])
 
+	def best(self):
+		"""
+		Simply returns the single best score in the database
+		"""
+		return max([s for n, s in self.data])
 	def insert(self, name, score):
 		self.data.append((name, score))
 		self.data.sort(key = lambda pair:-pair[1])
