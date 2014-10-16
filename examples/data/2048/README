@@ -1,0 +1,4 @@
+Data for the 2048 game
+
+./examples/data/2048/scores.txt		- Flat text database of high scores for TwentyFourtyEightGameUI.highscore. See HighScoresDB in the pydoc
+

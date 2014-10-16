@@ -1,1 +1,4 @@
 Data for the tetris game
+
+./examples/data/tetris/scores.txt	Flat text database of high scores for TetrisGameUI.highscore. See HighScoresDB in the pydoc
+

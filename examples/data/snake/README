@@ -1,0 +1,5 @@
+Data for the snake game
+
+./examples/data/snake/scores.txt	- Flat text database of high scores for SnakeGameUI.highscore. See HighScoresDB in the pydoc
+./examples/data/snake/level[N].txt	- Serialized character map for the Nth level of the snake game
+
