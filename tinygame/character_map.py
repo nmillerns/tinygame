@@ -168,6 +168,19 @@ class CharacterMap():
 			s += str(row) + "\n" # the new line puts each row of characters on a new line. In turn the __str__ overload is called on each row. See CharacterRow.__str__()
 		return s
 
+	def __eq__(self, other):
+		"""
+		Compares the content of two character maps to see if they are identical
+		"""
+		if (self.width, self.height) != (other.width, other.height): return False # must be the same dimensions
+		return all([r == s for r,s in zip(self.rows, other.rows)]) # check content row by row
+
+	def __ne__(self, other):
+		"""
+		Compares the content of two character maps to see if they are identical
+		"""
+		return not self.__eq__(other)
+
 class CharacterRow():
 	"""
 	A class representing one row of character data.
@@ -183,6 +196,8 @@ class CharacterRow():
 		self.data[i] = ord(character) # we store the 8bit value (ord()) to save space
 	def __str__(self):
 		return ''.join([chr(val) for val in self.data]) #just joing the characters together to form a row string
+	def __eq__(self, other):
+		return self.width == other.width and all([d == e for d, e in zip(self.data, other.data)])
 	def fill(self, character):
 		self.data = [ord(character) for i in xrange(0, self.width)] # set each item in the row to the 8bit value given
 
