@@ -65,15 +65,12 @@ class TwentyFourtyEightGameUI():
 		self.done = False
 		self.delay = 1/8.0
 		self.score = 0
-		self.won = False
+		self.win = False
 		self.highscore = tg.HighScoresGUI(tg.HighScoresDB("examples/data/2048/scores.txt"))
 		self.coords = []
 		for x in xrange(0, 4):
 			for y in xrange(0, 4):
 				self.coords.append((x,y))
-				self.grid[x,y] = ' '
-		self.insert_random()
-		self.insert_random()
 
 	def intro(self):
 		try:
@@ -123,7 +120,7 @@ class TwentyFourtyEightGameUI():
 		tg.keyboard.getch(10.0) # wait for a key press for the last second. Also clears the keypresses for the next screen
 		
 	def score_tile(self, tile):
-		self.score += 2**(ord(tile)+1+1) # score the power of two just achived... +1 for 0 offeset
+		self.score += 2*2**(ord(tile)+1) # score the power of two just achived... +1 for 0 offeset
 
 	def slide_up(self):
 		for x in xrange(0, 4):
@@ -259,35 +256,31 @@ class TwentyFourtyEightGameUI():
 
 	def render_grid(self):
 		self.screen.fill(' ')
-
 		for x in xrange(0, 4):
 			for y in xrange(0, 4):
 				b = self.grid[x, y]
 				if b == ' ': continue
-				if ord(b) >= 9: self.win = True
-				Bxy = TILES[ord(b)]
-				self.screen.draw(5*x, 2*y+2 , Bxy)
+				if ord(b) >= 10: self.win = True
+				self.screen.draw(5*x, 2*y+2 , TILES[ord(b)])
 		self.screen.write_text(1, 0, "Score: %d"%self.score)
 		self.screen.write_text(1, 1, "Best:  %d"%max(self.highscore.highscoresDB.best(), self.score))
-		if self.won: self.screen.write_text(4, 12, "2048! You Win!")
+		if self.win: self.screen.write_text(4, 12, "2048! You Win!")
 
 	def play(self):
 		"""
 		The UI plays a round of 2048 game. 
 		"""
 		self.done = False
+		for i in xrange(0, 2): self.insert_random()
 
 		while not self.done: # play forever until something happens
-			for c in self.coords:
-				if self.grid[c] != ' ' and ord(self.grid[c]) >= 10: self.won = True
 			self.render_grid()
 			self.screen.show()
 			if not self.move_exists():
 				self.show_gameover()
-				self.done = True
 				break
 
-			self.prev.draw(0, 0, self.grid)
+			self.prev.draw(0, 0, self.grid) # copy the grid onto the previous for storage
 
 			k = tg.keyboard.getch(10.0) # get the keypress and slide tiles accordingly.
 			if k == tg.keyboard.KEY_UP:
@@ -300,7 +293,6 @@ class TwentyFourtyEightGameUI():
 				self.right()
 			if k == tg.keyboard.KEY_ESCAPE:
 				self.done = True
-				break
 
 			if self.grid != self.prev: self.insert_random()
 
