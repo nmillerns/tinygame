@@ -1,6 +1,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: built-in module fcntl</title>
+<meta charset="utf-8">
 </head><body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
@@ -20,11 +21,12 @@ a&nbsp;file&nbsp;or&nbsp;socket&nbsp;object.</tt></p>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-fcntl"><strong>fcntl</strong></a>(...)</dt><dd><tt><a href="#-fcntl">fcntl</a>(fd,&nbsp;opt,&nbsp;[arg])<br>
+<td width="100%"><dl><dt><a name="-fcntl"><strong>fcntl</strong></a>(...)</dt><dd><tt><a href="#-fcntl">fcntl</a>(fd,&nbsp;op,&nbsp;[arg])<br>
 &nbsp;<br>
-Perform&nbsp;the&nbsp;requested&nbsp;operation&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.&nbsp;&nbsp;The&nbsp;operation<br>
-is&nbsp;defined&nbsp;by&nbsp;op&nbsp;and&nbsp;is&nbsp;operating&nbsp;system&nbsp;dependent.&nbsp;&nbsp;These&nbsp;constants&nbsp;are<br>
-available&nbsp;from&nbsp;the&nbsp;fcntl&nbsp;module.&nbsp;&nbsp;The&nbsp;argument&nbsp;arg&nbsp;is&nbsp;optional,&nbsp;and<br>
+Perform&nbsp;the&nbsp;operation&nbsp;op&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.&nbsp;&nbsp;The&nbsp;values&nbsp;used<br>
+for&nbsp;op&nbsp;are&nbsp;operating&nbsp;system&nbsp;dependent,&nbsp;and&nbsp;are&nbsp;available<br>
+as&nbsp;constants&nbsp;in&nbsp;the&nbsp;fcntl&nbsp;module,&nbsp;using&nbsp;the&nbsp;same&nbsp;names&nbsp;as&nbsp;used&nbsp;in<br>
+the&nbsp;relevant&nbsp;C&nbsp;header&nbsp;files.&nbsp;&nbsp;The&nbsp;argument&nbsp;arg&nbsp;is&nbsp;optional,&nbsp;and<br>
 defaults&nbsp;to&nbsp;0;&nbsp;it&nbsp;may&nbsp;be&nbsp;an&nbsp;int&nbsp;or&nbsp;a&nbsp;string.&nbsp;&nbsp;If&nbsp;arg&nbsp;is&nbsp;given&nbsp;as&nbsp;a&nbsp;string,<br>
 the&nbsp;return&nbsp;value&nbsp;of&nbsp;fcntl&nbsp;is&nbsp;a&nbsp;string&nbsp;of&nbsp;that&nbsp;length,&nbsp;containing&nbsp;the<br>
 resulting&nbsp;value&nbsp;put&nbsp;in&nbsp;the&nbsp;arg&nbsp;buffer&nbsp;by&nbsp;the&nbsp;operating&nbsp;system.&nbsp;&nbsp;The&nbsp;length<br>
@@ -34,13 +36,14 @@ corresponding&nbsp;to&nbsp;the&nbsp;return&nbsp;value&nbsp;of&nbsp;the&nbsp;fcnt
  <dl><dt><a name="-flock"><strong>flock</strong></a>(...)</dt><dd><tt><a href="#-flock">flock</a>(fd,&nbsp;operation)<br>
 &nbsp;<br>
 Perform&nbsp;the&nbsp;lock&nbsp;operation&nbsp;op&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.&nbsp;&nbsp;See&nbsp;the&nbsp;Unix&nbsp;<br>
-manual&nbsp;page&nbsp;for&nbsp;<a href="#-flock">flock</a>(3)&nbsp;for&nbsp;details.&nbsp;&nbsp;(On&nbsp;some&nbsp;systems,&nbsp;this&nbsp;function&nbsp;is<br>
+manual&nbsp;page&nbsp;for&nbsp;<a href="#-flock">flock</a>(2)&nbsp;for&nbsp;details.&nbsp;&nbsp;(On&nbsp;some&nbsp;systems,&nbsp;this&nbsp;function&nbsp;is<br>
 emulated&nbsp;using&nbsp;<a href="#-fcntl">fcntl</a>().)</tt></dd></dl>
- <dl><dt><a name="-ioctl"><strong>ioctl</strong></a>(...)</dt><dd><tt><a href="#-ioctl">ioctl</a>(fd,&nbsp;opt[,&nbsp;arg[,&nbsp;mutate_flag]])<br>
+ <dl><dt><a name="-ioctl"><strong>ioctl</strong></a>(...)</dt><dd><tt><a href="#-ioctl">ioctl</a>(fd,&nbsp;op[,&nbsp;arg[,&nbsp;mutate_flag]])<br>
 &nbsp;<br>
-Perform&nbsp;the&nbsp;requested&nbsp;operation&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.&nbsp;&nbsp;The&nbsp;operation&nbsp;is<br>
-defined&nbsp;by&nbsp;opt&nbsp;and&nbsp;is&nbsp;operating&nbsp;system&nbsp;dependent.&nbsp;&nbsp;Typically&nbsp;these&nbsp;codes&nbsp;are<br>
-retrieved&nbsp;from&nbsp;the&nbsp;fcntl&nbsp;or&nbsp;termios&nbsp;library&nbsp;modules.<br>
+Perform&nbsp;the&nbsp;operation&nbsp;op&nbsp;on&nbsp;file&nbsp;descriptor&nbsp;fd.&nbsp;&nbsp;The&nbsp;values&nbsp;used&nbsp;for&nbsp;op<br>
+are&nbsp;operating&nbsp;system&nbsp;dependent,&nbsp;and&nbsp;are&nbsp;available&nbsp;as&nbsp;constants&nbsp;in&nbsp;the<br>
+fcntl&nbsp;or&nbsp;termios&nbsp;library&nbsp;modules,&nbsp;using&nbsp;the&nbsp;same&nbsp;names&nbsp;as&nbsp;used&nbsp;in&nbsp;the<br>
+relevant&nbsp;C&nbsp;header&nbsp;files.<br>
 &nbsp;<br>
 The&nbsp;argument&nbsp;arg&nbsp;is&nbsp;optional,&nbsp;and&nbsp;defaults&nbsp;to&nbsp;0;&nbsp;it&nbsp;may&nbsp;be&nbsp;an&nbsp;int&nbsp;or&nbsp;a<br>
 buffer&nbsp;containing&nbsp;character&nbsp;data&nbsp;(most&nbsp;likely&nbsp;a&nbsp;string&nbsp;or&nbsp;an&nbsp;array).&nbsp;<br>

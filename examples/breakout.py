@@ -5,19 +5,22 @@ import tinygame as tg
 
 class Paddle():
 	"""
+	Simple class for the user's paddle. It has a location and can draw itself onto any character map, in particular the screen
 	"""
 	def __init__(self, x, y, width):
-		self.x = x
+		self.x = x # sets initial location
 		self.y = y
-		self.width = width
-		self.appearance = ''.join(['=' for i in xrange(0, self.width)])
+		self.width = width # sets the width
+		self.appearance = ''.join(['=' for i in xrange(0, self.width)]) # sets the appearance of the paddle as a sequence of ='s
 	def draw(self, character_map):
 		"""
+		Draws the appearance of the paddle (a sequence of='s) on the given character map
 		"""
 		character_map.write_text(self.x - self.width / 2, self.y, self.appearance)
 
 class FallingBrick():
 	"""
+	Class to handle the broken bricks that fall
 	"""
 	def __init__(self, x, y):
 		self.x = x
@@ -31,6 +34,9 @@ class FallingBrick():
 			character_map[self.x, iy] = '"'
 
 	def tick(self, character_map):
+		"""
+		
+		"""
 		self.y += .1 + 1.3*random.random()
 		hit = False
 		iy = int(self.y)

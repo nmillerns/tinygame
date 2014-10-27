@@ -1,4 +1,4 @@
-EXAMPLES:=doc/snake.html doc/tetris.html doc/breakout.html doc/life.html
+EXAMPLES:=doc/snake.html doc/tetris.html doc/breakout.html doc/life.html doc/2048.html doc/flappy.html
 
 all:	doc/tinygame.html $(EXAMPLES)
 
@@ -31,6 +31,16 @@ doc/breakout.html: doc/random.html
 	pydoc -w examples/breakout.py
 	sed 's|$(PWD)|..|g' < breakout.html > doc/breakout.html
 	rm breakout.html
+
+doc/flappy.html: doc/random.html
+	pydoc -w examples/flappy.py
+	sed 's|$(PWD)|..|g' < flappy.html > doc/flappy.html
+	rm flappy.html
+
+doc/2048.html: doc/random.html
+	pydoc -w examples/2048.py
+	sed 's|$(PWD)|..|g' < 2048.html > doc/2048.html
+	rm 2048.html
 
 doc/%.html: examples/%.py
 	pydoc -w  $<

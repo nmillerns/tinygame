@@ -1,6 +1,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><title>Python: module random</title>
+<meta charset="utf-8">
 </head><body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
@@ -167,11 +168,10 @@ mu&nbsp;is&nbsp;the&nbsp;mean,&nbsp;and&nbsp;sigma&nbsp;is&nbsp;the&nbsp;standar
 
 <dl><dt><a name="Random-randint"><strong>randint</strong></a>(self, a, b)</dt><dd><tt>Return&nbsp;random&nbsp;integer&nbsp;in&nbsp;range&nbsp;[a,&nbsp;b],&nbsp;including&nbsp;both&nbsp;end&nbsp;points.</tt></dd></dl>
 
-<dl><dt><a name="Random-randrange"><strong>randrange</strong></a>(self, start, stop<font color="#909090">=None</font>, step<font color="#909090">=1</font>, int<font color="#909090">=&lt;type 'int'&gt;</font>, default<font color="#909090">=None</font>, maxwidth<font color="#909090">=9007199254740992L</font>)</dt><dd><tt>Choose&nbsp;a&nbsp;random&nbsp;item&nbsp;from&nbsp;range(start,&nbsp;stop[,&nbsp;step]).<br>
+<dl><dt><a name="Random-randrange"><strong>randrange</strong></a>(self, start, stop<font color="#909090">=None</font>, step<font color="#909090">=1</font>, _int<font color="#909090">=&lt;type 'int'&gt;</font>, _maxwidth<font color="#909090">=9007199254740992L</font>)</dt><dd><tt>Choose&nbsp;a&nbsp;random&nbsp;item&nbsp;from&nbsp;range(start,&nbsp;stop[,&nbsp;step]).<br>
 &nbsp;<br>
 This&nbsp;fixes&nbsp;the&nbsp;problem&nbsp;with&nbsp;<a href="#Random-randint">randint</a>()&nbsp;which&nbsp;includes&nbsp;the<br>
-endpoint;&nbsp;in&nbsp;Python&nbsp;this&nbsp;is&nbsp;usually&nbsp;not&nbsp;what&nbsp;you&nbsp;want.<br>
-Do&nbsp;not&nbsp;supply&nbsp;the&nbsp;'int',&nbsp;'default',&nbsp;and&nbsp;'maxwidth'&nbsp;arguments.</tt></dd></dl>
+endpoint;&nbsp;in&nbsp;Python&nbsp;this&nbsp;is&nbsp;usually&nbsp;not&nbsp;what&nbsp;you&nbsp;want.</tt></dd></dl>
 
 <dl><dt><a name="Random-sample"><strong>sample</strong></a>(self, population, k)</dt><dd><tt>Chooses&nbsp;k&nbsp;unique&nbsp;random&nbsp;elements&nbsp;from&nbsp;a&nbsp;population&nbsp;sequence.<br>
 &nbsp;<br>
@@ -198,7 +198,7 @@ If&nbsp;a&nbsp;is&nbsp;not&nbsp;None&nbsp;or&nbsp;an&nbsp;int&nbsp;or&nbsp;long,
 
 <dl><dt><a name="Random-setstate"><strong>setstate</strong></a>(self, state)</dt><dd><tt>Restore&nbsp;internal&nbsp;state&nbsp;from&nbsp;object&nbsp;returned&nbsp;by&nbsp;<a href="#Random-getstate">getstate</a>().</tt></dd></dl>
 
-<dl><dt><a name="Random-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>, int<font color="#909090">=&lt;type 'int'&gt;</font>)</dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
+<dl><dt><a name="Random-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>)</dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
 &nbsp;<br>
 Optional&nbsp;arg&nbsp;random&nbsp;is&nbsp;a&nbsp;0-argument&nbsp;function&nbsp;returning&nbsp;a&nbsp;random<br>
 float&nbsp;in&nbsp;[0.0,&nbsp;1.0);&nbsp;by&nbsp;default,&nbsp;the&nbsp;standard&nbsp;random.random.</tt></dd></dl>
@@ -338,11 +338,10 @@ mu&nbsp;is&nbsp;the&nbsp;mean,&nbsp;and&nbsp;sigma&nbsp;is&nbsp;the&nbsp;standar
 
 <dl><dt><a name="SystemRandom-randint"><strong>randint</strong></a>(self, a, b)</dt><dd><tt>Return&nbsp;random&nbsp;integer&nbsp;in&nbsp;range&nbsp;[a,&nbsp;b],&nbsp;including&nbsp;both&nbsp;end&nbsp;points.</tt></dd></dl>
 
-<dl><dt><a name="SystemRandom-randrange"><strong>randrange</strong></a>(self, start, stop<font color="#909090">=None</font>, step<font color="#909090">=1</font>, int<font color="#909090">=&lt;type 'int'&gt;</font>, default<font color="#909090">=None</font>, maxwidth<font color="#909090">=9007199254740992L</font>)</dt><dd><tt>Choose&nbsp;a&nbsp;random&nbsp;item&nbsp;from&nbsp;range(start,&nbsp;stop[,&nbsp;step]).<br>
+<dl><dt><a name="SystemRandom-randrange"><strong>randrange</strong></a>(self, start, stop<font color="#909090">=None</font>, step<font color="#909090">=1</font>, _int<font color="#909090">=&lt;type 'int'&gt;</font>, _maxwidth<font color="#909090">=9007199254740992L</font>)</dt><dd><tt>Choose&nbsp;a&nbsp;random&nbsp;item&nbsp;from&nbsp;range(start,&nbsp;stop[,&nbsp;step]).<br>
 &nbsp;<br>
 This&nbsp;fixes&nbsp;the&nbsp;problem&nbsp;with&nbsp;<a href="#SystemRandom-randint">randint</a>()&nbsp;which&nbsp;includes&nbsp;the<br>
-endpoint;&nbsp;in&nbsp;Python&nbsp;this&nbsp;is&nbsp;usually&nbsp;not&nbsp;what&nbsp;you&nbsp;want.<br>
-Do&nbsp;not&nbsp;supply&nbsp;the&nbsp;'int',&nbsp;'default',&nbsp;and&nbsp;'maxwidth'&nbsp;arguments.</tt></dd></dl>
+endpoint;&nbsp;in&nbsp;Python&nbsp;this&nbsp;is&nbsp;usually&nbsp;not&nbsp;what&nbsp;you&nbsp;want.</tt></dd></dl>
 
 <dl><dt><a name="SystemRandom-sample"><strong>sample</strong></a>(self, population, k)</dt><dd><tt>Chooses&nbsp;k&nbsp;unique&nbsp;random&nbsp;elements&nbsp;from&nbsp;a&nbsp;population&nbsp;sequence.<br>
 &nbsp;<br>
@@ -360,7 +359,7 @@ To&nbsp;choose&nbsp;a&nbsp;sample&nbsp;in&nbsp;a&nbsp;range&nbsp;of&nbsp;integer
 This&nbsp;is&nbsp;especially&nbsp;fast&nbsp;and&nbsp;space&nbsp;efficient&nbsp;for&nbsp;sampling&nbsp;from&nbsp;a<br>
 large&nbsp;population:&nbsp;&nbsp;&nbsp;<a href="#SystemRandom-sample">sample</a>(xrange(10000000),&nbsp;60)</tt></dd></dl>
 
-<dl><dt><a name="SystemRandom-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>, int<font color="#909090">=&lt;type 'int'&gt;</font>)</dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
+<dl><dt><a name="SystemRandom-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>)</dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
 &nbsp;<br>
 Optional&nbsp;arg&nbsp;random&nbsp;is&nbsp;a&nbsp;0-argument&nbsp;function&nbsp;returning&nbsp;a&nbsp;random<br>
 float&nbsp;in&nbsp;[0.0,&nbsp;1.0);&nbsp;by&nbsp;default,&nbsp;the&nbsp;standard&nbsp;random.random.</tt></dd></dl>
@@ -521,11 +520,10 @@ mu&nbsp;is&nbsp;the&nbsp;mean,&nbsp;and&nbsp;sigma&nbsp;is&nbsp;the&nbsp;standar
 
 <dl><dt><a name="WichmannHill-randint"><strong>randint</strong></a>(self, a, b)</dt><dd><tt>Return&nbsp;random&nbsp;integer&nbsp;in&nbsp;range&nbsp;[a,&nbsp;b],&nbsp;including&nbsp;both&nbsp;end&nbsp;points.</tt></dd></dl>
 
-<dl><dt><a name="WichmannHill-randrange"><strong>randrange</strong></a>(self, start, stop<font color="#909090">=None</font>, step<font color="#909090">=1</font>, int<font color="#909090">=&lt;type 'int'&gt;</font>, default<font color="#909090">=None</font>, maxwidth<font color="#909090">=9007199254740992L</font>)</dt><dd><tt>Choose&nbsp;a&nbsp;random&nbsp;item&nbsp;from&nbsp;range(start,&nbsp;stop[,&nbsp;step]).<br>
+<dl><dt><a name="WichmannHill-randrange"><strong>randrange</strong></a>(self, start, stop<font color="#909090">=None</font>, step<font color="#909090">=1</font>, _int<font color="#909090">=&lt;type 'int'&gt;</font>, _maxwidth<font color="#909090">=9007199254740992L</font>)</dt><dd><tt>Choose&nbsp;a&nbsp;random&nbsp;item&nbsp;from&nbsp;range(start,&nbsp;stop[,&nbsp;step]).<br>
 &nbsp;<br>
 This&nbsp;fixes&nbsp;the&nbsp;problem&nbsp;with&nbsp;<a href="#WichmannHill-randint">randint</a>()&nbsp;which&nbsp;includes&nbsp;the<br>
-endpoint;&nbsp;in&nbsp;Python&nbsp;this&nbsp;is&nbsp;usually&nbsp;not&nbsp;what&nbsp;you&nbsp;want.<br>
-Do&nbsp;not&nbsp;supply&nbsp;the&nbsp;'int',&nbsp;'default',&nbsp;and&nbsp;'maxwidth'&nbsp;arguments.</tt></dd></dl>
+endpoint;&nbsp;in&nbsp;Python&nbsp;this&nbsp;is&nbsp;usually&nbsp;not&nbsp;what&nbsp;you&nbsp;want.</tt></dd></dl>
 
 <dl><dt><a name="WichmannHill-sample"><strong>sample</strong></a>(self, population, k)</dt><dd><tt>Chooses&nbsp;k&nbsp;unique&nbsp;random&nbsp;elements&nbsp;from&nbsp;a&nbsp;population&nbsp;sequence.<br>
 &nbsp;<br>
@@ -543,7 +541,7 @@ To&nbsp;choose&nbsp;a&nbsp;sample&nbsp;in&nbsp;a&nbsp;range&nbsp;of&nbsp;integer
 This&nbsp;is&nbsp;especially&nbsp;fast&nbsp;and&nbsp;space&nbsp;efficient&nbsp;for&nbsp;sampling&nbsp;from&nbsp;a<br>
 large&nbsp;population:&nbsp;&nbsp;&nbsp;<a href="#WichmannHill-sample">sample</a>(xrange(10000000),&nbsp;60)</tt></dd></dl>
 
-<dl><dt><a name="WichmannHill-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>, int<font color="#909090">=&lt;type 'int'&gt;</font>)</dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
+<dl><dt><a name="WichmannHill-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>)</dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
 &nbsp;<br>
 Optional&nbsp;arg&nbsp;random&nbsp;is&nbsp;a&nbsp;0-argument&nbsp;function&nbsp;returning&nbsp;a&nbsp;random<br>
 float&nbsp;in&nbsp;[0.0,&nbsp;1.0);&nbsp;by&nbsp;default,&nbsp;the&nbsp;standard&nbsp;random.random.</tt></dd></dl>
@@ -636,11 +634,10 @@ mu&nbsp;is&nbsp;the&nbsp;mean,&nbsp;and&nbsp;sigma&nbsp;is&nbsp;the&nbsp;standar
  <dl><dt><a name="-paretovariate"><strong>paretovariate</strong></a>(self, alpha)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Pareto&nbsp;distribution.&nbsp;&nbsp;alpha&nbsp;is&nbsp;the&nbsp;shape&nbsp;parameter.</tt></dd></dl>
  <dl><dt><a name="-randint"><strong>randint</strong></a>(self, a, b)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Return&nbsp;random&nbsp;integer&nbsp;in&nbsp;range&nbsp;[a,&nbsp;b],&nbsp;including&nbsp;both&nbsp;end&nbsp;points.</tt></dd></dl>
  <dl><dt><a name="-random"><strong>random</strong></a>(...)</dt><dd><tt><a href="#-random">random</a>()&nbsp;-&gt;&nbsp;x&nbsp;in&nbsp;the&nbsp;interval&nbsp;[0,&nbsp;1).</tt></dd></dl>
- <dl><dt><a name="-randrange"><strong>randrange</strong></a>(self, start, stop<font color="#909090">=None</font>, step<font color="#909090">=1</font>, int<font color="#909090">=&lt;type 'int'&gt;</font>, default<font color="#909090">=None</font>, maxwidth<font color="#909090">=9007199254740992L</font>)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Choose&nbsp;a&nbsp;random&nbsp;item&nbsp;from&nbsp;range(start,&nbsp;stop[,&nbsp;step]).<br>
+ <dl><dt><a name="-randrange"><strong>randrange</strong></a>(self, start, stop<font color="#909090">=None</font>, step<font color="#909090">=1</font>, _int<font color="#909090">=&lt;type 'int'&gt;</font>, _maxwidth<font color="#909090">=9007199254740992L</font>)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Choose&nbsp;a&nbsp;random&nbsp;item&nbsp;from&nbsp;range(start,&nbsp;stop[,&nbsp;step]).<br>
 &nbsp;<br>
 This&nbsp;fixes&nbsp;the&nbsp;problem&nbsp;with&nbsp;<a href="#-randint">randint</a>()&nbsp;which&nbsp;includes&nbsp;the<br>
-endpoint;&nbsp;in&nbsp;Python&nbsp;this&nbsp;is&nbsp;usually&nbsp;not&nbsp;what&nbsp;you&nbsp;want.<br>
-Do&nbsp;not&nbsp;supply&nbsp;the&nbsp;'int',&nbsp;'default',&nbsp;and&nbsp;'maxwidth'&nbsp;arguments.</tt></dd></dl>
+endpoint;&nbsp;in&nbsp;Python&nbsp;this&nbsp;is&nbsp;usually&nbsp;not&nbsp;what&nbsp;you&nbsp;want.</tt></dd></dl>
  <dl><dt><a name="-sample"><strong>sample</strong></a>(self, population, k)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Chooses&nbsp;k&nbsp;unique&nbsp;random&nbsp;elements&nbsp;from&nbsp;a&nbsp;population&nbsp;sequence.<br>
 &nbsp;<br>
 Returns&nbsp;a&nbsp;new&nbsp;list&nbsp;containing&nbsp;elements&nbsp;from&nbsp;the&nbsp;population&nbsp;while<br>
@@ -663,7 +660,7 @@ system&nbsp;specific&nbsp;randomness&nbsp;source&nbsp;if&nbsp;available.<br>
 &nbsp;<br>
 If&nbsp;a&nbsp;is&nbsp;not&nbsp;None&nbsp;or&nbsp;an&nbsp;int&nbsp;or&nbsp;long,&nbsp;hash(a)&nbsp;is&nbsp;used&nbsp;instead.</tt></dd></dl>
  <dl><dt><a name="-setstate"><strong>setstate</strong></a>(self, state)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Restore&nbsp;internal&nbsp;state&nbsp;from&nbsp;object&nbsp;returned&nbsp;by&nbsp;<a href="#-getstate">getstate</a>().</tt></dd></dl>
- <dl><dt><a name="-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>, int<font color="#909090">=&lt;type 'int'&gt;</font>)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
+ <dl><dt><a name="-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
 &nbsp;<br>
 Optional&nbsp;arg&nbsp;random&nbsp;is&nbsp;a&nbsp;0-argument&nbsp;function&nbsp;returning&nbsp;a&nbsp;random<br>
 float&nbsp;in&nbsp;[0.0,&nbsp;1.0);&nbsp;by&nbsp;default,&nbsp;the&nbsp;standard&nbsp;random.random.</tt></dd></dl>
