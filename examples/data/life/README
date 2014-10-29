@@ -1,0 +1,4 @@
+Data for Conway's game of life
+
+./examples/data/life/*.txt		 - Example starting seeds as serialized character maps. Usage: python examples/life.py examples/data/life/(file.txt)
+
