@@ -19,6 +19,7 @@ class Pipe():
 		self.width = Pipe.HEAD.width
 		self.gap_y, self.gap_height, self.height = gap_y, gap_height, height
 		self.age = 0
+		self.scored = False
 
 	def draw(self, character_map, mask_map):
 		for y in xrange(0, self.height):
@@ -85,20 +86,70 @@ class FlappyUI():
 	FPS = 24.0 # Frame rate in frames per second
 	ARRIVAL_RATE = 1.8 # The time (in seconds) between each pipe that arrives on the right of the screen
 
-	def __init__(self):
-		self.screen = tg.character_display.CharacterDisplay(80, 35)
-		self.fg = tg.character_display.CharacterMap(80, 35)
-		self.fgmask = tg.character_display.CharacterMap(80, 35)
+	def __init__(self, width, height, cheat=False):
+		self.width = width
+		self.height = height
+		self.screen = tg.character_display.CharacterDisplay(self.width, self.height)
+		self.bg = tg.character_map.parse("""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
+ .----.-----.-.---.---/    \       /    .---.  .--  /.---./    .------  \/  .---
+/     / \       /  \  .  ---.  .----.  /   .----.  .-.   /  -----. .-- .--.  .. 
+ .---.  .-----.---.  | |      /      \  .-.  .  .. | | .------.  ..   /    \|  |
+/     \/       \   \/   \  .--.       \/   \/ \/  \| |/        \/  \ /      |  |
+      /         \  /     \/    \       \    \      | /          \   |       |  |
+
+
+
+""" )
+		if random.randint(1, 10) < 4:
+			self.bg.fill(' ')
+			coords = []
+			for x in xrange(0, self.bg.width):
+				for y in xrange(0, self.bg.height-7):
+					coords.append((x,y))
+			random.shuffle(coords)
+			for star in xrange(0, 50):
+				self.bg[coords[star]] = '.'
+			
+		self.fg = tg.character_map.CharacterMap(self.width, self.height)
+		self.fgmask = tg.character_display.CharacterMap(self.width, self.height)
 		self.done = False
+		self.cheat = cheat
 		self.faby = Bird(25, 20)
 		ground_tile = tg.character_map.parse('____\n/   ')
 		ground_mask = tg.character_map.parse('####\n####')
-		self.fg.fill(' ')
+
+		self.fg.fill('\x00')
 		self.fgmask.fill(' ')
-		for x in xrange(0, 80, 4):
-			self.fg.draw(x, 33, ground_tile)
-			self.fgmask.draw(x, 33, ground_mask)
-		self.next_pipe = Pipe(160, random.randint(2,22), 8, 33)
+		for x in xrange(0, self.width, 4):
+			self.fg.draw(x, self.height-ground_tile.height, ground_tile)
+			self.fgmask.draw(x, self.height-ground_tile.height, ground_mask)
+		self.next_pipe = Pipe(160, random.randint(2,self.height-22), 8, self.height-2)
 		self.old_pipes = [self.next_pipe]
 		self.score = 0
 
@@ -123,28 +174,30 @@ class FlappyUI():
 				self.next_pipe.draw(self.fg, self.fgmask)
 			else:
 				for y in xrange(0, 33): # Othwewise draw a clear column on the right to clear scrolled off pipes which would wrap around to the right column
-					self.fg[self.fg.width-1, y] = ' '
+					self.fg[self.fg.width-1, y] = '\x00'
 					self.fgmask[self.fgmask.width-1, y] = ' '
 
-			self.screen.draw(0, 0, self.fg, ' ') # place the fg image on the screen as the next layer. Spaces ' ' are transpearant
+			self.screen.draw(0, 0, self.bg) # draw the background first -- the first layer
+
+			self.screen.draw(0, 0, self.fg, '\x00') # place the fg image on the screen as the next layer. Spaces ' ' are transpearant
 			if self.next_pipe.age >= self.ARRIVAL_RATE*self.FPS: # Keep new pipes generated at the arrival rate
-				self.next_pipe = Pipe(80, random.randint(2, 22), 8, 33)
+				self.next_pipe = Pipe(self.width, random.randint(2, self.height-13), 8, self.height-2)
 				self.old_pipes.append(self.next_pipe) # store the next pipe in the set of old pipes unti it is scored
 
 
 			self.faby.accelerate((0, self.GRAVITY)) # Apply acceleration due to gravity
 
-			next_old_pipes = []
 			for pipe in self.old_pipes:
 				pipe.tick()
 				if pipe.x < self.faby.x: # Score for a pipe when the bird passes it
-					self.score += 1l
-				else: # The scored pipe is implicitly lost, as we only read non-scored pipes here
-					next_old_pipes.append(pipe)
-			self.old_pipes = next_old_pipes
+					self.score += 1
+					pipe.scored = True
+			self.old_pipes = [pipe for pipe in self.old_pipes if not pipe.scored]
 
 			self.faby.tick()
-			self.faby.y = max(0, min(self.faby.y, self.fg.height-1)) # constrain the bird inside the screen
+			self.faby.y = max(0, min(self.faby.y, self.height-1)) # constrain the bird inside the screen
+			self.screen.write_text(5,1, "Score: %d"%(self.score))
+
 			collision = self.faby.collision(self.fgmask)
 			if collision:
 				cx, cy = collision
@@ -152,10 +205,9 @@ class FlappyUI():
 				self.screen[cx,cy] = 'X'
 				self.screen.show()
 				tg.time.sleep(1)
-				self.done = True
+				if not self.cheat: self.done = True
 
 			self.faby.draw(self.screen)
-			self.screen.write_text(5,1, "Score=%d"%self.score)
 			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase even if we get key presses that exit keyboard.getch() early
 			self.screen.show()
 
@@ -173,7 +225,7 @@ def main():
 	"""
 	tg.initialize()
 	try:
-		gameui = FlappyUI()
+		gameui = FlappyUI(80, 35, len(sys.argv) == 2 and sys.argv[1] == '--cheat')
 		gameui.intro()
 		gameui.play() # simply start playing
 
