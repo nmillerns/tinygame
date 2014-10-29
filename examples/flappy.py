@@ -89,6 +89,7 @@ class FlappyUI():
 	def __init__(self, width, height, cheat=False):
 		self.width = width
 		self.height = height
+		self.highscore = tg.HighScoresGUI(tg.HighScoresDB("examples/data/flappy/scores.txt")) # Load a GUI object for high scores with data from file
 		self.screen = tg.character_display.CharacterDisplay(self.width, self.height)
 		self.bg = tg.character_map.parse("""
 
@@ -154,8 +155,50 @@ ___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
 		self.score = 0
 
 	def intro(self):
-		pass
+		title = tg.character_map.parse("""
+ ______________________________________________________
+| ______ _                           ____  _         _ ||
+||  ____| |                         |  _ \(_)       | |||
+|| |__  | | __ _ _ __  _ __  _   _  | |_) |_ _ __ __| |||
+||  __| | |/ _` | '_ \| '_ \| | | | |  _ <| | '__/ _` |||
+|| |    | | (_| | |_) | |_) | |_| | | |_) | | | | (_| |||
+||_|    |_|\__,_| .__/| .__/ \__, | |____/|_|_|  \__,_|||
+|               | |   | |     __/ |                    ||
+|               |_|   |_|    |___/                     ||
+|                                        Presented in  ||
+|                                            tinygame  ||
+|                 Nick Miller 2014                     ||
+|                                                      ||
+|  Press any key to start                              ||
+|  Tap SPACE to flap wings                             ||
+'______________________________________________________''
+ ------------------------------------------------------'
+""")
+		tg.keyboard.getch(0)
+		metronome = tg.Metronome(1/self.FPS) # Use a metronome to maintain specified fps
+		d = 0
+		while True:
+			k = tg.keyboard.getch(1/self.FPS)
+			if k:
+				break
+			self.screen.draw(0, 0, self.bg) # draw the background first -- the first layer
 
+			self.screen.draw(0, 0, self.fg, '\x00') # place the fg image on the screen as the next layer. Spaces ' ' are transpearant
+			self.faby.tick()
+			self.faby.y = max(0, min(self.faby.y, self.height-1)) # constrain the bird inside the screen
+
+			self.faby.draw(self.screen)
+			self.screen.draw(self.width/2-title.width/2, 0, title)
+
+			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase even if we get key presses that exit keyboard.getch() early
+			self.screen.show()
+
+			self.fg.scroll_left()
+			self.fgmask.scroll_left()
+			d += 1
+			if (d >= 4*self.FPS):
+				self.highscore.scroll_on(self.screen)
+				d = 0
 	def play(self):
 		"""
 		The UI plays a round of Flappy Bird until the user hits something 

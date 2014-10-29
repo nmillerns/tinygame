@@ -1,0 +1,4 @@
+Data for the flappy bird game
+
+./examples/data/flappy/scores.txt		- Flat text database of high scores for FlappyUI.highscore. See HighScoresDB in the pydoc
+
