@@ -91,42 +91,7 @@ class FlappyUI():
 		self.height = height
 		self.highscore = tg.HighScoresGUI(tg.HighScoresDB("examples/data/flappy/scores.txt")) # Load a GUI object for high scores with data from file
 		self.screen = tg.character_display.CharacterDisplay(self.width, self.height)
-		self.bg = tg.character_map.parse("""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
- .----.-----.-.---.---/    \       /    .---.  .--  /.---./    .------  \/  .---
-/     / \       /  \  .  ---.  .----.  /   .----.  .-.   /  -----. .-- .--.  .. 
- .---.  .-----.---.  | |      /      \  .-.  .  .. | | .------.  ..   /    \|  |
-/     \/       \   \/   \  .--.       \/   \/ \/  \| |/        \/  \ /      |  |
-      /         \  /     \/    \       \    \      | /          \   |       |  |
-
-
-
-""" )
+		self.bg = tg.character_map.load("examples/data/flappy/bg.txt" )
 		if random.randint(1, 10) < 4:
 			self.bg.fill(' ')
 			coords = []
@@ -134,14 +99,14 @@ ___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
 				for y in xrange(0, self.bg.height-7):
 					coords.append((x,y))
 			random.shuffle(coords)
-			for star in xrange(0, 50):
+			for star in xrange(0, 30):
 				self.bg[coords[star]] = '.'
 			
 		self.fg = tg.character_map.CharacterMap(self.width, self.height)
 		self.fgmask = tg.character_display.CharacterMap(self.width, self.height)
 		self.done = False
 		self.cheat = cheat
-		self.faby = Bird(25, 20)
+		self.faby = Bird(23, 9)
 		ground_tile = tg.character_map.parse('____\n/   ')
 		ground_mask = tg.character_map.parse('####\n####')
 
@@ -150,12 +115,12 @@ ___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
 		for x in xrange(0, self.width, 4):
 			self.fg.draw(x, self.height-ground_tile.height, ground_tile)
 			self.fgmask.draw(x, self.height-ground_tile.height, ground_mask)
-		self.next_pipe = Pipe(160, random.randint(2,self.height-22), 8, self.height-2)
+		self.next_pipe = Pipe(160, random.randint(2,self.height-14), 8, self.height-2)
 		self.old_pipes = [self.next_pipe]
 		self.score = 0
 
 	def intro(self):
-		title = tg.character_map.parse("""
+		title = tg.character_map.parse("""\
  ______________________________________________________
 | ______ _                           ____  _         _ ||
 ||  ____| |                         |  _ \(_)       | |||
@@ -165,12 +130,14 @@ ___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
 ||_|    |_|\__,_| .__/| .__/ \__, | |____/|_|_|  \__,_|||
 |               | |   | |     __/ |                    ||
 |               |_|   |_|    |___/                     ||
+|                                                      ||
 |                                        Presented in  ||
 |                                            tinygame  ||
+|                                                      ||
 |                 Nick Miller 2014                     ||
 |                                                      ||
-|  Press any key to start                              ||
-|  Tap SPACE to flap wings                             ||
+|       Press any key to start.   ESC to quit          ||
+|              Tap SPACE to flap wings                 ||
 '______________________________________________________''
  ------------------------------------------------------'
 """)
@@ -187,8 +154,8 @@ ___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
 			self.faby.tick()
 			self.faby.y = max(0, min(self.faby.y, self.height-1)) # constrain the bird inside the screen
 
-			self.faby.draw(self.screen)
 			self.screen.draw(self.width/2-title.width/2, 0, title)
+			self.faby.draw(self.screen)
 
 			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase even if we get key presses that exit keyboard.getch() early
 			self.screen.show()
@@ -216,7 +183,7 @@ ___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
 			if self.next_pipe.x + self.next_pipe.width >= self.fg.width: # Draw the pipe if it is at the right margin of the screen. Otherwise it has been drawn already and is scrolling along (see scroll_left below)
 				self.next_pipe.draw(self.fg, self.fgmask)
 			else:
-				for y in xrange(0, 33): # Othwewise draw a clear column on the right to clear scrolled off pipes which would wrap around to the right column
+				for y in xrange(0, self.fg.height-2): # Othwewise draw a clear column on the right to clear scrolled off pipes which would wrap around to the right column
 					self.fg[self.fg.width-1, y] = '\x00'
 					self.fgmask[self.fgmask.width-1, y] = ' '
 
@@ -247,8 +214,9 @@ ___..-. __ _ _ .---.   .---..--.---._ _--.---.------..---.-.------..---.--.--.--
 				self.faby.draw(self.screen)
 				self.screen[cx,cy] = 'X'
 				self.screen.show()
-				tg.time.sleep(1)
-				if not self.cheat: self.done = True
+				tg.time.sleep(1 if not self.cheat else .25)
+				if not self.cheat:
+					self.done = True
 
 			self.faby.draw(self.screen)
 			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase even if we get key presses that exit keyboard.getch() early
@@ -268,7 +236,7 @@ def main():
 	"""
 	tg.initialize()
 	try:
-		gameui = FlappyUI(80, 35, len(sys.argv) == 2 and sys.argv[1] == '--cheat')
+		gameui = FlappyUI(80, 23, len(sys.argv) == 2 and sys.argv[1] == '--cheat')
 		gameui.intro()
 		gameui.play() # simply start playing
 

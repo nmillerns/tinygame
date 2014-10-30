@@ -64,6 +64,7 @@ class TwentyFourtyEightGameUI():
 		self.prev = self.grid.clone() # have a previous copy of the grid to check for differences
 		self.delay = 1/8.0 # A dilay pause time to time animations
 		self.done = False
+		self.exit = False
 		self.score = 0
 		self.win = False
 		self.highscore = tg.HighScoresGUI(tg.HighScoresDB("examples/data/2048/scores.txt")) # Load a GUI object for high scores with data from file
@@ -94,7 +95,7 @@ class TwentyFourtyEightGameUI():
                                                           tinygame            
                                                                               
                              Nick Miller 2014                                 
-
+                  Press any key to start. ESC to quit
   ---------------------------------------------------------------------------- 
   ----------------------------------------------------------------------------
 """
@@ -103,7 +104,11 @@ class TwentyFourtyEightGameUI():
 				cm = tg.character_map.parse(title_card)
 				self.screen.draw(0, 0, cm)
 				self.screen.show()
-				if tg.keyboard.getch(3) != None: return
+				k = tg.keyboard.getch(3)
+				if k == tg.keyboard.KEY_ESCAPE:
+					self.done = True
+					self.exit = True
+				if  k != None: return
 				self.highscore.scroll_on(self.screen)
 		finally:
 			self.screen.fill(' ')
@@ -116,7 +121,7 @@ class TwentyFourtyEightGameUI():
 		self.screen.write_text(6, 13, "Game Over!") # write Game Over!
 		self.screen.show() # make sure to .show() so its visible on the console
 		tg.time.sleep(1.5) # sleep with no key presses
-		tg.keyboard.getch(10.0) # wait for a key press for the last second. Also clears the keypresses for the next screen
+		tg.keyboard.getch(1.0) # wait for a key press for the last second. Also clears the keypresses for the next screen
 		
 	def score_tile(self, tile):
 		"""
@@ -295,7 +300,6 @@ class TwentyFourtyEightGameUI():
 		"""
 		The UI plays a round of 2048 game. 
 		"""
-		self.done = False
 		for i in xrange(0, 2): self.insert_random() # start with 2 random tiles
 
 		while not self.done: # play forever until something happens
@@ -318,6 +322,7 @@ class TwentyFourtyEightGameUI():
 				self.right()
 			if k == tg.keyboard.KEY_ESCAPE:
 				self.done = True
+				self.exit = True
 
 			if self.grid != self.prev: self.insert_random()
 
@@ -331,9 +336,11 @@ def main():
 	"""
 	tg.initialize()
 	try:
-		gameui = TwentyFourtyEightGameUI()
-		gameui.intro()
-		gameui.play() # simply start playing
+		while True:
+			gameui = TwentyFourtyEightGameUI()
+			gameui.intro()
+			gameui.play() # simply start playing
+			if gameui.exit: break
 
 	finally:
 		tg.quit()
