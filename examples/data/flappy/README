@@ -1,4 +1,5 @@
 Data for the flappy bird game
 
 ./examples/data/flappy/scores.txt		- Flat text database of high scores for FlappyUI.highscore. See HighScoresDB in the pydoc
+./examples/data/flappy/bg.txt			- A serialized character map of the daytime background in Flappy Bird. It is supposed to be distant hills
 

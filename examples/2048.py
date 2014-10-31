@@ -323,7 +323,6 @@ class TwentyFourtyEightGameUI():
 			if k == tg.keyboard.KEY_ESCAPE:
 				self.done = True
 				self.exit = True
-
 			if self.grid != self.prev: self.insert_random()
 
 		self.highscore.handle_new_score(self.score, self.screen)

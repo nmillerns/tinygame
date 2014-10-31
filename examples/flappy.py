@@ -105,6 +105,7 @@ class FlappyUI():
 		self.fg = tg.character_map.CharacterMap(self.width, self.height)
 		self.fgmask = tg.character_display.CharacterMap(self.width, self.height)
 		self.done = False
+		self.exit = False
 		self.cheat = cheat
 		self.faby = Bird(23, 9)
 		ground_tile = tg.character_map.parse('____\n/   ')
@@ -146,8 +147,10 @@ class FlappyUI():
 		d = 0
 		while True:
 			k = tg.keyboard.getch(1/self.FPS)
-			if k:
-				break
+			if k == tg.keyboard.KEY_ESCAPE:
+				self.done = True
+				self.exit = True
+			if k: break
 			self.screen.draw(0, 0, self.bg) # draw the background first -- the first layer
 
 			self.screen.draw(0, 0, self.fg, '\x00') # place the fg image on the screen as the next layer. Spaces ' ' are transpearant
@@ -178,6 +181,7 @@ class FlappyUI():
 				self.faby.flap() # Use the space key to flap the bird wings
 			if k == tg.keyboard.KEY_ESCAPE:
 				self.done = True
+				self.exit = True
 				break
 
 			if self.next_pipe.x + self.next_pipe.width >= self.fg.width: # Draw the pipe if it is at the right margin of the screen. Otherwise it has been drawn already and is scrolling along (see scroll_left below)
@@ -225,6 +229,7 @@ class FlappyUI():
 			self.fg.scroll_left()
 			self.fgmask.scroll_left()
 
+		self.highscore.handle_new_score(self.score, self.screen)
 
 	def finalize(self):
 		self.highscore.handle_new_score(self.score, self.screen)
@@ -236,9 +241,11 @@ def main():
 	"""
 	tg.initialize()
 	try:
-		gameui = FlappyUI(80, 23, len(sys.argv) == 2 and sys.argv[1] == '--cheat')
-		gameui.intro()
-		gameui.play() # simply start playing
+		while True:
+			gameui = FlappyUI(80, 23, len(sys.argv) == 2 and sys.argv[1] == '--cheat')
+			gameui.intro()
+			gameui.play() # simply start playing
+			if gameui.exit: break
 
 	finally:
 		tg.quit()

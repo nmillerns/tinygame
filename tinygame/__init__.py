@@ -144,16 +144,20 @@ class HighScoresGUI():
 			screen.scroll_down()
 			screen.draw(0, i-plate.height+1, plate) # draw the names plate in the gap you just scrolled off
 			screen.show()
-			if keyboard.getch(.07) != None: return # tick at 1/.07 = 14.286 fps
+			if keyboard.getch(.07) != None: # tick at 1/.07 = 14.286 fps
+				screen.draw(0, 0, plate) # show it quickly if you abort drawing
+				return 
+
+		if not scroll_off: return
 
 		if keyboard.getch(2) != None: return # wait 2 seconds
 
-		if scroll_off: # scroll back off
-			for i in xrange(0, screen.height):
-				screen.scroll_down()
-				screen.draw(0, i-screen.height+1, prev)
-				screen.show()
-				if keyboard.getch(.07) != None: return
+		for i in xrange(0, screen.height):
+			screen.scroll_down()
+			screen.draw(0, i-screen.height+1, prev)
+			screen.show()
+			if keyboard.getch(.07) != None: return
+
 	def handle_new_score(self, score, screen):
 		"""
 		Takes in a new score and chacks if it ranks, and if so get the user's name and show the new list including the new user's name
@@ -167,6 +171,8 @@ class HighScoresGUI():
 				self.highscoresDB.insert(name, score) # subit the name in the database... It bumps off the old bottom ranker
 				self.highscoresDB.save() # re-save the scores in the database file
 				self.scroll_on(screen, scroll_off = False) # scroll away the name input screen to show the scores
+				screen.show()
+				keyboard.getch(0) # clear key presses to abort scroll
 				keyboard.getch(4) # wait for a key hit for 4 seconds
 				# then we go back and normal gui control flow is resumed
 

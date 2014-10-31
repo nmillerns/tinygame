@@ -96,7 +96,7 @@ class Ball():
 		character_map[int(round(self.x)), int(round(self.y))] = 'O'
 
 class BreakoutGameUI():
-	background_string = """
+	background_string = """\
  ______________________________________________________________________________ 
 |                                                                              |
 |      ##################################################################      |
@@ -122,12 +122,12 @@ class BreakoutGameUI():
 |                                                                              |
 """
 	def __init__(self):
-		self.screen = tg.character_display.CharacterDisplay(80, 24)
+		self.screen = tg.character_display.CharacterDisplay(80, 23)
 		self.done = False
 		self.bg = tg.character_map.parse(BreakoutGameUI.background_string)
 		self.total_bricks = len([1 for c in BreakoutGameUI.background_string if c == '#'])
 		self.score = 0
-		self.lives = 5
+		self.lives = 10
 		self.highscore = tg.HighScoresGUI(tg.HighScoresDB("examples/data/breakout/scores.txt"))
 
 	def show_stats(self):
@@ -190,8 +190,8 @@ class BreakoutGameUI():
 		tg.keyboard.getch(1.0)
 
 	def play_round(self):
-		paddle = Paddle(40, 23, 6)
-		ball = Ball(5.0, 22.0)
+		paddle = Paddle(40, 22, 8)
+		ball = Ball(5.0, 21.0)
 		metronome = tg.Metronome(1/30.0)
 		ball.dx, ball.dy = .45, -.3
 		falling = []

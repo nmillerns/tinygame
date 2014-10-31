@@ -159,15 +159,17 @@ class TetrisGameUI():
 """
 
 	def __init__(self):
-		self.screen = tg.character_display.CharacterDisplay(48, 24) # the game UI creates a 32 x 24 character screen to draw the game upon
+		self.screen = tg.character_display.CharacterDisplay(48, 23) # the game UI creates a 32 x 24 character screen to draw the game upon
 		self.score = 0 # the game UI tracks the score
 		self.lines = 0 # the game UI tracks number of completed lines
 		self.level = 0 # the game UI the player level
 		self.highscore = tg.HighScoresGUI(tg.HighScoresDB("examples/data/tetris/scores.txt"))
+		self.done = False
+		self.exit = False
 
 	def intro(self):
 		try:
-			title_card = """
+			title_card = """\
 [][][][][][][][][][][][][][][][][][][][][][][][]
 []                                            []
 []_____  ______  ______  ______   __   ______ []   
@@ -180,7 +182,7 @@ class TetrisGameUI():
 []                                            []
 []                                            []
 []                                            [] 
-[]                                            []
+[]     Press any key to start. ESC to quit    []
 []                                            []
 []                                            []
 []                                            []
@@ -196,7 +198,11 @@ class TetrisGameUI():
 				self.screen.fill(' ')
 				self.screen.draw(0, 0, cm)
 				self.screen.show()
-				if tg.keyboard.getch(3) != None: return
+				k = tg.keyboard.getch(3)
+				if k == tg.keyboard.KEY_ESCAPE: 
+					self.done = True
+					self.exit = True
+				if  k != None: return
 				self.highscore.scroll_on(self.screen)
 		finally:
 			self.screen.fill(' ')
@@ -229,7 +235,7 @@ class TetrisGameUI():
 		t = None # There is no current Tetromino it will be generated
 		next = random_tetromino() # decide the next Tetromino
 
-		while True: # Play forever until the game is over
+		while not self.done: # Play forever until the game is over
 			if t == None: # check if there is no current Tetromino
 				t = next # if so use the Tetromino up next
 				next = random_tetromino() # now redecide what is next after that
@@ -253,6 +259,7 @@ class TetrisGameUI():
 			elif k == tg.keyboard.KEY_DOWN:
 				t.advance()
 			elif k == tg.keyboard.KEY_ESCAPE:
+				self.exit = True
 				break
 
 			if not t.fits_in(bg): # check if the move we did on the Tetromino allows it to fit
@@ -303,10 +310,11 @@ def main():
 	"""
 	tg.initialize()
 	try:
-		gameui = TetrisGameUI()
-		gameui.intro()
-		gameui.play() # simply start playing
-
+		while True:
+			gameui = TetrisGameUI()
+			gameui.intro()
+			gameui.play() # simply start playing
+			if gameui.exit: break
 	finally:
 		tg.quit()
 

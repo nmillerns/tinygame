@@ -1,1 +1,4 @@
 Data for the breakout game
+
+./examples/data/breakout/scores.txt		- Flat text database of high scores for BreakoutGameUI.highscore. See HighScoresDB in the pydoc
+
