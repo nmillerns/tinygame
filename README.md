@@ -6,4 +6,4 @@ An educational very lightweight literate programming library for creating simple
 screenshots
 ===========
 
-![Flappy Bird](doc/flappy-title.png?raw=true)
+![Flappy Bird](doc/flappy-title.png =72x)
