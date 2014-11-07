@@ -178,13 +178,13 @@ class SnakeGameUI():
 
 		while True: # play forever until something happens
 			k = tg.keyboard.getch(1/10.0) # get the keypress and set nibbles direction (nibbles.dx, nibbles.dy) accordingly. Wait 1/10 of a second so the game progresses if no key is pressed
-			if k == tg.keyboard.KEY_UP:
+			if k == tg.keyboard.KEY_UP and (nibbles.dx, nibbles.dy) != (0, 1):
 				nibbles.dx, nibbles.dy = 0, -1
-			if k == tg.keyboard.KEY_DOWN:
+			if k == tg.keyboard.KEY_DOWN and (nibbles.dx, nibbles.dy) != (0, -1):
 				nibbles.dx, nibbles.dy = 0, 1
-			if k == tg.keyboard.KEY_LEFT:
+			if k == tg.keyboard.KEY_LEFT and (nibbles.dx, nibbles.dy) != (1, 0):
 				nibbles.dx, nibbles.dy = -1, 0
-			if k == tg.keyboard.KEY_RIGHT:
+			if k == tg.keyboard.KEY_RIGHT and (nibbles.dx, nibbles.dy) != (-1, 0):
 				nibbles.dx, nibbles.dy = 1, 0
 			if k == tg.keyboard.KEY_ESCAPE:
 				self.done = True
