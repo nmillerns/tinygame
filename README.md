@@ -6,4 +6,10 @@ An educational very lightweight literate programming library for creating simple
 screenshots
 ===========
 
-![Flappy Bird](doc/flappy-title.png?raw=true)
+![Flappy Bird](doc/flappy-title.png) ![Playing Flappy Bird](doc/flappy-play.png)
+
+![Tetris](doc/tetris-title.png) ![Playing Tetris](doc/tetris-play.png)
+
+![2048](doc/2048-title.png) ![Playing 2048](doc/2048-play.png)
+
+![Breakout](doc/breakout-play.Nibbles) ![Nibbles](png/nibbles-play.png)
