@@ -57,9 +57,14 @@ any&nbsp;given&nbsp;score.&nbsp;Thr&nbsp;ranking&nbsp;lies&nbsp;in&nbsp;0&nbsp;t
 filename:&nbsp;a&nbsp;sting&nbsp;containing&nbsp;&nbsp;path&nbsp;and&nbsp;filename&nbsp;of&nbsp;a&nbsp;plaintext&nbsp;file&nbsp;that&nbsp;will&nbsp;store&nbsp;the&nbsp;simple&nbsp;high&nbsp;scroes&nbsp;database<br>
 N:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;representing&nbsp;the&nbsp;number&nbsp;of&nbsp;top&nbsp;entries&nbsp;you&nbsp;would&nbsp;like&nbsp;to&nbsp;store&nbsp;in&nbsp;the&nbsp;database</tt></dd></dl>
 
-<dl><dt><a name="HighScoresDB-best"><strong>best</strong></a>(self)</dt><dd><tt>Simply&nbsp;returns&nbsp;the&nbsp;single&nbsp;best&nbsp;score&nbsp;in&nbsp;the&nbsp;database</tt></dd></dl>
+<dl><dt><a name="HighScoresDB-best"><strong>best</strong></a>(self)</dt><dd><tt>Simply&nbsp;returns&nbsp;the&nbsp;single&nbsp;best&nbsp;score&nbsp;in&nbsp;the&nbsp;database<br>
+&nbsp;<br>
+return:&nbsp;The&nbsp;float&nbsp;value&nbsp;of&nbsp;the&nbsp;best&nbsp;score&nbsp;recorded</tt></dd></dl>
 
-<dl><dt><a name="HighScoresDB-insert"><strong>insert</strong></a>(self, name, score)</dt></dl>
+<dl><dt><a name="HighScoresDB-insert"><strong>insert</strong></a>(self, name, score)</dt><dd><tt>Inserts&nbsp;a&nbsp;score&nbsp;in&nbsp;the&nbsp;database&nbsp;under&nbsp;the&nbsp;given&nbsp;name.<br>
+&nbsp;<br>
+name:&nbsp;A&nbsp;string&nbsp;of&nbsp;the&nbsp;user&nbsp;who&nbsp;achieved&nbsp;the&nbsp;score<br>
+score:&nbsp;A&nbsp;float&nbsp;value&nbsp;of&nbsp;the&nbsp;score&nbsp;achived</tt></dd></dl>
 
 <dl><dt><a name="HighScoresDB-ranking"><strong>ranking</strong></a>(self, score)</dt><dd><tt>Determine&nbsp;the&nbsp;ranking&nbsp;of&nbsp;a&nbsp;new&nbsp;score&nbsp;in&nbsp;this&nbsp;database.&nbsp;In&nbsp;0..N-1&nbsp;if&nbsp;it&nbsp;ranks&nbsp;in&nbsp;the&nbsp;top&nbsp;N&nbsp;or&nbsp;N</tt></dd></dl>
 

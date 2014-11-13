@@ -57,7 +57,7 @@ class Pipe():
 
 	def tick(self):
 		"""
-		Call for every frame of a pipe. Moves it leftard and ages the pipe
+		Call for every frame of a pipe. Moves it leftward and ages the pipe
 		"""
 		self.x -= 1 # Move left one unit every frame
 		if self.x < 80: self.age += 1 # Increase our age while we are on screen

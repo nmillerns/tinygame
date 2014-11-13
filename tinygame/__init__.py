@@ -261,9 +261,18 @@ class HighScoresDB():
 	def best(self):
 		"""
 		Simply returns the single best score in the database
+
+		return: The float value of the best score recorded
 		"""
 		return max([s for n, s in self.data])
+
 	def insert(self, name, score):
+		"""
+		Inserts a score in the database under the given name.
+
+		name: A string of the user who achieved the score
+		score: A float value of the score achived
+		"""
 		self.data.append((name, score))
 		self.data.sort(key = lambda pair:-pair[1])
 		self.data = self.data[0:-1]
