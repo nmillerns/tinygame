@@ -177,7 +177,7 @@ class SnakeGameUI():
 		apples_eaten = 0 # track how many apples have been eaten this round so we know when we can progress a level
 
 		while True: # play forever until something happens
-			k = tg.keyboard.getch(1/10.0) # get the keypress and set nibbles direction (nibbles.dx, nibbles.dy) accordingly. Wait 1/10 of a second so the game progresses if no key is pressed
+			k = tg.keyboard.getch() # get the keypress and set nibbles direction (nibbles.dx, nibbles.dy) accordingly.
 			if k == tg.keyboard.KEY_UP and (nibbles.dx, nibbles.dy) != (0, 1):
 				nibbles.dx, nibbles.dy = 0, -1
 			if k == tg.keyboard.KEY_DOWN and (nibbles.dx, nibbles.dy) != (0, -1):
@@ -222,8 +222,8 @@ class SnakeGameUI():
 			if apples_eaten >= 8: # check if we've eaten enough apples
 				self.level += 1 # if so progress to the next stage
 				break # and stop the round
-			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase even if we get key presses that exit keyboard.getch() early
 			self.screen.show() # show the updated screen to the user once per frame -- now
+			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase even if we get key presses that exit keyboard.getch() early
 
 	def finalize(self):
 		self.highscore.handle_new_score(self.score, self.screen)
