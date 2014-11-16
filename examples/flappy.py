@@ -220,7 +220,7 @@ class FlappyUI():
 		metronome = tg.Metronome(1/self.FPS) # Use a metronome to maintain specified fps
 		idle = 0 # Track idle time to show high scores
 		while True: # Show the title until a kep press
-			k = tg.keyboard.getch(1/self.FPS) # Read the key press
+			k = tg.keyboard.getch() # Read the key press
 			if k == tg.keyboard.KEY_ESCAPE: # ESCAPE is special. Stop the title, but also exit the program
 				self.done = True
 				self.exit = True # make sure to exit
@@ -233,7 +233,7 @@ class FlappyUI():
 			self.screen.draw(self.width/2-title.width/2, 0, title) # Draw the title card
 			self.faby.draw(self.screen) # Draw the animated Bird in front
 
-			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase even if we get key presses that exit keyboard.getch() early
+			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase with FPS
 			self.screen.show() # Update the newest image on screen
 
 			self.fg.scroll_left() # Keep the ground scrolling
@@ -249,7 +249,7 @@ class FlappyUI():
 		metronome = tg.Metronome(1/self.FPS) # Use a metronome to maintain specified fps
 
 		while not self.done:
-			k = tg.keyboard.getch(1/self.FPS) # Read key presses
+			k = tg.keyboard.getch() # Read key presses
 			if k == ' ':
 				self.faby.flap() # Use the space key to flap the bird wings
 			if k == tg.keyboard.KEY_ESCAPE:
@@ -296,7 +296,7 @@ class FlappyUI():
 					self.done = True # Then the game if over
 
 			self.faby.draw(self.screen) # Draw the animated Bird on screen  buffer
-			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase even if we get key presses that exit keyboard.getch() early
+			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase at FPS
 			self.screen.show() # Update the display with the newest frame
 
 			self.fg.scroll_left() # Keep the foreground scrolling leftward

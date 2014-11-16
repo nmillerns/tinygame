@@ -196,7 +196,7 @@ class BreakoutGameUI():
 		ball.dx, ball.dy = .45, -.3
 		falling = []
 		while True:
-			k = tg.keyboard.getch(1/30.0)
+			k = tg.keyboard.getch()
 			if k == tg.keyboard.KEY_LEFT:
 				paddle.x -= 1
 			if k == tg.keyboard.KEY_RIGHT:
@@ -232,8 +232,8 @@ class BreakoutGameUI():
 				self.lives -= 1
 				break
 			ball.draw(self.screen)
-			metronome.wait_for_tick()
 			self.screen.show()
+			metronome.wait_for_tick()
 
 	def finalize(self):
 		self.highscore.handle_new_score(self.score, self.screen)
