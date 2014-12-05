@@ -22,7 +22,7 @@ def main():
             timer.wait_for_tick() # wait until the 1.0/10 second tick happens
             screen.show() # show the next frame
             frame += 1
-            if frame % 15 == 0: layer0.scroll_left()
+            if frame % 20 == 0: layer0.scroll_left()
             if frame % 3 == 0: layer1.scroll_left()
             if frame % 1 == 0: layer2.scroll_left()
 
