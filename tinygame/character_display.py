@@ -84,6 +84,13 @@ class CharacterDisplay(CharacterMap): # Inherit from the CharacterMap class.
 		CharacterMap.scroll_up(self, amount)
 		self.dirty = True # same except we now know the screen data is now different so set the dirty bit
 
+	def scroll_down(self, amount = 1):
+		"""
+		Same as scrolling down on a normal character map. See CharacterMap
+		"""
+		CharacterMap.scroll_down(self, amount)
+		self.dirty = True # same except we now know the screen data is now different so set the dirty bit
+
 	def scroll_left(self, amount = 1):
 		"""
 		Same as scrolling a normal character map. See CharacterMap
