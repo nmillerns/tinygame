@@ -57,7 +57,7 @@ def main(args):
 		prev = tg.character_map.CharacterMap(screen.width, screen.height) # we store the previous
 		next = prev.clone() # and next state in two successive maps
 
-		prev.draw(0, 0, start)
+		prev.draw_image(0, 0, start)
 
 		while True:
 			k = tg.keyboard.getch() # this will return a character from the keyboard if one is pressed otherwise None
@@ -75,7 +75,7 @@ def main(args):
 						if len(n) == 3: next[x,y] = '#' # is born from reproduction
 						else: next[x,y] = ' ' # no new generation
 						
-			screen.draw(0, 0, next)
+			screen.draw_image(0, 0, next)
 			prev, next = next, prev # switch the next to the new previous
 			timer.wait_for_tick() # wait until the 1.0/10 second tick happens
 			screen.show()

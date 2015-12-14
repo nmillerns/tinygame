@@ -142,10 +142,10 @@ class HighScoresGUI():
 
 		for i in xrange(0, plate.height): # scroll the plate on one name at a time from the top
 			screen.scroll_down()
-			screen.draw(0, i-plate.height+1, plate) # draw the names plate in the gap you just scrolled off
+			screen.draw_image(0, i-plate.height+1, plate) # draw the names plate in the gap you just scrolled off
 			screen.show()
 			if keyboard.getch(.07) != None: # tick at 1/.07 = 14.286 fps
-				screen.draw(0, 0, plate) # show it quickly if you abort drawing
+				screen.draw_image(0, 0, plate) # show it quickly if you abort drawing
 				return 
 
 		if not scroll_off: return
@@ -154,7 +154,7 @@ class HighScoresGUI():
 
 		for i in xrange(0, screen.height):
 			screen.scroll_down()
-			screen.draw(0, i-screen.height+1, prev)
+			screen.draw_image(0, i-screen.height+1, prev)
 			screen.show()
 			if keyboard.getch(.07) != None: return
 

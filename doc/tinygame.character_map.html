@@ -79,15 +79,15 @@ return:&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;this&nbsp;map</tt></
 &nbsp;<br>
 A&nbsp;new&nbsp;<a href="#CharacterMap">CharacterMap</a>&nbsp;of&nbsp;the&nbsp;same&nbsp;heght&nbsp;and&nbsp;width&nbsp;returned&nbsp;and&nbsp;all&nbsp;the&nbsp;data&nbsp;of&nbsp;self&nbsp;is&nbsp;copied&nbsp;to&nbsp;it</tt></dd></dl>
 
-<dl><dt><a name="CharacterMap-draw"><strong>draw</strong></a>(self, x, y, other, chromakey<font color="#909090">=None</font>)</dt><dd><tt>Draws&nbsp;the&nbsp;given&nbsp;<a href="#CharacterMap">CharacterMap</a>&nbsp;on&nbsp;self.<br>
+<dl><dt><a name="CharacterMap-draw_image"><strong>draw_image</strong></a>(self, x, y, character_map, chromakey<font color="#909090">=None</font>)</dt><dd><tt>Draws&nbsp;the&nbsp;other&nbsp;<a href="#CharacterMap">CharacterMap</a>&nbsp;character_map&nbsp;on&nbsp;self.<br>
 &nbsp;<br>
-Draws&nbsp;the&nbsp;given&nbsp;<a href="#CharacterMap">CharacterMap</a>,&nbsp;other&nbsp;onto&nbsp;this&nbsp;<a href="#CharacterMap">CharacterMap</a>&nbsp;at&nbsp;posion&nbsp;x,&nbsp;y&nbsp;(they&nbsp;can&nbsp;be&nbsp;negative&nbsp;and&nbsp;the&nbsp;other&nbsp;character_map&nbsp;is&nbsp;properly&nbsp;clipped)<br>
-Chromakey&nbsp;provides&nbsp;an&nbsp;(optional)&nbsp;character&nbsp;designated&nbsp;as&nbsp;"transparent".&nbsp;Like&nbsp;the&nbsp;blue&nbsp;in&nbsp;"blue-screening".&nbsp;Any&nbsp;instance&nbsp;of&nbsp;this&nbsp;character&nbsp;in&nbsp;other&nbsp;means&nbsp;transparecy&nbsp;and&nbsp;the&nbsp;original&nbsp;self&nbsp;data&nbsp;shows&nbsp;through<br>
-It&nbsp;is&nbsp;makes&nbsp;for&nbsp;readable&nbsp;strings&nbsp;to&nbsp;use&nbsp;'&nbsp;'&nbsp;as&nbsp;a&nbsp;chromakey&nbsp;but&nbsp;any&nbsp;unused&nbsp;character&nbsp;is&nbsp;possible.<br>
+Composited&nbsp;the&nbsp;given&nbsp;<a href="#CharacterMap">CharacterMap</a>,&nbsp;character_map&nbsp;onto&nbsp;this&nbsp;<a href="#CharacterMap">CharacterMap</a>&nbsp;at&nbsp;posion&nbsp;x,&nbsp;y&nbsp;(which&nbsp;are&nbsp;allowed&nbsp;to&nbsp;be&nbsp;negative,&nbsp;in&nbsp;which&nbsp;case&nbsp;the&nbsp;other&nbsp;character_map&nbsp;is&nbsp;properly&nbsp;clipped)<br>
+Chromakey&nbsp;provides&nbsp;an&nbsp;(optional)&nbsp;character&nbsp;designated&nbsp;as&nbsp;"transparent".&nbsp;Like&nbsp;the&nbsp;blue&nbsp;in&nbsp;"blue-screening".&nbsp;Any&nbsp;instance&nbsp;of&nbsp;this&nbsp;character&nbsp;in&nbsp;character_map&nbsp;means&nbsp;transparecy&nbsp;and&nbsp;the&nbsp;original&nbsp;self&nbsp;data&nbsp;shows&nbsp;through<br>
+It&nbsp;is&nbsp;made&nbsp;for&nbsp;readable&nbsp;strings&nbsp;to&nbsp;use&nbsp;'&nbsp;'&nbsp;as&nbsp;a&nbsp;chromakey&nbsp;but&nbsp;any&nbsp;unused&nbsp;character&nbsp;is&nbsp;possible.<br>
 &nbsp;<br>
 x:&nbsp;an&nbsp;integer&nbsp;representing&nbsp;the&nbsp;x&nbsp;coordinate&nbsp;where&nbsp;the&nbsp;top&nbsp;left&nbsp;character&nbsp;of&nbsp;other&nbsp;appears<br>
 y:&nbsp;an&nbsp;integer&nbsp;representing&nbsp;the&nbsp;y&nbsp;coordinate&nbsp;where&nbsp;the&nbsp;top&nbsp;left&nbsp;character&nbsp;of&nbsp;other&nbsp;appears<br>
-other:&nbsp;a&nbsp;<a href="#CharacterMap">CharacterMap</a>&nbsp;to&nbsp;be&nbsp;drawn&nbsp;onto&nbsp;this&nbsp;<a href="#CharacterMap">CharacterMap</a><br>
+character_map:&nbsp;a&nbsp;<a href="#CharacterMap">CharacterMap</a>&nbsp;to&nbsp;be&nbsp;composited&nbsp;onto&nbsp;this&nbsp;<a href="#CharacterMap">CharacterMap</a><br>
 chromakey:&nbsp;a&nbsp;single&nbsp;character&nbsp;string&nbsp;representing&nbsp;the&nbsp;transparent&nbsp;characters&nbsp;in&nbsp;other.&nbsp;Typically&nbsp;None&nbsp;or&nbsp;'&nbsp;'</tt></dd></dl>
 
 <dl><dt><a name="CharacterMap-fill"><strong>fill</strong></a>(self, character)</dt><dd><tt>Fills&nbsp;the&nbsp;entire&nbsp;character_map&nbsp;with&nbsp;the&nbsp;specified&nbsp;character&nbsp;repeated&nbsp;over&nbsp;and&nbsp;over<br>

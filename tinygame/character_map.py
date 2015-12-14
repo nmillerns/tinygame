@@ -49,28 +49,28 @@ class CharacterMap():
 			for j in xrange(0, len(lines[i])): # write all the characters in the line in the appropriate row, and column
 				self[x + j, y + i] = lines[i][j] if lines[i][j] not in ['\t'] else ' ' # draw only printable characters
 
-	def draw(self, x, y, other, chromakey = None):
+	def draw_image(self, x, y, character_map, chromakey = None):
 		"""
-		Draws the given CharacterMap on self.
+		Draws the other CharacterMap character_map on self.
 
-		Draws the given CharacterMap, other onto this CharacterMap at posion x, y (they can be negative and the other character_map is properly clipped)
-		Chromakey provides an (optional) character designated as "transparent". Like the blue in "blue-screening". Any instance of this character in other means transparecy and the original self data shows through
-		It is makes for readable strings to use ' ' as a chromakey but any unused character is possible.
+		Composited the given CharacterMap, character_map onto this CharacterMap at posion x, y (which are allowed to be negative, in which case the other character_map is properly clipped)
+		Chromakey provides an (optional) character designated as "transparent". Like the blue in "blue-screening". Any instance of this character in character_map means transparecy and the original self data shows through
+		It is made for readable strings to use ' ' as a chromakey but any unused character is possible.
 
 		x: an integer representing the x coordinate where the top left character of other appears
 		y: an integer representing the y coordinate where the top left character of other appears
-		other: a CharacterMap to be drawn onto this CharacterMap
+		character_map: a CharacterMap to be composited onto this CharacterMap
 		chromakey: a single character string representing the transparent characters in other. Typically None or ' '
 		"""
 		x0 = max(0, x) # start drawing at column x but clip it to 0 if we are drawing starting off the screen
 		y0 = max(0, y) # start drawing at row y but clip it to 0 if we are drawing starting off the screen
-		x1 = min(self.width, x + other.width) # clip right
-		y1 = min(self.height, y + other.height) # clip the bottom
-		ck = ord(chromakey) if chromakey != None else None # we use the 8bit ASCII value (ord()) of the chromakey since our data is 8bit. It is allowed to be none
+		x1 = min(self.width, x + character_map.width) # clip right
+		y1 = min(self.height, y + character_map.height) # clip the bottom
+		ck = ord(chromakey) if chromakey != None else None # we use the 8bit ASCII value (ord()) of the chromakey since our data is 8bit. It is allowed to be None
 		for yi in xrange(y0, y1): # go through the clipped rows and columns and draw
 			for xi in xrange(x0, x1):
-				c = other.rows[yi-y].data[xi-x] # we get the character to draw from other at the correct offset
-				if ck == None or c != ck: self.rows[yi].data[xi] = other.rows[yi-y].data[xi-x] # place the character on self unless it matches the chromakey character "colour"
+				c = character_map.rows[yi-y].data[xi-x] # we get the character to draw from other at the correct offset
+				if c != ck: self.rows[yi].data[xi] = c # place the character on self unless it matches the chromakey character "colour"
 
 	def clone(self):
 		"""
@@ -79,7 +79,7 @@ class CharacterMap():
 		A new CharacterMap of the same heght and width returned and all the data of self is copied to it
 		"""
 		cmap = CharacterMap(self.width, self.height)
-		cmap.draw(0, 0, self) # simply draw yourself on the new map
+		cmap.draw_image(0, 0, self) # simply draw yourself on the new map
 		return cmap
 
 	def scroll_up(self, amount = 1):

@@ -138,7 +138,7 @@ class SnakeGameUI():
 				ch = tg.keyboard.getch(0)
 				cm = tg.character_map.parse(title_card)
 				self.screen.fill(' ')
-				self.screen.draw(0, 0, cm)
+				self.screen.draw_image(0, 0, cm)
 				self.screen.show()
 				if tg.keyboard.getch(3) != None: return
 				self.highscore.scroll_on(self.screen)
@@ -173,7 +173,7 @@ class SnakeGameUI():
 		metronome = tg.Metronome(1/10.0) # Use a metronome to maintain 10 fps
 
 		bg = tg.character_map.load("examples/data/snake/level" + str(self.level) + ".txt") # load the level background from a text file into the bg CharacterMap
-		aapple = None # For no we dont have a apple. One will be created during play
+		apple = None # For no2 we dont have a apple. One will be created during play
 		apples_eaten = 0 # track how many apples have been eaten this round so we know when we can progress a level
 
 		while True: # play forever until something happens
@@ -192,17 +192,17 @@ class SnakeGameUI():
 
 			nibbles.tick() # nibbles handles his own movement. See the Snake.tick() method
 
-			self.screen.draw(0, 0, bg) # first redraw the background on screen
+			self.screen.draw_image(0, 0, bg) # first redraw the background on screen
 			self.screen.write_text(5,0, "Lives: " + str(self.lives)) # write the stats at the top
 			self.screen.write_text(40,0, "Level: " + str(self.level))
 			self.screen.write_text(70,0, "Score: " + str(self.score))
 
 			nibbles.draw_body(self.screen) # draw the body of the snake first. This way we can place the apple anwhere not on the body, and check that the head does not run into the body
-			if aapple: aapple.draw(self.screen) # draw the apple if it exists
+			if apple: apple.draw(self.screen) # draw the apple if it exists
 
 			if self.screen[2*nibbles.x,nibbles.y] == '(':  # check to see if the head is at the location of the apple
 				nibbles.length += 5 # if so, eat it and grow nibbles
-				aapple = None # no more apple. It was eaten. It will be recreated later
+				apple = None # no more apple. It was eaten. It will be recreated later
 				self.score += 10 # get 10 pts for eating an apple
 				apples_eaten += 1 # track how many nibbles has eaten
 			elif self.screen[2*nibbles.x,nibbles.y] in ['|' , '[']: # check if the head has run into a wall or a body part
@@ -211,12 +211,12 @@ class SnakeGameUI():
 
 			nibbles.draw_head(self.screen) # now draw the head
 
-			if aapple == None: # check if there is no apple. If there isn't it must be regenerated
+			if apple == None: # check if there is no apple. If there isn't it must be regenerated
 				while True: # go forever until we find a place for the apple
 					ax = 2+random.randint(0, 39) # propose a random place
 					ay = 2+random.randint(0, 21)
 					if self.screen[2*ax,ay] == ' ': # check if it is an empty space with no head or body
-						aapple = Apple(ax,ay) # this is the new apple
+						apple = Apple(ax,ay) # this is the new apple
 						break # we are done finding a place for the apple
 
 			if apples_eaten >= 8: # check if we've eaten enough apples

@@ -27,20 +27,20 @@ class FallingBrick():
 		self.y = y
 	def draw(self, character_map):
 		"""
+		Draws a falling brick at its current location on the given character_map
 		"""
 		iy = int(round(self.y))
 		if iy < character_map.height:
-			if  character_map[self.x, iy] == '=': hit = True
 			character_map[self.x, iy] = '"'
 
 	def tick(self, character_map):
 		"""
-		
+		Tick a falling brick one frame... keeps falling and detects collision with the player paddle
 		"""
 		self.y += .1 + 1.3*random.random()
 		hit = False
-		iy = int(self.y)
-		if iy < character_map.height and character_map[self.x, iy] == '=': hit = True
+		int_y = int(self.y)
+		if int_y < character_map.height and character_map[self.x, int_y] == '=': hit = True  # Check for collision with the paddle
 		return hit
 
 def sign(x):
@@ -48,6 +48,7 @@ def sign(x):
 
 class Ball():
 	"""
+	The ball in breakout. Follows simple linear motion with perfectly elastic collisions
 	"""
 	def __init__(self, x, y):
 		self.x = x
@@ -55,43 +56,48 @@ class Ball():
 		self.stuck = True
 	def tick(self, character_map):
 		if self.stuck: return
-		hit = None
-		x1 = self.x + self.dx
-		y1 = self.y + self.dy
+		hit = None  # for detecting collisions with solid surfaces in the play area
+		next_x = self.x + self.dx
+		next_y = self.y + self.dy
 		bounce_horizontal = False
 		bounce_vertical = False
 
 		if self.dx != 0:
-			ix = int(round(x1 + 0.5*sign(self.dx)))
-			iy = int(round(y1))
+			# check the next positions on the playing grid for collisions
+			ix = int(round(next_x + 0.5*sign(self.dx)))
+			iy = int(round(next_y))
 			if character_map[ix, iy] not in [' ', None]:
 				if character_map[ix, iy] == '#': hit = (ix, iy)
 				bounce_horizontal = True
 
 		if self.dy != 0:
-			ix = int(round(x1))
-			iy = int(round(y1 + 0.5*sign(self.dy)))
+			# check the next positions on the playing grid for collisions
+			ix = int(round(next_x))
+			iy = int(round(next_y + 0.5*sign(self.dy)))
 			if character_map[ix, iy] not in [' ', None]:
 				if character_map[ix, iy] == '#': hit = (ix, iy)
 				bounce_vertical = True
 		if bounce_horizontal and bounce_vertical:
-			ix = int(round(x1 + 0.5*sign(self.dx)))
-			iy = int(round(y1 + 0.5*sign(self.dy)))
+			# Choose between horizontal and vertical bounce based on which direction is faster
+			ix = int(round(next_x + 0.5*sign(self.dx)))
+			iy = int(round(next_y + 0.5*sign(self.dy)))
 			if abs(ix - self.x) > abs(iy - self.y): bounce_horizontal = False
 			else: bounce_vertical = False
 
+		# reverse directions for perfectly elastic collisions
 		if bounce_horizontal:
-			x1 = self.x
+			next_x = self.x
 			self.dx *= -1
 		if bounce_vertical:
-			y1 = self.y
+			next_y = self.y
 			self.dy *= -1
 
-		self.x, self.y = x1, y1
+		self.x, self.y = next_x, next_y
 		return hit
 
 	def draw(self, character_map):
 		"""
+		Draws an O for the ball
 		"""
 		character_map[int(round(self.x)), int(round(self.y))] = 'O'
 
@@ -168,7 +174,7 @@ class BreakoutGameUI():
 				ch = tg.keyboard.getch(0)
 				cm = tg.character_map.parse(title_card)
 				self.screen.fill(' ')
-				self.screen.draw(0, 0, cm)
+				self.screen.draw_image(0, 0, cm)
 				self.screen.show()
 				if tg.keyboard.getch(3) != None: return
 				self.highscore.scroll_on(self.screen)
@@ -194,7 +200,7 @@ class BreakoutGameUI():
 		ball = Ball(5.0, 21.0)
 		metronome = tg.Metronome(1/30.0)
 		ball.dx, ball.dy = .45, -.3
-		falling = []
+		falling_bricks = []
 		while True:
 			k = tg.keyboard.getch()
 			if k == tg.keyboard.KEY_LEFT:
@@ -209,24 +215,25 @@ class BreakoutGameUI():
 			if paddle.x - paddle.width/2 < 1: paddle.x = 1 + paddle.width/2
 			if paddle.x + paddle.width/2 > self.screen.width - 1: paddle.x = self.screen.width - 1 - paddle.width/2
 
-			self.screen.draw(0, 0, self.bg)
+			self.screen.draw_image(0, 0, self.bg)
 			
 			paddle.draw(self.screen)
 			hit = ball.tick(self.screen)
-			if ball.stuck: ball.x = paddle.x
+			if ball.stuck: ball.x = paddle.x  # The ball can travel with the paddle
 			if hit != None:
+				# Score a bick remove it from the background and replace it with a falling brick
 				self.total_bricks -= 1
 				self.score += 10
 				x, y = hit
 				self.bg[x,y] = ' '
-				falling.append(FallingBrick(x,y))
+				falling_bricks.append(FallingBrick(x,y))
 
 			self.screen.write_text(5, 0, "Score: " + str(self.score))
 			self.screen.write_text(68,0, "Bricks: " + str(self.total_bricks))
-			for f in falling:
-				if f.tick(self.screen): self.score += 15
-				f.draw(self.screen)
-			falling = [f for f in falling if f.y < self.screen.height]
+			for fbrick in falling_bricks:
+				if fbrick.tick(self.screen): self.score += 15
+				fbrick.draw(self.screen)
+			falling_bricks = [f for f in falling_bricks if f.y < self.screen.height]
 
 			if int(round(ball.y)) >= self.screen.height + 5:
 				self.lives -= 1

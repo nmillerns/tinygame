@@ -91,11 +91,11 @@ class CharacterDisplay(CharacterMap): # Inherit from the CharacterMap class.
 		CharacterMap.scroll_left(self, amount)
 		self.dirty = True # same except we now know the screen data is now different so set the dirty bit
 
-	def draw(self, x, y, other, chromakey = None):
+	def draw_image(self, x, y, character_map, chromakey = None):
 		"""
 		Same as drawing onto a a normal character map. See CharacterMap
 		"""
-		CharacterMap.draw(self, x, y, other, chromakey)
+		CharacterMap.draw_image(self, x, y, character_map, chromakey)
 		self.dirty = True # same except we now know the screen data is now different so set the dirty bit
 
 	def write_text(self, x, y, text):

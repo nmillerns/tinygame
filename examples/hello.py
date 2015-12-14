@@ -10,8 +10,8 @@ def main():
 		screen.write_text(5, 10, "Hello, World!") # write Hello World! around the middle of the display. This is hello world afterall
 		timer = tg.Metronome(1.0/10) # continue at 10 frames per second
 		while True:
-			k = tg.keyboard.getch() # this will return a character from the keyboard if one is pressed otherwise None		
-			if k != None:
+			key = tg.keyboard.getch() # this will return a character from the keyboard if one is pressed otherwise None		
+			if key != None:
 				break # go until a user presses a key
 
 			screen.scroll_left() # keep scrolling the display left (it loops around)

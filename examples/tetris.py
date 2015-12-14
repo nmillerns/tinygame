@@ -41,7 +41,7 @@ class Tetromino():
 		Draws the Tetromino on the given CharacterMap. The ' ' blanks are drawn transparent
 		"""
 		x,y, w, h = self.bounding_box() # find the bounding box
-		character_map.draw(x, y, self.appearance(), ' ') # draw from the bounding box (as related to the x,y location of the center)
+		character_map.draw_image(x, y, self.appearance(), ' ') # draw from the bounding box (as related to the x,y location of the center)
 
 	def bounding_box(self):
 		# the box around this Tetromino is starts half width back and half height back from the center.
@@ -85,7 +85,7 @@ class Tetromino():
 def rotated(appearance):
 	"""
 	Calculates and returns the character map of a the given block if it is rotated 90 degrees ccw.
-	This is a little tricky since the blocks have t characters for every square. ie "[]"
+	This is a little tricky since the blocks have 2 characters for every square. ie "[]"
 	"""
 	r = tg.character_map.CharacterMap(2*appearance.height, appearance.width/2) # the rotated one exchanges height and width stretching appropriately for 2 characters for every square
 	for i in xrange(0, appearance.height): # go through rows
@@ -196,7 +196,7 @@ class TetrisGameUI():
 				ch = tg.keyboard.getch(0)
 				cm = tg.character_map.parse(title_card)
 				self.screen.fill(' ')
-				self.screen.draw(0, 0, cm)
+				self.screen.draw_image(0, 0, cm)
 				self.screen.show()
 				k = tg.keyboard.getch(3)
 				if k == tg.keyboard.KEY_ESCAPE: 
@@ -232,15 +232,15 @@ class TetrisGameUI():
 		"""
 		bg = tg.character_map.parse(TetrisGameUI.BACKGROUND_STRING) # load the background from the string into the bg CharacterMap
 
-		t = None # There is no current Tetromino it will be generated
-		next = random_tetromino() # decide the next Tetromino
+		tetromino = None # There is no current Tetromino it will be generated
+		next_tetromino = random_tetromino() # decide the next Tetromino
 
 		while not self.done: # Play forever until the game is over
-			if t == None: # check if there is no current Tetromino
-				t = next # if so use the Tetromino up next
-				next = random_tetromino() # now redecide what is next after that
-				if not t.fits_in(bg): # check if the new Tetromino at the top fits in the screen
-					t.draw(self.screen) # if not we dont have any more room and the game is over
+			if tetromino == None: # check if there is no current Tetromino
+				tetromino = next_tetromino # if so use the Tetromino up next
+				next_tetromino = random_tetromino() # now redecide what is next after that
+				if not tetromino.fits_in(bg): # check if the new Tetromino at the top fits in the screen
+					tetromino.draw(self.screen) # if not we dont have any more room and the game is over
 					self.screen.show() # show the user the problem
 					tg.time.sleep(.5)
 					tg.keyboard.getch(.5)
@@ -249,33 +249,33 @@ class TetrisGameUI():
 
 			k = tg.keyboard.getch(1/10.0) # get the keypress and change the Tetromino accordingly. Wait 1/10 of a second so the game progresses if no key is pressed
 			if k == tg.keyboard.KEY_LEFT:
-				t.translate_left()
+				tetromino.translate_left()
 			elif k == tg.keyboard.KEY_RIGHT:
-				t.translate_right()
+				tetromino.translate_right()
 			elif k == tg.keyboard.KEY_UP or k == 'x':
-				t.rotate_ccw()
+				tetromino.rotate_ccw()
 			elif k == 'z':
-				t.rotate_cw()
+				tetromino.rotate_cw()
 			elif k == tg.keyboard.KEY_DOWN:
-				t.advance()
+				tetromino.advance()
 			elif k == tg.keyboard.KEY_ESCAPE:
 				self.exit = True
 				break
 
-			if not t.fits_in(bg): # check if the move we did on the Tetromino allows it to fit
-				t.undo() # if not undo the move
+			if not tetromino.fits_in(bg): # check if the move we did on the Tetromino allows it to fit
+				tetromino.undo() # if not undo the move
 
-			t.advance() # The current Tetromino always advances down once per frame
-			if not t.fits_in(bg): # check if it fits after moving down
-				t.undo() # if not it must have gone through the floor. So it is done moving
-				t.draw(bg) # commit the current Tetromino to the background
-				self.score += int(round(t.y/2.0)) # score the Tetromino
-				t = None # No more Tetromino. We will move on to the next Tetromino
+			tetromino.advance() # The current Tetromino always advances down once per frame
+			if not tetromino.fits_in(bg): # check if it fits after moving down
+				tetromino.undo() # if not it must have gone through the floor. So it is done moving
+				tetromino.draw(bg) # commit the current Tetromino to the background
+				self.score += int(round(tetromino.y/2.0)) # score the Tetromino
+				tetromino = None # No more Tetromino. We will move on to the next Tetromino
 
-			self.screen.draw(0, 0, bg) # Refresh the screen using background
-			if t: t.draw(self.screen) # Draw the current Tetromino on the screen (note: not on the backgond)
+			self.screen.draw_image(0, 0, bg) # Refresh the screen using background
+			if tetromino: tetromino.draw(self.screen) # Draw the current Tetromino on the screen (note: not on the backgond)
 
-			self.screen.draw(23, 18, next.appearance()) # preview the next Tetromino at the side at 23,10
+			self.screen.draw_image(23, 18, next_tetromino.appearance()) # preview the next Tetromino at the side at 23,10
 			self.screen.write_text(24,2, str(self.score)) # Write stats on the side of the screen
 			self.screen.write_text(25,6, str(self.level))
 			self.screen.write_text(25,10, str(self.lines))

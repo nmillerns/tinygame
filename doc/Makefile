@@ -2,10 +2,13 @@ EXAMPLES:=doc/snake.html doc/tetris.html doc/breakout.html doc/life.html doc/204
 
 all:	doc/tinygame.html $(EXAMPLES)
 
-doc/tinygame.html: doc/tinygame.keyboard.html doc/tinygame.character_map.html doc/tinygame.character_display.html
+doc/tinygame.html: doc/tinygame.__main__.html doc/tinygame.keyboard.html doc/tinygame.character_map.html doc/tinygame.character_display.html
 	pydoc -w tinygame
 	sed 's|$(PWD)|..|g' < tinygame.html > doc/tinygame.html
 	rm tinygame.html
+
+doc/tinygame.__main__.html:
+	touch doc/tinygame.__main__.html
 
 doc/tinygame.keyboard.html: doc/fcntl.html doc/select.html doc/termios.html doc/os.html doc/sys.html
 	pydoc -w tinygame.keyboard

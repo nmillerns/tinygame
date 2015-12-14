@@ -35,25 +35,25 @@ class Pipe():
 		self.age = 0 # track the age of the pipe so it dies and is scored when the bird passes (its appearance continues to be scrolled off to the left until it leaves)
 		self.scored = False # It is on the right of the screen and has not been scored
 
-	def draw(self, character_map, mask_map):
+	def draw(self, character_map, solid_mask_map):
 		"""
 		Draws this pipe on the given CharacterMap.
 		Pipes are only drawn at the very right hand side of the buffer. 
 		The buffer continues to scroll so the pipe travels toward the left of the screen
 
 		character_map: A CharacterMap buffer to draw the appearance of the pipe
-		mask_map: An identical size CharacterMap containing collision information. Draw the pipe's mask on for collision detection
+		solid_mask_map: An identical size CharacterMap containing collision information. Draw the pipe's mask on for collision detection
 		"""
 		for y in xrange(0, self.height): # Draw all the way down the pipe
-			if self.gap_y < y and y <= self.gap_y + self.gap_height: continue # No need to draw anything between the gaps
-			character_map.draw(self.x, y, Pipe.BODY) # Draw a body segment at each point
-			mask_map.draw(self.x, y, Pipe.BODY_MASK) # Same on the mask
+			if self.gap_y < y and y <= self.gap_y + self.gap_height: continue # No need to draw anything between the vertical gaps
+			character_map.draw_image(self.x, y, Pipe.BODY) # Draw a body segment at each point
+			solid_mask_map.draw_image(self.x, y, Pipe.BODY_MASK) # Same on the mask
 
-		character_map.draw(self.x, self.gap_y - Pipe.HEAD.height+1, Pipe.HEAD) # Draw the upper pipe head
-		character_map.draw(self.x, self.gap_y + self.gap_height, Pipe.HEAD) # Draw the lower pipe head
+		character_map.draw_image(self.x, self.gap_y - Pipe.HEAD.height+1, Pipe.HEAD) # Draw the upper pipe head
+		character_map.draw_image(self.x, self.gap_y + self.gap_height, Pipe.HEAD) # Draw the lower pipe head
 
-		mask_map.draw(self.x, self.gap_y - Pipe.HEAD.height+1, Pipe.HEAD_MASK) # Draw the heads on the collision mask too
-		mask_map.draw(self.x, self.gap_y + self.gap_height, Pipe.HEAD_MASK)
+		solid_mask_map.draw_image(self.x, self.gap_y - Pipe.HEAD.height+1, Pipe.HEAD_MASK) # Draw the heads on the collision mask too
+		solid_mask_map.draw_image(self.x, self.gap_y + self.gap_height, Pipe.HEAD_MASK)
 
 	def tick(self):
 		"""
@@ -101,7 +101,7 @@ class Bird():
 
 		character_map: A CharacterMap on which to draw the current animation image of the Bird	
 		"""
-		character_map.draw(int(self.x), int(self.y), self.animated_current_sprite(), ' ') # Draw the current Bird animation image at the current position
+		character_map.draw_image(int(self.x), int(self.y), self.animated_current_sprite(), ' ') # Draw the current Bird animation image at the current position
 
 	def flap(self):
 		"""
@@ -174,7 +174,7 @@ class FlappyUI():
 				self.bg[coords[star]] = '.'
 			
 		self.fg = tg.character_map.CharacterMap(self.width, self.height) # Create CharacterMap to draw foreground objects (ground and pipe)
-		self.fgmask = tg.character_display.CharacterMap(self.width, self.height) # Create a corresponding collision map to detect collisions with foreground objects
+		self.fg_collision_mask = tg.character_display.CharacterMap(self.width, self.height) # Create a corresponding collision map to detect collisions with foreground objects
 		self.done = False # Not done
 		self.exit = False # Not ready to exit the program
 		self.cheat = cheat # Set the desired cheat flag
@@ -183,10 +183,10 @@ class FlappyUI():
 		ground_mask = tg.character_map.parse('####\n####') # It is solid in the collision mask
 
 		self.fg.fill('\x00') # Fill the foreground with '\x00' which we will use as the transparent characters. This will show the background behind
-		self.fgmask.fill(' ')  # Empty collision mask
+		self.fg_collision_mask.fill(' ')  # Empty collision mask
 		for x in xrange(0, self.width, ground_tile.width): # Repeatedly draw the piece of ground pattern to fill the whole screen
-			self.fg.draw(x, self.height-ground_tile.height, ground_tile) 
-			self.fgmask.draw(x, self.height-ground_tile.height, ground_mask) # Also fill in the ground on the collision mask
+			self.fg.draw_image(x, self.height-ground_tile.height, ground_tile) 
+			self.fg_collision_mask.draw_image(x, self.height-ground_tile.height, ground_mask) # Also fill in the ground on the collision mask
 		self.next_pipe = Pipe(self.width + 80, random.randint(2,self.height-14), 8, self.height-2) # The first pipe is very far away to give the user time
 		self.old_pipes = [self.next_pipe] # old_pipes is all existing pipes that have yet to be scored
 		self.score = 0
@@ -225,19 +225,19 @@ class FlappyUI():
 				self.done = True
 				self.exit = True # make sure to exit
 			if k: break # Until a key is press
-			self.screen.draw(0, 0, self.bg) # draw the background first -- the first layer
+			self.screen.draw_image(0, 0, self.bg) # draw the background first -- the first layer
 
-			self.screen.draw(0, 0, self.fg, '\x00') # place the fg image on the screen as the next layer. Zeros '\x00' are transpearant
+			self.screen.draw_image(0, 0, self.fg, '\x00') # place the fg image on the screen as the next layer. Zeros '\x00' are transpearant
 			self.faby.tick() # Keep the Bird ticking for animation
 
-			self.screen.draw(self.width/2-title.width/2, 0, title) # Draw the title card
+			self.screen.draw_image(self.width/2-title.width/2, 0, title) # Draw the title card
 			self.faby.draw(self.screen) # Draw the animated Bird in front
 
 			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase with FPS
 			self.screen.show() # Update the newest image on screen
 
 			self.fg.scroll_left() # Keep the ground scrolling
-			self.fgmask.scroll_left() # Scroll the collision mask along side it and keep in sync
+			self.fg_collision_mask.scroll_left() # Scroll the collision mask along side it and keep in sync
 			idle += 1 # Track the idle time
 			if (idle >= 4*self.FPS): # If idle for 4 seconds
 				self.highscore.scroll_on(self.screen) # Show high scores
@@ -258,15 +258,15 @@ class FlappyUI():
 				break
 
 			if self.next_pipe.x + self.next_pipe.width >= self.fg.width: # Draw the pipe if it is exactly at the right margin of the screen. Otherwise it has been drawn already and is scrolling along (see scroll_left below)
-				self.next_pipe.draw(self.fg, self.fgmask)
+				self.next_pipe.draw(self.fg, self.fg_collision_mask)
 			else:
 				for y in xrange(0, self.fg.height-2): # Draw a blank column on the right to clear scrolled off pipes which have just wrapped around
 					self.fg[self.fg.width-1, y] = '\x00'
-					self.fgmask[self.fgmask.width-1, y] = ' '
+					self.fg_collision_mask[self.fg_collision_mask.width-1, y] = ' '
 
-			self.screen.draw(0, 0, self.bg) # draw the background first -- the first layer
+			self.screen.draw_image(0, 0, self.bg) # draw the background first -- the first layer
 
-			self.screen.draw(0, 0, self.fg, '\x00') # place the fg image on the screen as the next layer. Spaces ' ' are transpearant
+			self.screen.draw_image(0, 0, self.fg, '\x00') # place the fg image on the screen as the next layer. Spaces ' ' are transpearant
 			if self.next_pipe.age >= self.ARRIVAL_RATE*self.FPS: # Keep new pipes generated at the arrival rate
 				self.next_pipe = Pipe(self.width, random.randint(2, self.height-13), 8, self.height-2)
 				self.old_pipes.append(self.next_pipe) # store the next pipe in the set of old pipes unti it is scored
@@ -285,7 +285,7 @@ class FlappyUI():
 			self.faby.y = max(0, min(self.faby.y, self.height-1)) # constrain the bird inside the screen
 			self.screen.write_text(5,1, "Score: %d"%(self.score)) # Present the score to the user
 
-			collision = self.faby.collision(self.fgmask) # See if the Bird collids with foreground using our collision mask
+			collision = self.faby.collision(self.fg_collision_mask) # See if the Bird collids with foreground using our collision mask
 			if collision: # If a collision is returned
 				cx, cy = collision
 				self.faby.draw(self.screen) # Draw the Bird with an X on it at the collision point
@@ -300,7 +300,7 @@ class FlappyUI():
 			self.screen.show() # Update the display with the newest frame
 
 			self.fg.scroll_left() # Keep the foreground scrolling leftward
-			self.fgmask.scroll_left() # Scroll the foreground in lock step
+			self.fg_collision_mask.scroll_left() # Scroll the foreground in lock step
 
 		self.highscore.handle_new_score(self.score, self.screen) # As the game is over, record a high score if necessary
 

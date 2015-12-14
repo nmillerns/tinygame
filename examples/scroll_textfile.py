@@ -20,7 +20,7 @@ try:
 		if k == tg.keyboard.KEY_ESCAPE:
 			break
 		screen.fill(' ')
-		screen.draw(20-x, 10-y, cmap)
+		screen.draw_image(-x, -y, cmap)
 		screen.show()
 
 finally:

@@ -61,7 +61,7 @@ class TwentyFourtyEightGameUI():
 		self.screen = tg.character_display.CharacterDisplay(80, 23) # the game UI creates a 80 x 24 character screen to draw the game upon
 		self.grid = tg.character_map.CharacterMap(4,4) # A character map to store a representation of the internal 4x4 grid 
 		self.grid.fill(' ') # clear the grid -- fill it with empty tiles
-		self.prev = self.grid.clone() # have a previous copy of the grid to check for differences
+		self.previous_grid = self.grid.clone() # have a previous copy of the grid to check for differences
 		self.delay = 1/8.0 # A dilay pause time to time animations
 		self.done = False
 		self.exit = False
@@ -102,7 +102,7 @@ class TwentyFourtyEightGameUI():
 			while True:
 				ch = tg.keyboard.getch(0)
 				cm = tg.character_map.parse(title_card)
-				self.screen.draw(0, 0, cm)
+				self.screen.draw_image(0, 0, cm)
 				self.screen.show()
 				k = tg.keyboard.getch(3)
 				if k == tg.keyboard.KEY_ESCAPE:
@@ -125,7 +125,7 @@ class TwentyFourtyEightGameUI():
 		
 	def score_tile(self, tile):
 		"""
-		Scores a gicen tile according to this game's rules
+		Scores a given tile according to this game's rules
 		"""
 		self.score += 2*2**(ord(tile)+1) # score the power of two just achived... +1 for 0 offeset
 
@@ -184,24 +184,24 @@ class TwentyFourtyEightGameUI():
 	def combine_right(self):
 		for y in xrange(0, self.grid.height):
 			for x in xrange(self.grid.width-1 - 1, -1, -1):
-				me = self.grid[x,y]
-				if me == ' ': continue
-				right = self.grid[x+1, y]
-				if me == right:
-					self.grid[x + 1, y] = chr(ord(me) + 1)
+				tile = self.grid[x,y]
+				if tile == ' ': continue
+				right_tile = self.grid[x+1, y]
+				if right_tile == tile:
+					self.grid[x + 1, y] = chr(ord(tile) + 1)
 					self.grid[x,y] = ' '
-					self.score_tile(me)
+					self.score_tile(tile)
 
 	def combine_left(self):
 		for y in xrange(0, self.grid.height):
 			for x in xrange(1, self.grid.width):
-				me = self.grid[x,y]
-				if me == ' ': continue
-				left = self.grid[x - 1, y]
-				if me == left:
-					self.grid[x - 1, y] = chr(ord(me) + 1)
+				tile = self.grid[x,y]
+				if tile == ' ': continue
+				left_tile = self.grid[x - 1, y]
+				if left_tile == tile:
+					self.grid[x - 1, y] = chr(ord(tile) + 1)
 					self.grid[x,y] = ' '
-					self.score_tile(me)
+					self.score_tile(tile)
 
 	def insert_random(self):
 		"""
@@ -211,7 +211,7 @@ class TwentyFourtyEightGameUI():
 		empty = [c for c in self.coords if self.grid[c] == ' '] # the set of all empty spaces remaining in the grid
 		random.shuffle(empty) # shuffle them to chose a random empty space
 		rtype = random.randint(1,10) # pick a random new tile based on a random number from 1 to 10. 
-		if empty != []: self.grid[empty[0]] = '\x01' if rtype == 1 else '\x00'  #random tile... 10% of the time use tile 4 otherwise use tile 2
+		if empty != []: self.grid[empty[0]] = '\x00' if rtype == 1 else '\x01'  #random tile... 10% of the time use tile 4 otherwise use tile 2
 
 	def move_exists(self):
 		"""
@@ -225,7 +225,7 @@ class TwentyFourtyEightGameUI():
 				if y < self.grid.height-1 and self.grid[x,y] == self.grid[x,y+1]: return True # if we can check up one, do so and see if there are adjacent tiles that could be combinded
 		return False
 
-	def up(self):
+	def up_pressed(self):
 		"""
 		Applies an up grid slide and combines tiles upward
 		"""
@@ -239,7 +239,7 @@ class TwentyFourtyEightGameUI():
 		tg.time.sleep(self.delay)
 		self.slide_up()
 		
-	def down(self):
+	def down_pressed(self):
 		"""
 		Applies a down grid slide and combines tiles downward
 		"""
@@ -253,7 +253,7 @@ class TwentyFourtyEightGameUI():
 		tg.time.sleep(self.delay)
 		self.slide_down()
 
-	def left(self):
+	def left_pressed(self):
 		"""
 		Applies a left grid slide and combines tiles left
 		"""
@@ -267,7 +267,7 @@ class TwentyFourtyEightGameUI():
 		tg.time.sleep(self.delay)
 		self.slide_left()
 
-	def right(self):
+	def right_pressed(self):
 		"""
 		Applies a right grid slide and combines tiles right
 		"""
@@ -288,10 +288,11 @@ class TwentyFourtyEightGameUI():
 		self.screen.fill(' ') # clear out the screen
 		for x in xrange(0, self.grid.width):
 			for y in xrange(0, self.grid.height):
-				b = self.grid[x, y]
-				if b == ' ': continue
-				if ord(b) >= 10: self.win = True
-				self.screen.draw(5*x, 2*y+2 , TILES[ord(b)])
+				tile = self.grid[x, y]
+				if tile == ' ': continue
+				if ord(tile) >= 10: self.win = True
+				tile_cm = TILES[ord(tile)]
+				self.screen.draw_image(tile_cm.width*x, tile_cm.height*y+2 , tile_cm)
 		self.screen.write_text(1, 0, "Score: %d"%self.score)
 		self.screen.write_text(1, 1, "Best:  %d"%max(self.highscore.highscoresDB.best(), self.score))
 		if self.win: self.screen.write_text(4, 12, "2048! You Win!")
@@ -309,21 +310,21 @@ class TwentyFourtyEightGameUI():
 				self.show_gameover()
 				break
 
-			self.prev.draw(0, 0, self.grid) # copy the grid onto the previous for storage
+			self.previous_grid.draw_image(0, 0, self.grid) # copy the grid onto the previous for storage
 
 			k = tg.keyboard.getch(10.0) # get the keypress and slide tiles accordingly.
 			if k == tg.keyboard.KEY_UP:
-				self.up()
+				self.up_pressed()
 			if k == tg.keyboard.KEY_DOWN:
-				self.down()
+				self.down_pressed()
 			if k == tg.keyboard.KEY_LEFT:
-				self.left()
+				self.left_pressed()
 			if k == tg.keyboard.KEY_RIGHT:
-				self.right()
+				self.right_pressed()
 			if k == tg.keyboard.KEY_ESCAPE:
 				self.done = True
 				self.exit = True
-			if self.grid != self.prev: self.insert_random()
+			if self.grid != self.previous_grid: self.insert_random()
 
 		self.highscore.handle_new_score(self.score, self.screen)
 

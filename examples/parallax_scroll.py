@@ -16,9 +16,9 @@ def main():
             k = tg.keyboard.getch() # this will return a character from the keyboard if one is pressed otherwise None        
             if k != None:
                 break # go until a user presses a key
-            screen.draw(0, 0, layer0,'#')
-            screen.draw(0, 0, layer1,'#')
-            screen.draw(0, 0, layer2,'#')
+            screen.draw_image(0, 0, layer0,'#')
+            screen.draw_image(0, 0, layer1,'#')
+            screen.draw_image(0, 0, layer2,'#')
             timer.wait_for_tick() # wait until the 1.0/10 second tick happens
             screen.show() # show the next frame
             frame += 1

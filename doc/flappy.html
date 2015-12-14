@@ -64,7 +64,7 @@ In&nbsp;particular,&nbsp;the&nbsp;character_map&nbsp;should&nbsp;be&nbsp;a&nbsp;
 &nbsp;<br>
 character_map:&nbsp;A&nbsp;CharacterMap&nbsp;with&nbsp;objects&nbsp;drawn&nbsp;on&nbsp;it&nbsp;to&nbsp;check&nbsp;collision&nbsp;on.&nbsp;Should&nbsp;be&nbsp;just&nbsp;a&nbsp;collision&nbsp;mask&nbsp;with&nbsp;on&nbsp;cells&nbsp;and&nbsp;blank&nbsp;where&nbsp;there&nbsp;is&nbsp;nothing</tt></dd></dl>
 
-<dl><dt><a name="Bird-draw"><strong>draw</strong></a>(self, character_map)</dt><dd><tt>Draws&nbsp;the&nbsp;animated&nbsp;<a href="#Bird">Bird</a>&nbsp;on&nbsp;the&nbsp;given&nbsp;tinygame.character_map.CharacterMap<br>
+<dl><dt><a name="Bird-draw"><strong>draw</strong></a>(self, character_map)</dt><dd><tt>Draws&nbsp;the&nbsp;animated&nbsp;<a href="#Bird">Bird</a>&nbsp;on&nbsp;the&nbsp;given&nbsp;CharacterMap<br>
 &nbsp;<br>
 character_map:&nbsp;A&nbsp;CharacterMap&nbsp;on&nbsp;which&nbsp;to&nbsp;draw&nbsp;the&nbsp;current&nbsp;animation&nbsp;image&nbsp;of&nbsp;the&nbsp;<a href="#Bird">Bird</a></tt></dd></dl>
 
@@ -130,12 +130,12 @@ gap_y:&nbsp;position&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;start&nbsp;of&nbsp;th
 gap_height:&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;gap&nbsp;in&nbsp;the&nbsp;pipes.&nbsp;Hopefully&nbsp;enough&nbsp;for&nbsp;the&nbsp;bird&nbsp;to&nbsp;fly&nbsp;through<br>
 height:&nbsp;the&nbsp;total&nbsp;length&nbsp;of&nbsp;the&nbsp;pipe&nbsp;&nbsp;(usually&nbsp;the&nbsp;whole&nbsp;height&nbsp;of&nbsp;the&nbsp;screen)</tt></dd></dl>
 
-<dl><dt><a name="Pipe-draw"><strong>draw</strong></a>(self, character_map, mask_map)</dt><dd><tt>Draws&nbsp;this&nbsp;pipe&nbsp;on&nbsp;the&nbsp;given&nbsp;CharacterMap.<br>
+<dl><dt><a name="Pipe-draw"><strong>draw</strong></a>(self, character_map, solid_mask_map)</dt><dd><tt>Draws&nbsp;this&nbsp;pipe&nbsp;on&nbsp;the&nbsp;given&nbsp;CharacterMap.<br>
 Pipes&nbsp;are&nbsp;only&nbsp;drawn&nbsp;at&nbsp;the&nbsp;very&nbsp;right&nbsp;hand&nbsp;side&nbsp;of&nbsp;the&nbsp;buffer.&nbsp;<br>
 The&nbsp;buffer&nbsp;continues&nbsp;to&nbsp;scroll&nbsp;so&nbsp;the&nbsp;pipe&nbsp;travels&nbsp;toward&nbsp;the&nbsp;left&nbsp;of&nbsp;the&nbsp;screen<br>
 &nbsp;<br>
 character_map:&nbsp;A&nbsp;CharacterMap&nbsp;buffer&nbsp;to&nbsp;draw&nbsp;the&nbsp;appearance&nbsp;of&nbsp;the&nbsp;pipe<br>
-mask_map:&nbsp;An&nbsp;identical&nbsp;size&nbsp;CharacterMap&nbsp;containing&nbsp;collision&nbsp;information.&nbsp;Draw&nbsp;the&nbsp;pipe's&nbsp;mask&nbsp;on&nbsp;for&nbsp;collision&nbsp;detection</tt></dd></dl>
+solid_mask_map:&nbsp;An&nbsp;identical&nbsp;size&nbsp;CharacterMap&nbsp;containing&nbsp;collision&nbsp;information.&nbsp;Draw&nbsp;the&nbsp;pipe's&nbsp;mask&nbsp;on&nbsp;for&nbsp;collision&nbsp;detection</tt></dd></dl>
 
 <dl><dt><a name="Pipe-tick"><strong>tick</strong></a>(self)</dt><dd><tt>Call&nbsp;for&nbsp;every&nbsp;frame&nbsp;of&nbsp;a&nbsp;pipe.&nbsp;Moves&nbsp;it&nbsp;leftward&nbsp;and&nbsp;ages&nbsp;the&nbsp;pipe</tt></dd></dl>
 
