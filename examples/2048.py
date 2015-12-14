@@ -211,7 +211,7 @@ class TwentyFourtyEightGameUI():
 		empty = [c for c in self.coords if self.grid[c] == ' '] # the set of all empty spaces remaining in the grid
 		random.shuffle(empty) # shuffle them to chose a random empty space
 		rtype = random.randint(1,10) # pick a random new tile based on a random number from 1 to 10. 
-		if empty != []: self.grid[empty[0]] = '\x00' if rtype == 1 else '\x01'  #random tile... 10% of the time use tile 4 otherwise use tile 2
+		if empty != []: self.grid[empty[0]] = '\x01' if rtype == 1 else '\x00'  #random tile... 10% of the time use tile 4 otherwise use tile 2
 
 	def move_exists(self):
 		"""
