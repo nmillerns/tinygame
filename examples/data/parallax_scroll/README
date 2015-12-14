@@ -1,5 +1,4 @@
 Data for the parallax scrolling
 
-./examples/data/parallax/layer*.txt		- A serialized character map of a scrolled layer. #'s are transparent and the layers below appear there
-
+./examples/data/parallax/layer*.txt		- A serialized character map of a scrolled layer. # symbols are transparent and the layers below appears through
 
