@@ -23,6 +23,7 @@ class CharacterMap():
 		"""
 		self.width = width
 		self.height = height
+		self.top_offset_y = 0 # we store a vertical offset of the top row to achieve scrolling
 		self.rows = [CharacterRow(self.width) for i in xrange(0, self.height)] # The data is constructed as a series of rows. See CharacterRow inner class below
 
 	def fill(self, character):
@@ -69,8 +70,13 @@ class CharacterMap():
 		ck = ord(chromakey) if chromakey != None else None # we use the 8bit ASCII value (ord()) of the chromakey since our data is 8bit. It is allowed to be None
 		for yi in xrange(y0, y1): # go through the clipped rows and columns and draw
 			for xi in xrange(x0, x1):
-				c = character_map.rows[yi-y].data[xi-x] # we get the character to draw from other at the correct offset
-				if c != ck: self.rows[yi].data[xi] = c # place the character on self unless it matches the chromakey character "colour"
+				lookup_y = (yi - y + character_map.top_offset_y) % character_map.height
+				lookup_x = (xi - x + character_map.rows[lookup_y].offset) % character_map.width
+				c = character_map.rows[lookup_y].data[lookup_x] # we get the character to draw from other at the correct offset
+				if c != ck: 
+					row = self.rows[(yi + self.top_offset_y) % self.height]
+					row.data[(xi + row.offset) % row.width] = c # place the character on self unless it matches the chromakey character "colour"
+
 
 	def clone(self):
 		"""
@@ -84,42 +90,43 @@ class CharacterMap():
 
 	def scroll_up(self, amount = 1):
 		"""
-		Rolls the rows of this chacter map up amount rows. 
+		Rolls the rows of this chacter map up amount rows by changing the offset of the "top" row
 
-		The rows which were "scrolled off" the top roll around and appear on the bottom
+		The rows which were "scrolled off" the top roll around and appear on the bottom 
 
 		amount: a positive integer less than self.height specifying how many rows to scroll off the top
 		"""
-		amount = amount % self.height
-		temp = self.rows[:]
-		self.rows = temp[amount:]
-		self.rows.extend(temp[0:amount])
+		self.top_offset_y = (self.top_offset_y + amount) % self.height
 
 	def scroll_down(self, amount = 1):
 		"""
-		Rolls the rows of this chacter map down amount rows. 
+		Rolls the rows of this chacter map down amount rows by changing the offset of the "top" row
 
 		The rows which were "scrolled off" the bottom roll around and appear on the top
 
 		amount: a positive integer less than self.height specifying how many rows to scroll off the top
 		"""
-		amount = amount % self.height
-		temp = self.rows[:]
-		self.rows = temp[self.height-amount:]
-		self.rows.extend(temp[0:self.height - amount])
+		self.top_offset_y = (self.top_offset_y - amount) % self.height
 
 	def scroll_left(self, amount = 1):
 		"""
 		Rolls the colums of this chacter map left amount columns. 
 		
-		The columns which were "scrolled off" the legt roll around and appear on the right.
+		The columns which were "scrolled off" the left roll around and appear on the right.
 		amount: a positive integer less than self.width specifying how many rows to scroll off the left
 		"""
-		amount = amount % self.width
 		for row in self.rows:
-			temp = row.data
-			row.data = temp[amount:]
-			row.data.extend(temp[0:amount])
+			row.scroll_left(amount)
+
+	def scroll_right(self, amount = 1):
+		"""
+		Rolls the colums of this chacter map left amount columns. 
+		
+		The columns which were "scrolled off" the right roll around and appear on the left.
+		amount: a positive integer less than self.width specifying how many rows to scroll off the left
+		"""
+		for row in self.rows:
+			row.scroll_right(amount)
 
 	def __setitem__(self, (x, y), value):
 		"""
@@ -133,7 +140,8 @@ class CharacterMap():
 		value: a single character string representing the desired value to set. eg '*'
 		"""
 		try: # simply try and draw and catch exceptions so nothing happens if we try to draw off the map
-			self.rows[y][x] = value # this in turn calls the setter in CharacterRow class. See CharacterRow.__setitem__
+			y_lookup = (y + self.top_offset_y) % self.height # account for the scrolled top offset
+			self.rows[y_lookup][x] = value # this in turn calls the setter in CharacterRow class. See CharacterRow.__setitem__
 		except IndexError, e:
 			pass # we just ignore when a character is drawn completely out of bounds
 
@@ -149,7 +157,8 @@ class CharacterMap():
 		return: a single character string representing the value in the character map. eg '*'
 		"""
 		try:
-			return self.rows[y][x] # this in turn calls the getter in CharacterRow class. See CharacterRow.__getitem__
+			y_lookup = (y + self.top_offset_y) % self.height # account for the scrolled top offset
+			return self.rows[y_lookup][x] # this in turn calls the getter in CharacterRow class. See CharacterRow.__getitem__
 		except IndexError, e:
 			return None # return None when character is completely out of bounds
 
@@ -164,8 +173,8 @@ class CharacterMap():
 		return: a string representation of this map
 		"""
 		s = "" # create a string to build
-		for row in self.rows:
-			s += str(row) + "\n" # the new line puts each row of characters on a new line. In turn the __str__ overload is called on each row. See CharacterRow.__str__()
+		for y in xrange(0, self.height):
+			s += str(self.rows[(self.top_offset_y + y) % self.height]) + "\n" # the new line puts each row of characters on a new line. In turn the __str__ overload is called on each row. See CharacterRow.__str__()
 		return s
 
 	def __eq__(self, other):
@@ -173,7 +182,7 @@ class CharacterMap():
 		Compares the content of two character maps to see if they are identical
 		"""
 		if (self.width, self.height) != (other.width, other.height): return False # must be the same dimensions
-		return all([r == s for r,s in zip(self.rows, other.rows)]) # check content row by row
+		return all([row == other_row for (row, other_row) in zip(self.rows, other.rows)])
 
 	def __ne__(self, other):
 		"""
@@ -189,18 +198,24 @@ class CharacterRow():
 	"""
 	def __init__(self, width):
 		self.width = width
+		self.offset = 0 # a horizontal "left" offset to account for horizontal scrolling
 		self.data = [ord(' ') for i in xrange(0, width)]
 	def __getitem__(self, i):
-		return chr(self.data[i]) # turn the 8bit value back to a string for users
+		lookup = (i + self.offset) % self.width # account for horizontal scrolling
+		return chr(self.data[lookup]) # turn the 8bit value back to a string for users
 	def __setitem__(self, i, character):
-		self.data[i] = ord(character) # we store the 8bit value (ord()) to save space
+		lookup = (i + self.offset) % self.width # account for horizontal scrolling
+		self.data[lookup] = ord(character) # we store the 8bit value (ord()) to save space
 	def __str__(self):
-		return ''.join([chr(val) for val in self.data]) #just joing the characters together to form a row string
+		return ''.join(chr(self.data[(x + self.offset) % self.width]) for x in xrange(0, self.width)) #just joing the characters together to form a row string
 	def __eq__(self, other):
-		return self.width == other.width and all([d == e for d, e in zip(self.data, other.data)])
+		return str(self) == str(other)
+	def scroll_left(self, amount):
+		self.offset = (self.offset - amount) % self.width
+	def scroll_left(self, amount):
+		self.offset = (self.offset + amount) % self.width
 	def fill(self, character):
 		self.data = [ord(character) for i in xrange(0, self.width)] # set each item in the row to the 8bit value given
-
 
 def load(filename):
 	"""
