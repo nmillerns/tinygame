@@ -94,7 +94,7 @@ chromakey:&nbsp;a&nbsp;single&nbsp;character&nbsp;string&nbsp;representing&nbsp;
 &nbsp;<br>
 character:&nbsp;a&nbsp;single&nbsp;character&nbsp;string&nbsp;representing&nbsp;the&nbsp;derired&nbsp;character&nbsp;to&nbsp;fill&nbsp;the&nbsp;map.&nbsp;eg&nbsp;'x'</tt></dd></dl>
 
-<dl><dt><a name="CharacterMap-scroll_down"><strong>scroll_down</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Rolls&nbsp;the&nbsp;rows&nbsp;of&nbsp;this&nbsp;chacter&nbsp;map&nbsp;down&nbsp;amount&nbsp;rows.&nbsp;<br>
+<dl><dt><a name="CharacterMap-scroll_down"><strong>scroll_down</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Rolls&nbsp;the&nbsp;rows&nbsp;of&nbsp;this&nbsp;chacter&nbsp;map&nbsp;down&nbsp;amount&nbsp;rows&nbsp;by&nbsp;changing&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;"top"&nbsp;row<br>
 &nbsp;<br>
 The&nbsp;rows&nbsp;which&nbsp;were&nbsp;"scrolled&nbsp;off"&nbsp;the&nbsp;bottom&nbsp;roll&nbsp;around&nbsp;and&nbsp;appear&nbsp;on&nbsp;the&nbsp;top<br>
 &nbsp;<br>
@@ -102,12 +102,17 @@ amount:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;less&nbsp;than&nbsp;self.<strong>
 
 <dl><dt><a name="CharacterMap-scroll_left"><strong>scroll_left</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Rolls&nbsp;the&nbsp;colums&nbsp;of&nbsp;this&nbsp;chacter&nbsp;map&nbsp;left&nbsp;amount&nbsp;columns.&nbsp;<br>
 &nbsp;<br>
-The&nbsp;columns&nbsp;which&nbsp;were&nbsp;"scrolled&nbsp;off"&nbsp;the&nbsp;legt&nbsp;roll&nbsp;around&nbsp;and&nbsp;appear&nbsp;on&nbsp;the&nbsp;right.<br>
+The&nbsp;columns&nbsp;which&nbsp;were&nbsp;"scrolled&nbsp;off"&nbsp;the&nbsp;left&nbsp;roll&nbsp;around&nbsp;and&nbsp;appear&nbsp;on&nbsp;the&nbsp;right.<br>
 amount:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;less&nbsp;than&nbsp;self.<strong>width</strong>&nbsp;specifying&nbsp;how&nbsp;many&nbsp;rows&nbsp;to&nbsp;scroll&nbsp;off&nbsp;the&nbsp;left</tt></dd></dl>
 
-<dl><dt><a name="CharacterMap-scroll_up"><strong>scroll_up</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Rolls&nbsp;the&nbsp;rows&nbsp;of&nbsp;this&nbsp;chacter&nbsp;map&nbsp;up&nbsp;amount&nbsp;rows.&nbsp;<br>
+<dl><dt><a name="CharacterMap-scroll_right"><strong>scroll_right</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Rolls&nbsp;the&nbsp;colums&nbsp;of&nbsp;this&nbsp;chacter&nbsp;map&nbsp;left&nbsp;amount&nbsp;columns.&nbsp;<br>
 &nbsp;<br>
-The&nbsp;rows&nbsp;which&nbsp;were&nbsp;"scrolled&nbsp;off"&nbsp;the&nbsp;top&nbsp;roll&nbsp;around&nbsp;and&nbsp;appear&nbsp;on&nbsp;the&nbsp;bottom<br>
+The&nbsp;columns&nbsp;which&nbsp;were&nbsp;"scrolled&nbsp;off"&nbsp;the&nbsp;right&nbsp;roll&nbsp;around&nbsp;and&nbsp;appear&nbsp;on&nbsp;the&nbsp;left.<br>
+amount:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;less&nbsp;than&nbsp;self.<strong>width</strong>&nbsp;specifying&nbsp;how&nbsp;many&nbsp;rows&nbsp;to&nbsp;scroll&nbsp;off&nbsp;the&nbsp;left</tt></dd></dl>
+
+<dl><dt><a name="CharacterMap-scroll_up"><strong>scroll_up</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Rolls&nbsp;the&nbsp;rows&nbsp;of&nbsp;this&nbsp;chacter&nbsp;map&nbsp;up&nbsp;amount&nbsp;rows&nbsp;by&nbsp;changing&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;"top"&nbsp;row<br>
+&nbsp;<br>
+The&nbsp;rows&nbsp;which&nbsp;were&nbsp;"scrolled&nbsp;off"&nbsp;the&nbsp;top&nbsp;roll&nbsp;around&nbsp;and&nbsp;appear&nbsp;on&nbsp;the&nbsp;bottom&nbsp;<br>
 &nbsp;<br>
 amount:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;less&nbsp;than&nbsp;self.<strong>height</strong>&nbsp;specifying&nbsp;how&nbsp;many&nbsp;rows&nbsp;to&nbsp;scroll&nbsp;off&nbsp;the&nbsp;top</tt></dd></dl>
 
@@ -143,6 +148,8 @@ A&nbsp;<a href="#CharacterMap">CharacterMap</a>&nbsp;is&nbsp;actually&nbsp;broke
 <dl><dt><a name="CharacterRow-__str__"><strong>__str__</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="CharacterRow-fill"><strong>fill</strong></a>(self, character)</dt></dl>
+
+<dl><dt><a name="CharacterRow-scroll_left"><strong>scroll_left</strong></a>(self, amount)</dt></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
