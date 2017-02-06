@@ -66,7 +66,7 @@ class Ball():
 			# check the next positions on the playing grid for collisions
 			ix = int(round(next_x + 0.5*sign(self.dx)))
 			iy = int(round(next_y))
-			if character_map[ix, iy] not in [' ', None]:
+			if iy < character_map.height and character_map[ix, iy] not in [' ', None]:
 				if character_map[ix, iy] == '#': hit = (ix, iy)
 				bounce_horizontal = True
 
@@ -74,7 +74,7 @@ class Ball():
 			# check the next positions on the playing grid for collisions
 			ix = int(round(next_x))
 			iy = int(round(next_y + 0.5*sign(self.dy)))
-			if character_map[ix, iy] not in [' ', None]:
+			if iy < character_map.height and character_map[ix, iy] not in [' ', None]:
 				if character_map[ix, iy] == '#': hit = (ix, iy)
 				bounce_vertical = True
 		if bounce_horizontal and bounce_vertical:
@@ -99,7 +99,8 @@ class Ball():
 		"""
 		Draws an O for the ball
 		"""
-		character_map[int(round(self.x)), int(round(self.y))] = 'O'
+		ix, iy = int(round(self.x)), int(round(self.y))
+		if iy < character_map.height: character_map[ix,iy] = 'O'
 
 class BreakoutGameUI():
 	background_string = """\
