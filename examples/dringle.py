@@ -77,6 +77,7 @@ class Board():
 
 	def eliminate_matches(self, x, y):
 		target = self.data[x, y]
+		if target == '#': return
 		if y > 0 and self.data[x, y - 1] == target: 
 			self.data[x, y] = '.'
 			self.data[x, y - 1] = '.'
@@ -91,6 +92,17 @@ class Board():
 		if x < self.data.width - 1 and self.data[x + 1, y] == target: 
 			self.data[x, y] = '.'
 			self.data[x + 1, y] = '.'
+
+	def change(self, x, y):
+		if y > 0 and self.data[x, y - 1] == '#': 
+			self.data[x, y] = '#'
+		if y < self.data.height - 1 and self.data[x, y + 1] == '#': 
+			self.data[x, y] = '#'
+		if x > 0 and self.data[x - 1, y] == '#': 
+			self.data[x, y] = '#'
+		if x < self.data.width - 1 and self.data[x + 1, y] == '#': 
+			self.data[x, y] = '#'
+
 
 class DringleUI():
 	def __init__(self):
@@ -109,6 +121,7 @@ class DringleUI():
 		if self.board.data[x, y] not in ['.', '0']:
 			self.board.data[x, y - 1] = self.board.data[x, y]
 			self.board.data[x, y] = '.'
+			self.board.change(x, y - 1)
 			self.board.eliminate_matches(x, y - 1)
 
 	def down_pressed(self):
@@ -119,6 +132,7 @@ class DringleUI():
 		if self.board.data[x, y] not in ['.', '0']:
 			self.board.data[x, y + 1] = self.board.data[x, y]
 			self.board.data[x, y] = '.'
+			self.board.change(x, y + 1)
 			self.board.eliminate_matches(x, y + 1)
 
 	def left_pressed(self):
@@ -129,6 +143,7 @@ class DringleUI():
 		if self.board.data[x, y] not in ['.', '0']:
 			self.board.data[x - 1, y] = self.board.data[x, y]
 			self.board.data[x, y] = '.'
+			self.board.change(x - 1, y)
 			self.board.eliminate_matches(x - 1, y)
 
 	def right_pressed(self):
@@ -139,6 +154,7 @@ class DringleUI():
 		if self.board.data[x, y] not in ['.', '0']:
 			self.board.data[x + 1, y] = self.board.data[x, y]
 			self.board.data[x, y] = '.'
+			self.board.change(x + 1, y)
 			self.board.eliminate_matches(x + 1, y)
 
 	def play_round(self):
