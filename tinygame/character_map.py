@@ -174,7 +174,8 @@ class CharacterMap():
 		"""
 		s = "" # create a string to build
 		for y in xrange(0, self.height):
-			s += str(self.rows[(self.top_offset_y + y) % self.height]) + "\n" # the new line puts each row of characters on a new line. In turn the __str__ overload is called on each row. See CharacterRow.__str__()
+			s += str(self.rows[(self.top_offset_y + y) % self.height]) # In turn the __str__ overload is called on each row. See CharacterRow.__str__()
+			if y < self.height - 1:  s += "\n" # The new line puts each row of characters on a new line. No need to add newline after the last character
 		return s
 
 	def __eq__(self, other):
