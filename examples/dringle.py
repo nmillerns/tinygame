@@ -21,6 +21,7 @@ class Player():
 
 
 class Board():
+	NEIGHBOURHOOD = [(0, -1), (0, 1), (-1, 0), (1, 0)]
 	def __init__(self, data_map):
 		self.data = data_map
 		self.start_x, self.start_y = None, None
@@ -39,70 +40,42 @@ class Board():
 				if self.data[x, y] == 'S':
 					self.start_x, self.start_y = x, y
 
-	def can_go_up(self, x, y):
-		y -= 1
-		if y < 0: return False
+	def in_bounds(self, x, y):
+		return 0 <= x and x < self.data.width and 0 <= y and  y < self.data.height
+
+	def valid_move(self, start, direction):
+		x, y = start
+		dx, dy = direction
+		x += dx
+		y += dy
+		if not self.in_bounds(x, y): return False
 		if self.data[x, y] == '#': return False
-		if self.data[x, y] == '.': return True
-		if self.data[x, y] == '0': return True
-		if y < 1 or self.data[x, y - 1] != '.': return False
+		if self.is_empty(x, y): return True
+		# Otherwise it must be a block to be pushed, look at another step forward to see if it can be moved into an empty space
+		x += dx
+		y += dy
+		if not self.in_bounds(x, y) or self.data[x, y] != '.': return False
 		return True
 
-	def can_go_down(self, x, y):
-		y += 1
-		if y >= self.data.height: return False
-		if self.data[x, y] == '#': return False
-		if self.data[x, y] == '.': return True
-		if self.data[x, y] == '0': return True
-		if y >= self.data.height - 1 or self.data[x, y + 1] != '.': return False
-		return True
+	def is_empty(self, x, y):
+		return self.data[x, y] == '.' or self.data[x, y] == 'X'
 
-	def can_go_left(self, x, y):
-		x -= 1
-		if x < 0: return False
-		if self.data[x, y] == '#': return False
-		if self.data[x, y] == '.': return True
-		if self.data[x, y] == '0': return True
-		if x < 1 or self.data[x - 1, y] != '.': return False
-		return True
-
-	def can_go_right(self, x, y):
-		x += 1
-		if x >= self.data.width: return False
-		if self.data[x, y] == '#': return False
-		if self.data[x, y] == '.': return True
-		if self.data[x, y] == '0': return True
-		if x >= self.data.width - 1 or self.data[x + 1, y] != '.': return False
-		return True
 
 	def eliminate_matches(self, x, y):
+		if self.is_empty(x, y): return
 		target = self.data[x, y]
 		if target == '#': return
-		if y > 0 and self.data[x, y - 1] == target: 
-			self.data[x, y] = '.'
-			self.data[x, y - 1] = '.'
-		if y < self.data.height - 1 and self.data[x, y + 1] == target: 
-			self.data[x, y] = '.'
-			self.data[x, y + 1] = '.'
-
-		if x > 0 and self.data[x - 1, y] == target: 
-			self.data[x, y] = '.'
-			self.data[x - 1, y] = '.'
-
-		if x < self.data.width - 1 and self.data[x + 1, y] == target: 
-			self.data[x, y] = '.'
-			self.data[x + 1, y] = '.'
-
+		for direction in self.NEIGHBOURHOOD:
+			dx, dy = direction
+			if self.in_bounds(x + dx, y + dy) and self.data[x + dx, y + dy] == target:
+				self.data[x, y] = '.'
+				self.data[x + dx, y + dy] = '.'
 	def change(self, x, y):
-		if y > 0 and self.data[x, y - 1] == '#': 
-			self.data[x, y] = '#'
-		if y < self.data.height - 1 and self.data[x, y + 1] == '#': 
-			self.data[x, y] = '#'
-		if x > 0 and self.data[x - 1, y] == '#': 
-			self.data[x, y] = '#'
-		if x < self.data.width - 1 and self.data[x + 1, y] == '#': 
-			self.data[x, y] = '#'
-
+		if self.is_empty(x, y): return
+		for direction in self.NEIGHBOURHOOD:
+			dx, dy = direction
+			if self.in_bounds(x + dx, y + dy) and self.data[x + dx, y + dy] == '#':
+				self.data[x, y] = '#'
 
 class DringleUI():
 	def __init__(self):
@@ -113,49 +86,36 @@ class DringleUI():
 		self.done = False
 		self.exit = False
 
+	def move_player(self, direction):
+		position = self.player.x, self.player.y
+		x, y = position
+		if self.board.valid_move(position, direction):
+			dx, dy = direction
+			self.player.x += dx
+			self.player.y += dy
+		# check to see if you are oushing a block too
+		x, y = self.player.x, self.player.y
+		if not self.board.is_empty(x, y):
+			self.board.data[x + dx, y + dy] = self.board.data[x, y]
+			self.board.data[x, y] = '.'
+			self.board.change(x + dx, y + dy)
+			self.board.eliminate_matches(x + dx, y + dy)
+		
 	def up_pressed(self):
 		self.player.image = Player.UP
-		x, y = self.player.x, self.player.y
-		if self.board.can_go_up(x, y): self.player.y -= 1
-		x, y = self.player.x, self.player.y
-		if self.board.data[x, y] not in ['.', '0']:
-			self.board.data[x, y - 1] = self.board.data[x, y]
-			self.board.data[x, y] = '.'
-			self.board.change(x, y - 1)
-			self.board.eliminate_matches(x, y - 1)
+		self.move_player((0, -1))
 
 	def down_pressed(self):
 		self.player.image = Player.DOWN
-		x, y = self.player.x, self.player.y
-		if self.board.can_go_down(x, y): self.player.y += 1
-		x, y = self.player.x, self.player.y
-		if self.board.data[x, y] not in ['.', '0']:
-			self.board.data[x, y + 1] = self.board.data[x, y]
-			self.board.data[x, y] = '.'
-			self.board.change(x, y + 1)
-			self.board.eliminate_matches(x, y + 1)
+		self.move_player((0, 1))
 
 	def left_pressed(self):
 		self.player.image = Player.LEFT
-		x, y = self.player.x, self.player.y
-		if self.board.can_go_left(x, y): self.player.x -= 1
-		x, y = self.player.x, self.player.y
-		if self.board.data[x, y] not in ['.', '0']:
-			self.board.data[x - 1, y] = self.board.data[x, y]
-			self.board.data[x, y] = '.'
-			self.board.change(x - 1, y)
-			self.board.eliminate_matches(x - 1, y)
+		self.move_player((-1, 0))
 
 	def right_pressed(self):
 		self.player.image = Player.RIGHT
-		x, y = self.player.x, self.player.y
-		if self.board.can_go_right(x, y): self.player.x += 1
-		x, y = self.player.x, self.player.y
-		if self.board.data[x, y] not in ['.', '0']:
-			self.board.data[x + 1, y] = self.board.data[x, y]
-			self.board.data[x, y] = '.'
-			self.board.change(x + 1, y)
-			self.board.eliminate_matches(x + 1, y)
+		self.move_player((1, 0))
 
 	def play_round(self):
 		self.load_level()
@@ -180,7 +140,7 @@ class DringleUI():
 				self.done = True
 				self.exit = True
 			x, y = self.player.x, self.player.y
-			if self.board.data[x, y] == '0': self.done = True
+			if self.board.data[x, y] == 'X': self.done = True
 
 			
 
