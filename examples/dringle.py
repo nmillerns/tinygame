@@ -4,7 +4,7 @@ Dringle?
 import sys
 sys.path.extend(['.', '..'])
 import tinygame as tg
-
+from copy import deepcopy
 class Player():
 	LEFT = "<"
 	RIGHT = ">"
@@ -82,11 +82,15 @@ class DringleUI():
 		self.level = 0
 		self.board = None
 		self.player = None
+		self.previous_boards = [deepcopy(self.board)]
+		self.previous_players = [deepcopy(self.player)]
 		self.screen = tg.character_display.CharacterDisplay(16, 8)
 		self.done = False
 		self.exit = False
 
 	def move_player(self, direction):
+		self.previous_boards.append(deepcopy(self.board))
+		self.previous_players.append(deepcopy(self.player))
 		position = self.player.x, self.player.y
 		x, y = position
 		if self.board.valid_move(position, direction):
@@ -102,25 +106,35 @@ class DringleUI():
 			self.board.eliminate_matches(x + dx, y + dy)
 		
 	def up_pressed(self):
-		self.player.image = Player.UP
 		self.move_player((0, -1))
+		self.player.image = Player.UP
 
 	def down_pressed(self):
-		self.player.image = Player.DOWN
 		self.move_player((0, 1))
+		self.player.image = Player.DOWN
 
 	def left_pressed(self):
-		self.player.image = Player.LEFT
 		self.move_player((-1, 0))
+		self.player.image = Player.LEFT
 
 	def right_pressed(self):
-		self.player.image = Player.RIGHT
 		self.move_player((1, 0))
+		self.player.image = Player.RIGHT
+
+	def undo_move(self):
+		history_length = len(self.previous_boards)
+		if history_length > 0:
+			self.board = self.previous_boards[-1]
+			self.player = self.previous_players[-1]
+			self.previous_boards = self.previous_boards[0:history_length-1]
+			self.previous_players = self.previous_players[0:history_length-1]
 
 	def play_round(self):
 		self.load_level()
 		x,y = self.board.get_start()
 		self.player = Player(x, y)
+		self.previous_boards = []
+		self.previous_players = []
 		self.done = False
 		while not self.done:
 			self.screen.fill(' ')
@@ -136,12 +150,17 @@ class DringleUI():
 				self.left_pressed()
 			if k == tg.keyboard.KEY_RIGHT:
 				self.right_pressed()
+			if k == tg.keyboard.KEY_BACKSPACE:
+				self.undo_move()
+			if k == 'r':
+				self.done = True
 			if k == tg.keyboard.KEY_ESCAPE:
 				self.done = True
 				self.exit = True
 			x, y = self.player.x, self.player.y
-			if self.board.data[x, y] == 'X': self.done = True
-
+			if self.board.data[x, y] == 'X': 
+				self.done = True
+				self.level += 1
 			
 
 	def load_level(self):
@@ -159,7 +178,6 @@ def main():
 		while True:
 			gameui.play_round()
 			if gameui.exit: break
-			gameui.level += 1
 
 	finally:
 		tg.quit()
