@@ -168,13 +168,14 @@ class DringleUI():
 		self.board = Board(board_data)
 
 
-def main():
+def main(args):
 	"""
 	The main entrypoint to the Dringle game. It initializes librarys including tinygame and creates the Game UI
 	"""
 	tg.initialize()
 	try:
 		gameui = DringleUI()
+		if len(args) > 0: gameui.level = int(args[0])
 		while True:
 			gameui.play_round()
 			if gameui.exit: break
@@ -183,4 +184,4 @@ def main():
 		tg.quit()
 
 if __name__ == "__main__":
-	main()
+	main(sys.argv[1:])
