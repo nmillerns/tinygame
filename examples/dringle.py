@@ -89,19 +89,24 @@ class DringleUI():
 		self.exit = False
 
 	def move_player(self, direction):
-		self.previous_boards.append(deepcopy(self.board))
-		self.previous_players.append(deepcopy(self.player))
 		position = self.player.x, self.player.y
 		x, y = position
 		if self.board.valid_move(position, direction):
+			self.previous_boards.append(deepcopy(self.board))
+			self.previous_players.append(deepcopy(self.player))
 			dx, dy = direction
 			self.player.x += dx
 			self.player.y += dy
-		# check to see if you are oushing a block too
+		# check to see if you are pushing a block too
 		x, y = self.player.x, self.player.y
 		if not self.board.is_empty(x, y):
 			self.board.data[x + dx, y + dy] = self.board.data[x, y]
 			self.board.data[x, y] = '.'
+			self.screen.fill(' ')
+			self.board.draw(self.screen)
+			self.player.draw(self.screen)
+			self.screen.show()
+			tg.Metronome(1/5.0).wait_for_tick()
 			self.board.change(x + dx, y + dy)
 			self.board.eliminate_matches(x + dx, y + dy)
 		
