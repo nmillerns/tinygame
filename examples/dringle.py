@@ -49,7 +49,7 @@ class Board():
 		x += dx
 		y += dy
 		if not self.in_bounds(x, y): return False
-		if self.data[x, y] == '#': return False
+		if self.data[x, y] == '!': return False
 		if self.is_empty(x, y): return True
 		# Otherwise it must be a block to be pushed, look at another step forward to see if it can be moved into an empty space
 		x += dx
@@ -64,7 +64,7 @@ class Board():
 	def eliminate_matches(self, x, y):
 		if self.is_empty(x, y): return
 		target = self.data[x, y]
-		if target == '#': return
+		if target == '!': return
 		for direction in self.NEIGHBOURHOOD:
 			dx, dy = direction
 			if self.in_bounds(x + dx, y + dy) and self.data[x + dx, y + dy] == target:
@@ -74,8 +74,8 @@ class Board():
 		if self.is_empty(x, y): return
 		for direction in self.NEIGHBOURHOOD:
 			dx, dy = direction
-			if self.in_bounds(x + dx, y + dy) and self.data[x + dx, y + dy] == '#':
-				self.data[x, y] = '#'
+			if self.in_bounds(x + dx, y + dy) and self.data[x + dx, y + dy] == '!':
+				self.data[x, y] = '!'
 
 class DringleUI():
 	def __init__(self):
