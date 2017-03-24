@@ -5,6 +5,7 @@ import sys
 sys.path.extend(['.', '..'])
 import tinygame as tg
 from copy import deepcopy
+
 class Player():
 	LEFT = "<"
 	RIGHT = ">"
@@ -16,8 +17,8 @@ class Player():
 		self.y = y
 		self.image = self.DOWN
 
-	def draw(self, screen):
-		screen[self.x, self.y] = self.image
+	def draw(self, target):
+		target[self.x, self.y] = self.image
 
 
 class Board():
@@ -31,8 +32,8 @@ class Board():
 	def get_start(self):
 		return (self.start_x, self.start_y)
 
-	def draw(self, screen):
-		screen.draw_image(0, 0, self.data)
+	def draw(self, target):
+		target.draw_image(0, 0, self.data)
 
 	def __find_start(self):
 		for y in xrange(0, self.data.height):
@@ -84,7 +85,10 @@ class DringleUI():
 		self.player = None
 		self.previous_boards = [deepcopy(self.board)]
 		self.previous_players = [deepcopy(self.player)]
-		self.screen = tg.character_display.CharacterDisplay(16, 8)
+		self.display = tg.character_map.CharacterMap(16, 8)
+		self.x_margin = 4
+		self.y_margin = 2
+		self.screen = tg.character_display.CharacterDisplay(16 + self.x_margin, 8 + self.y_margin)
 		self.done = False
 		self.exit = False
 
@@ -102,9 +106,10 @@ class DringleUI():
 		if not self.board.is_empty(x, y):
 			self.board.data[x + dx, y + dy] = self.board.data[x, y]
 			self.board.data[x, y] = '.'
-			self.screen.fill(' ')
-			self.board.draw(self.screen)
-			self.player.draw(self.screen)
+			self.display.fill(' ')
+			self.board.draw(self.display)
+			self.player.draw(self.display)
+			self.screen.draw_image(self.x_margin, self.y_margin, self.display)
 			self.screen.show()
 			tg.Metronome(1/5.0).wait_for_tick()
 			self.board.change(x + dx, y + dy)
@@ -141,10 +146,12 @@ class DringleUI():
 		self.previous_boards = []
 		self.previous_players = []
 		self.done = False
+		self.screen.fill(' ')
 		while not self.done:
-			self.screen.fill(' ')
-			self.board.draw(self.screen)
-			self.player.draw(self.screen)
+			self.display.fill(' ')
+			self.board.draw(self.display)
+			self.player.draw(self.display)
+			self.screen.draw_image(4, 2, self.display)
 			self.screen.show()
 			k = tg.keyboard.getch(10.0)
 			if k == tg.keyboard.KEY_UP:
