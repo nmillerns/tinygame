@@ -66,11 +66,11 @@ class CharacterMap():
 		y0 = max(0, y) # start drawing at row y but clip it to 0 if we are drawing starting off the screen
 		x1 = min(self.width, x + character_map.width) # clip right
 		y1 = min(self.height, y + character_map.height) # clip the bottom
-		ck = ord(chromakey) if chromakey != None else None # we use the 8bit ASCII value (ord()) of the chromakey since our data is 8bit. It is allowed to be None
+		ck = chromakey if chromakey != None else None # It is allowed to be None
 		for yi in xrange(y0, y1): # go through the clipped rows and columns and draw
 			for xi in xrange(x0, x1):
-				c = character_map.rows[yi-y].data[xi-x] # we get the character to draw from other at the correct offset
-				if c != ck: self.rows[yi].data[xi] = c # place the character on self unless it matches the chromakey character "colour"
+				c = character_map.rows[yi-y].characters[xi-x] # we get the character to draw from other at the correct offset
+				if c != ck: self.rows[yi].characters[xi] = c # place the character on self unless it matches the chromakey character "colour"
 
 	def clone(self):
 		"""
@@ -117,9 +117,9 @@ class CharacterMap():
 		"""
 		amount = amount % self.width
 		for row in self.rows:
-			temp = row.data
-			row.data = temp[amount:]
-			row.data.extend(temp[0:amount])
+			temp = row.characters
+			row.characters = temp[amount:]
+			row.characters.extend(temp[0:amount])
 
 	def scroll_right(self, amount = 1):
 		"""
@@ -130,9 +130,9 @@ class CharacterMap():
 		"""
 		amount = amount % self.width
 		for row in self.rows:
-			temp = row.data
-			row.data = temp[self.width-amount:]
-			row.data.extend(temp[0:self.width - amount])
+			temp = row.characters
+			row.characters = temp[self.width-amount:]
+			row.characters.extend(temp[0:self.width - amount])
 
 	def __setitem__(self, (x, y), value):
 		"""
@@ -176,11 +176,7 @@ class CharacterMap():
 
 		return: a string representation of this map
 		"""
-		s = "" # create a string to build
-		for y in xrange(0, self.height):
-			s += str(self.rows[y])
-			if y < self.height - 1: s += "\n" # the new line puts each row of characters on a new line. In turn the __str__ overload is called on each row. See CharacterRow.__str__()
-		return s
+		return '\n'.join([str(row) for row in self.rows]) # the new line puts each row of characters on a new line. In turn the __str__ overload is called on each row. See CharacterRow.__str__()
 
 	def __eq__(self, other):
 		"""
@@ -203,17 +199,17 @@ class CharacterRow():
 	"""
 	def __init__(self, width):
 		self.width = width
-		self.data = [ord(' ') for i in xrange(0, width)]
+		self.characters = [' ' for i in xrange(0, width)]
 	def __getitem__(self, i):
-		return chr(self.data[i]) # turn the 8bit value back to a string for users
+		return self.characters[i]
 	def __setitem__(self, i, character):
-		self.data[i] = ord(character) # we store the 8bit value (ord()) to save space
+		self.characters[i] = character
 	def __str__(self):
-		return ''.join([chr(val) for val in self.data]) #just joing the characters together to form a row string
+		return ''.join(self.characters) #just joining the characters together to form a row string
 	def __eq__(self, other):
-		return self.width == other.width and all([d == e for d, e in zip(self.data, other.data)])
+		return self.width == other.width and all([d == e for d, e in zip(self.characters, other.characters)])
 	def fill(self, character):
-		self.data = [ord(character) for i in xrange(0, self.width)] # set each item in the row to the 8bit value given
+		self.characters = [character for i in xrange(0, self.width)] # set each item in the row to the char value given
 
 def load(filename):
 	"""
