@@ -66,7 +66,7 @@ class CharacterMap():
 		y0 = max(0, y) # start drawing at row y but clip it to 0 if we are drawing starting off the screen
 		x1 = min(self.width, x + character_map.width) # clip right
 		y1 = min(self.height, y + character_map.height) # clip the bottom
-		ck = chromakey if chromakey != None else None # It is allowed to be None
+		ck = chromakey # It is allowed to be None
 		for yi in xrange(y0, y1): # go through the clipped rows and columns and draw
 			for xi in xrange(x0, x1):
 				c = character_map.rows[yi-y].characters[xi-x] # we get the character to draw from other at the correct offset
