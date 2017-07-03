@@ -1,3 +1,4 @@
+import ctypes
 """
 character_map
 This submodule contains a specification of character map data and useful text drawing functions
@@ -117,8 +118,8 @@ class CharacterMap():
 		"""
 		amount = amount % self.width
 		for row in self.rows:
-			temp = row.characters
-			row.characters = temp[amount:]
+			temp = row.characters[0:amount]
+			row.characters[0:self.width-amount] = row.characters[amount:self.width]
 			row.characters.extend(temp[0:amount])
 
 	def scroll_right(self, amount = 1):
@@ -130,9 +131,9 @@ class CharacterMap():
 		"""
 		amount = amount % self.width
 		for row in self.rows:
-			temp = row.characters
-			row.characters = temp[self.width-amount:]
-			row.characters.extend(temp[0:self.width - amount])
+			temp = row.characters[0:self.width - amount]
+			row.characters[0:amount] = row.characters[self.width-amount:self.width]
+			row.characters[amount:self.width] = temp
 
 	def __setitem__(self, (x, y), value):
 		"""
@@ -199,17 +200,17 @@ class CharacterRow():
 	"""
 	def __init__(self, width):
 		self.width = width
-		self.characters = [' ' for i in xrange(0, width)]
+		self.characters = ctypes.create_string_buffer(' '*width)
 	def __getitem__(self, i):
 		return self.characters[i]
 	def __setitem__(self, i, character):
 		self.characters[i] = character
 	def __str__(self):
-		return ''.join(self.characters) #just joining the characters together to form a row string
+		return self.characters.value
 	def __eq__(self, other):
-		return self.width == other.width and all([d == e for d, e in zip(self.characters, other.characters)])
+		return self.width == other.width and d.value == e.value
 	def fill(self, character):
-		self.characters = [character for i in xrange(0, self.width)] # set each item in the row to the char value given
+		self.characters[:width] = character*self.width # set each item in the row to the char value given
 
 def load(filename):
 	"""
