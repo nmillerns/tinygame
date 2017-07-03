@@ -120,7 +120,7 @@ class CharacterMap():
 		for row in self.rows:
 			temp = row.characters[0:amount]
 			row.characters[0:self.width-amount] = row.characters[amount:self.width]
-			row.characters.extend(temp[0:amount])
+			row.characters[self.width-amount:self.width] = temp
 
 	def scroll_right(self, amount = 1):
 		"""
@@ -210,7 +210,7 @@ class CharacterRow():
 	def __eq__(self, other):
 		return self.width == other.width and d.value == e.value
 	def fill(self, character):
-		self.characters[:width] = character*self.width # set each item in the row to the char value given
+		self.characters[0:self.width] = character*self.width # set each item in the row to the char value given
 
 def load(filename):
 	"""
@@ -219,7 +219,7 @@ def load(filename):
 	filename: a string path to a text file
 	returm: a CharacterMap loaded with content from the file
 	"""
-	f = open(filename) #open the file
+	f = open(filename) #op en the file
 	cm = parse(f.read()) # simply read in the content as a string and reuse the parse(string) function to do the work
 	f.close() # close now the we're finished
 	return cm
