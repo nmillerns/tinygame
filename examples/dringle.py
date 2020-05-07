@@ -36,8 +36,8 @@ class Board():
 		target.draw_image(0, 0, self.data)
 
 	def __find_start(self):
-		for y in xrange(0, self.data.height):
-			for x in xrange(0, self.data.width):
+		for y in range(0, self.data.height):
+			for x in range(0, self.data.width):
 				if self.data[x, y] == 'S':
 					self.start_x, self.start_y = x, y
 

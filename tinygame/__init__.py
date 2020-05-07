@@ -7,10 +7,10 @@ as well as user input from the keyboard. (See keyboard.py). Unfortunately sound 
 Example games reside in the examples/ directory
 """
 
-import keyboard # import the keyboard submodule. See keyboard.py
-import character_display # import the character_display submodule. See character_display.py
-import character_map # import the character_map submodule. See character_map.py
 import time
+import tinygame.keyboard # import the keyboard submodule. See keyboard.py
+import tinygame.character_display # import the character_display submodule. See character_display.py
+import tinygame.character_map # import the character_map submodule. See character_map.py
 
 def initialize():
 	"""
@@ -95,8 +95,8 @@ class Metronome():
 		Sleeps until the next tick of the metronome. If a tick has already occured since last calling wait_for_tick() an exception is caught and it returns immediately
 		"""
 		try: # use the time.sleep to sleep until the next tick
-			time.sleep(self.period - (time.time() - self.previous))
-		except (IOError, TypeError), e: # simply catch the exceptions when we have to seleep negative time (tick already passed) or no previous time was specified
+			time.sleep(max(0, self.period - (time.time() - self.previous)))
+		except (IOError, TypeError) as e: # simply catch the exceptions when we have to seleep negative time (tick already passed) or no previous time was specified
 			pass
 		finally:
 			self.reset() # always set the time of last tick to now
@@ -135,12 +135,12 @@ class HighScoresGUI():
 			line = "%2d: %s ...... %d\n"%(i, name, score)
 			text += line
 			maxlen = max(maxlen, len(line))
-		x = plate.width / 2 - 9
+		x = plate.width // 2 - 9
 		plate.write_text(x, 0, "*** High Scores ***") # write the text into a high scores screen
-		x = plate.width / 2 - maxlen / 2
+		x = plate.width // 2 - maxlen // 2
 		plate.write_text(x, 2, text)
 
-		for i in xrange(0, plate.height): # scroll the plate on one name at a time from the top
+		for i in range(0, plate.height): # scroll the plate on one name at a time from the top
 			screen.scroll_down()
 			screen.draw_image(0, i-plate.height+1, plate) # draw the names plate in the gap you just scrolled off
 			screen.show()
@@ -152,7 +152,7 @@ class HighScoresGUI():
 
 		if keyboard.getch(2) != None: return # wait 2 seconds
 
-		for i in xrange(0, screen.height):
+		for i in range(0, screen.height):
 			screen.scroll_down()
 			screen.draw_image(0, i-screen.height+1, prev)
 			screen.show()
@@ -188,10 +188,10 @@ class HighScoresGUI():
 			"""
 			An inner helper function to refresh the screen display as the name is typed
 			"""
-			x = screen.width/2 - 7
+			x = screen.width//2 - 7
 			screen.fill(' ')
 			screen.write_text(x, 1, "New High Score!")
-			x = screen.width/2 - (maxlen + 12)/2
+			x = screen.width//2 - (maxlen + 12)//2
 			screen.write_text(x,3, "Enter Name: " + name)
 			screen.show()
 
@@ -225,7 +225,7 @@ class HighScoresDB():
 		"""
 		self.filename = filename
 		self.N = N
-		self.data = [("None", 0) for i in xrange(0, self.N)]
+		self.data = [("None", 0) for i in range(0, self.N)]
 
 	def save(self):
 		"""
@@ -249,8 +249,8 @@ class HighScoresDB():
 				self.data.append( (name, int(score_string)) )
 			f.close()
 
-		except IOError, e:
-			self.data = [("None", 0) for i in xrange(0, self.N)]
+		except IOError as e:
+			self.data = [("None", 0) for i in range(0, self.N)]
 			
 	def ranking(self, score):
 		"""

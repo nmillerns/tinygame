@@ -45,7 +45,7 @@ class Tetromino():
 
 	def bounding_box(self):
 		# the box around this Tetromino is starts half width back and half height back from the center.
-		x0, y0 = 2*int(self.x - self.appearance().width/2) + 1, int(self.y - self.appearance().height/2) # use 2*x + 1 because the character map has a grid 2 characters wide, and a border of 1
+		x0, y0 = 2*int(self.x - self.appearance().width//2) + 1, int(self.y - self.appearance().height//2) # use 2*x + 1 because the character map has a grid 2 characters wide, and a border of 1
 		return (x0, y0, x0 + self.appearance().width, y0 + self.appearance().height)
 	
 	def fits_in(self, character_map):
@@ -53,8 +53,8 @@ class Tetromino():
 		Check of the given Tetromino fits inside the given character map if it were draw there using its current bounding box
 		"""
 		x0, y0, x1, y1 = self.bounding_box()
-		for yi in xrange(y0, y1): # check all points inside the bounding box
-			for xi in xrange(x0, x1, 2):
+		for yi in range(y0, y1): # check all points inside the bounding box
+			for xi in range(x0, x1, 2):
 				if self.appearance()[xi-x0, yi-y0] != ' ' and character_map[xi+1, yi] != '.': return False # if it is not a transparent character but the map does not have a grid point there, then we don't fit
 		return True # no points have collided so we fit
 
@@ -87,9 +87,9 @@ def rotated(appearance):
 	Calculates and returns the character map of a the given block if it is rotated 90 degrees ccw.
 	This is a little tricky since the blocks have 2 characters for every square. ie "[]"
 	"""
-	r = tg.character_map.CharacterMap(2*appearance.height, appearance.width/2) # the rotated one exchanges height and width stretching appropriately for 2 characters for every square
-	for i in xrange(0, appearance.height): # go through rows
-		for j in xrange(0, appearance.width/2): # go through columns
+	r = tg.character_map.CharacterMap(2*appearance.height, appearance.width//2) # the rotated one exchanges height and width stretching appropriately for 2 characters for every square
+	for i in range(0, appearance.height): # go through rows
+		for j in range(0, appearance.width//2): # go through columns
 			if appearance[2*j, i] != ' ': # only set a new rotated block if there was a block at this row and column
 				r[2*i, r.height - 1 - j] = '[' # use rotation matrix  [0 1; -1 0] ie col i row j to col -j row i
 				r[2*i + 1, r.height - 1 - j] = ']'
@@ -283,7 +283,7 @@ class TetrisGameUI():
 
 			# now that we have handled the current Tetromino, we do the check for completed rows (lines) in the commited background
 			number_completed_rows = 0 # count the complete rows this turn
-			for y in xrange(1, bg.height-1): # run through all rows
+			for y in range(1, bg.height-1): # run through all rows
 				complete = True # assume it is complete and check otherwise
 				for x in range(2, 22, 2): # go through the row
 					if bg[x, y] == '.': # check to see if we see through to the grid
@@ -292,7 +292,7 @@ class TetrisGameUI():
 				if complete: # was it a complete row indeed?
 					number_completed_rows += 1 # if so increment the complete rows
 					self.screen.write_text(1, y, "********************") # draw a little piece of animation on screen of the row collapsing
-					for z in xrange(y, 2, -1): # go back up the rows above in the background and shift everything down one
+					for z in range(y, 2, -1): # go back up the rows above in the background and shift everything down one
 						for x in range(1, 22-1):
 							bg[x, z] = bg[x, z-1] # shifted down (z->z-1)
 					bg.write_text(1, 1, " . . . . . . . . . .") # since everything is shifted down we push in an empty row at the top

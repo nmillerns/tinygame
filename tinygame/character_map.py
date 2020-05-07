@@ -23,7 +23,7 @@ class CharacterMap():
 		"""
 		self.width = width
 		self.height = height
-		self.rows = [CharacterRow(self.width) for i in xrange(0, self.height)] # The data is constructed as a series of rows. See CharacterRow inner class below
+		self.rows = [CharacterRow(self.width) for i in range(0, self.height)] # The data is constructed as a series of rows. See CharacterRow inner class below
 
 	def fill(self, character):
 		"""
@@ -45,8 +45,8 @@ class CharacterMap():
 		text: a string the message to write into the map. It could be multiple lines. eg 'Hello,\nWorld!'
 		"""
 		lines = text.split('\n') # first split the text by the newline character into multiple lines
-		for i in xrange(0, len(lines)): # go throught each line
-			for j in xrange(0, len(lines[i])): # write all the characters in the line in the appropriate row, and column
+		for i in range(0, len(lines)): # go throught each line
+			for j in range(0, len(lines[i])): # write all the characters in the line in the appropriate row, and column
 				self[x + j, y + i] = lines[i][j] if lines[i][j] not in ['\t'] else ' ' # draw only printable characters
 
 	def draw_image(self, x, y, character_map, chromakey = None):
@@ -67,8 +67,8 @@ class CharacterMap():
 		x1 = min(self.width, x + character_map.width) # clip right
 		y1 = min(self.height, y + character_map.height) # clip the bottom
 		ck = chromakey # It is allowed to be None
-		for yi in xrange(y0, y1): # go through the clipped rows and columns and draw
-			for xi in xrange(x0, x1):
+		for yi in range(y0, y1): # go through the clipped rows and columns and draw
+			for xi in range(x0, x1):
 				c = character_map.rows[yi-y].characters[xi-x] # we get the character to draw from other at the correct offset
 				if c != ck: self.rows[yi].characters[xi] = c # place the character on self unless it matches the chromakey character "colour"
 
@@ -134,23 +134,24 @@ class CharacterMap():
 			row.characters = temp[self.width-amount:]
 			row.characters.extend(temp[0:self.width - amount])
 
-	def __setitem__(self, (x, y), value):
+	def __setitem__(self, x_y, value):
 		"""
 		An item setter operator override.  It overrides the square bracket index operator. 
 
-		The (x,y) pair argument lets you call it with a coordinate in the brackets.
+		The x_y pair argument lets you call it with a coordinate in the brackets.
 		eg
 		mymap[10,12] = '*' # calls this method with x=10,y=12 and value = '*'
 
-		(x,y): an integer pair specifing the target coordinate
+		x_y: an integer pair specifing the target coordinate
 		value: a single character string representing the desired value to set. eg '*'
 		"""
+		x, y = x_y
 		try: # simply try and draw and catch exceptions so nothing happens if we try to draw off the map
 			self.rows[y][x] = value # this in turn calls the setter in CharacterRow class. See CharacterRow.__setitem__
-		except IndexError, e:
+		except IndexError as e:
 			pass # we just ignore when a character is drawn completely out of bounds
 
-	def __getitem__(self, (x,y)):
+	def __getitem__(self, x_y):
 		"""
 		An item getter operator override.  It overrides the square bracket index operator. 
 
@@ -158,12 +159,13 @@ class CharacterMap():
 		eg
 		peek = mymap[10,12] # calls this method with x=10,y=12
 
-		(x,y): an integer pair specifing the coordinate you want to get
+		x_y: an integer pair specifing the coordinate you want to get
 		return: a single character string representing the value in the character map. eg '*'
 		"""
+		x, y = x_y
 		try:
 			return self.rows[y][x] # this in turn calls the getter in CharacterRow class. See CharacterRow.__getitem__
-		except IndexError, e:
+		except IndexError as e:
 			return None # return None when character is completely out of bounds
 
 	def __str__(self):
@@ -199,7 +201,7 @@ class CharacterRow():
 	"""
 	def __init__(self, width):
 		self.width = width
-		self.characters = [' ' for i in xrange(0, width)]
+		self.characters = [' ' for i in range(0, width)]
 	def __getitem__(self, i):
 		return self.characters[i]
 	def __setitem__(self, i, character):
@@ -209,7 +211,7 @@ class CharacterRow():
 	def __eq__(self, other):
 		return self.width == other.width and all([d == e for d, e in zip(self.characters, other.characters)])
 	def fill(self, character):
-		self.characters = [character for i in xrange(0, self.width)] # set each item in the row to the char value given
+		self.characters = [character for i in range(0, self.width)] # set each item in the row to the char value given
 
 def load(filename):
 	"""

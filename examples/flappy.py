@@ -44,7 +44,7 @@ class Pipe():
 		character_map: A CharacterMap buffer to draw the appearance of the pipe
 		solid_mask_map: An identical size CharacterMap containing collision information. Draw the pipe's mask on for collision detection
 		"""
-		for y in xrange(0, self.height): # Draw all the way down the pipe
+		for y in range(0, self.height): # Draw all the way down the pipe
 			if self.gap_y < y and y <= self.gap_y + self.gap_height: continue # No need to draw anything between the vertical gaps
 			character_map.draw_image(self.x, y, Pipe.BODY) # Draw a body segment at each point
 			solid_mask_map.draw_image(self.x, y, Pipe.BODY_MASK) # Same on the mask
@@ -93,7 +93,7 @@ class Bird():
 
 		return: CharacterMap you may use to draw the animated Bird
 		"""
-		return self.animation[self.age/2 % len(self.animation)] # The animation moves along with age. The image changes every 2 frames. Mod operator % loops the animation
+		return self.animation[self.age//2 % len(self.animation)] # The animation moves along with age. The image changes every 2 frames. Mod operator % loops the animation
 
 	def draw(self, character_map):
 		"""
@@ -110,14 +110,14 @@ class Bird():
 		self.dy = Bird.FLAP_IMPULSE # Set the velocity using the impulse
 		self.age = 0 # Reset the animation age to zero, so the wings appear down on every flap
 
-	def apply_force(self, (Fx,Fy)):
+	def apply_force(self, Fx_Fy):
 		"""
 		Applies the given force to accelerate the Bird. In particular the force of gravity can accelerate it downward.
 		Note the flapping the wings imparts an impulse. See Bitd.flap(...)
 
-		Fx: The x component of the force. Note this is usually 0 since the Bird should maintain a fixed x position as the world scrolls by
-		Fy: The y component of the force to apply
+		Fx_Fy: a pair. The x, and y component of the force. Note x is usually 0 since the Bird should maintain a fixed x position as the world scrolls by
 		"""
+		Fx, Fy = Fx_Fy
 		self.dy += Fy # Change the velocity by acceleration. Note assume mass m = 1. F = ma. So a = F/m = F
 
 	def tick(self):
@@ -135,8 +135,8 @@ class Bird():
 		character_map: A CharacterMap with objects drawn on it to check collision on. Should be just a collision mask with on cells and blank where there is nothing
 		"""
 		sprite = self.animated_current_sprite() # Determine the sprite to be drawn next
-		for y in xrange(0, sprite.height): # Go through each cell in the sprite
-			for x in xrange(sprite.width-1,0,-1): # Go throgh from right to left since we want to find the rightmost collision as the Bird travels rightward
+		for y in range(0, sprite.height): # Go through each cell in the sprite
+			for x in range(sprite.width-1,0,-1): # Go throgh from right to left since we want to find the rightmost collision as the Bird travels rightward
 				if sprite[x,y] != ' ' and character_map[int(self.x)+x,int(self.y)+y] != ' ': # If it is non-blank on the collision mask we have a collision
 					return int(self.x)+x,int(self.y)+y # return the point of collision
 		return None # Return None for no collision
@@ -166,11 +166,11 @@ class FlappyUI():
 		if random.randint(1, 10) < 4: # 40% of the time, randomly, we change the background to nighttime stars
 			self.bg.fill(' ') # Start with a black night background
 			coords = [] # Fill in all the possible coordinates for stars
-			for x in xrange(0, self.bg.width):
-				for y in xrange(0, self.bg.height-7): # Stars can reach all the way down to height-7
+			for x in range(0, self.bg.width):
+				for y in range(0, self.bg.height-7): # Stars can reach all the way down to height-7
 					coords.append((x,y))
 			random.shuffle(coords) # Randomize coordinates for random stars
-			for star in xrange(0, 30): # Place 30 stars at the coordinates
+			for star in range(0, 30): # Place 30 stars at the coordinates
 				self.bg[coords[star]] = '.'
 			
 		self.fg = tg.character_map.CharacterMap(self.width, self.height) # Create CharacterMap to draw foreground objects (ground and pipe)
@@ -184,7 +184,7 @@ class FlappyUI():
 
 		self.fg.fill('\x00') # Fill the foreground with '\x00' which we will use as the transparent characters. This will show the background behind
 		self.fg_collision_mask.fill(' ')  # Empty collision mask
-		for x in xrange(0, self.width, ground_tile.width): # Repeatedly draw the piece of ground pattern to fill the whole screen
+		for x in range(0, self.width, ground_tile.width): # Repeatedly draw the piece of ground pattern to fill the whole screen
 			self.fg.draw_image(x, self.height-ground_tile.height, ground_tile) 
 			self.fg_collision_mask.draw_image(x, self.height-ground_tile.height, ground_mask) # Also fill in the ground on the collision mask
 		self.next_pipe = Pipe(self.width + 80, random.randint(2,self.height-14), 8, self.height-2) # The first pipe is very far away to give the user time
@@ -230,7 +230,7 @@ class FlappyUI():
 			self.screen.draw_image(0, 0, self.fg, '\x00') # place the fg image on the screen as the next layer. Zeros '\x00' are transpearant
 			self.faby.tick() # Keep the Bird ticking for animation
 
-			self.screen.draw_image(self.width/2-title.width/2, 0, title) # Draw the title card
+			self.screen.draw_image(self.width//2-title.width//2, 0, title) # Draw the title card
 			self.faby.draw(self.screen) # Draw the animated Bird in front
 
 			metronome.wait_for_tick() # wait for a metronome tick to keep the pace of the game at one rate. This will keep pase with FPS
@@ -260,7 +260,7 @@ class FlappyUI():
 			if self.next_pipe.x + self.next_pipe.width >= self.fg.width: # Draw the pipe if it is exactly at the right margin of the screen. Otherwise it has been drawn already and is scrolling along (see scroll_left below)
 				self.next_pipe.draw(self.fg, self.fg_collision_mask)
 			else:
-				for y in xrange(0, self.fg.height-2): # Draw a blank column on the right to clear scrolled off pipes which have just wrapped around
+				for y in range(0, self.fg.height-2): # Draw a blank column on the right to clear scrolled off pipes which have just wrapped around
 					self.fg[self.fg.width-1, y] = '\x00'
 					self.fg_collision_mask[self.fg_collision_mask.width-1, y] = ' '
 

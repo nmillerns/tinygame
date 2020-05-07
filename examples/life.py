@@ -43,7 +43,7 @@ def main(args):
 	args: command line argument list. Should be empty or exactly one string representing the path to a character map
 	"""
 	if len(args) not in [0,1]: # validate command line arguments
-		print "Usage: python life.py [startmap.txt]"
+		print("Usage: python life.py [startmap.txt]")
 		return
 
 	tg.initialize()
@@ -64,8 +64,8 @@ def main(args):
 			if k == tg.keyboard.ESCAPE:
 				break # go until a user presses escape key
 
-			for y in xrange(0, prev.height):
-				for x in xrange(0, prev.width):
+			for y in range(0, prev.height):
+				for x in range(0, prev.width):
 					n = [(xo,yo) for (xo,yo) in [(-1, -1), (0, -1), (1,-1), (-1, 0), (1, 0), (-1,1), (0, 1), (1,1)] if prev[(x+xo)%prev.width,(y+yo)%prev.height] == '#']
 					if prev[x,y] == '#':
 						if len(n) < 2: next[x,y] = ' ' # cell dies from under-population
