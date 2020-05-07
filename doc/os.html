@@ -9,8 +9,8 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>os</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.7/os.py">/usr/lib/python2.7/os.py</a><br><a href="http://docs.python.org/library/os">Module Docs</a></font></td></tr></table>
-    <p><tt>OS&nbsp;routines&nbsp;for&nbsp;Mac,&nbsp;NT,&nbsp;or&nbsp;Posix&nbsp;depending&nbsp;on&nbsp;what&nbsp;system&nbsp;we're&nbsp;on.<br>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.7/os.py">/usr/lib/python2.7/os.py</a><br><a href="https://docs.python.org/library/os">Module Docs</a></font></td></tr></table>
+    <p><tt>OS&nbsp;routines&nbsp;for&nbsp;NT&nbsp;or&nbsp;Posix&nbsp;depending&nbsp;on&nbsp;what&nbsp;system&nbsp;we're&nbsp;on.<br>
 &nbsp;<br>
 This&nbsp;exports:<br>
 &nbsp;&nbsp;-&nbsp;all&nbsp;functions&nbsp;from&nbsp;posix,&nbsp;nt,&nbsp;os2,&nbsp;or&nbsp;ce,&nbsp;e.g.&nbsp;unlink,&nbsp;stat,&nbsp;etc.<br>
@@ -664,7 +664,7 @@ Super-rename;&nbsp;create&nbsp;directories&nbsp;as&nbsp;necessary&nbsp;and&nbsp;
 empty.&nbsp;&nbsp;Works&nbsp;like&nbsp;rename,&nbsp;except&nbsp;creation&nbsp;of&nbsp;any&nbsp;intermediate<br>
 directories&nbsp;needed&nbsp;to&nbsp;make&nbsp;the&nbsp;new&nbsp;pathname&nbsp;good&nbsp;is&nbsp;attempted<br>
 first.&nbsp;&nbsp;After&nbsp;the&nbsp;rename,&nbsp;directories&nbsp;corresponding&nbsp;to&nbsp;rightmost<br>
-path&nbsp;segments&nbsp;of&nbsp;the&nbsp;old&nbsp;name&nbsp;will&nbsp;be&nbsp;pruned&nbsp;way&nbsp;until&nbsp;either&nbsp;the<br>
+path&nbsp;segments&nbsp;of&nbsp;the&nbsp;old&nbsp;name&nbsp;will&nbsp;be&nbsp;pruned&nbsp;until&nbsp;either&nbsp;the<br>
 whole&nbsp;path&nbsp;is&nbsp;consumed&nbsp;or&nbsp;a&nbsp;nonempty&nbsp;directory&nbsp;is&nbsp;found.<br>
 &nbsp;<br>
 Note:&nbsp;this&nbsp;function&nbsp;can&nbsp;fail&nbsp;with&nbsp;the&nbsp;new&nbsp;directory&nbsp;structure&nbsp;made<br>
@@ -864,11 +864,12 @@ subdirectories&nbsp;(directories&nbsp;are&nbsp;generated&nbsp;bottom&nbsp;up).<b
 &nbsp;<br>
 When&nbsp;topdown&nbsp;is&nbsp;true,&nbsp;the&nbsp;caller&nbsp;can&nbsp;modify&nbsp;the&nbsp;dirnames&nbsp;list&nbsp;in-place<br>
 (e.g.,&nbsp;via&nbsp;del&nbsp;or&nbsp;slice&nbsp;assignment),&nbsp;and&nbsp;walk&nbsp;will&nbsp;only&nbsp;recurse&nbsp;into&nbsp;the<br>
-subdirectories&nbsp;whose&nbsp;names&nbsp;remain&nbsp;in&nbsp;dirnames;&nbsp;this&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;prune<br>
-the&nbsp;search,&nbsp;or&nbsp;to&nbsp;impose&nbsp;a&nbsp;specific&nbsp;order&nbsp;of&nbsp;visiting.&nbsp;&nbsp;Modifying<br>
-dirnames&nbsp;when&nbsp;topdown&nbsp;is&nbsp;false&nbsp;is&nbsp;ineffective,&nbsp;since&nbsp;the&nbsp;directories&nbsp;in<br>
-dirnames&nbsp;have&nbsp;already&nbsp;been&nbsp;generated&nbsp;by&nbsp;the&nbsp;time&nbsp;dirnames&nbsp;itself&nbsp;is<br>
-generated.<br>
+subdirectories&nbsp;whose&nbsp;names&nbsp;remain&nbsp;in&nbsp;dirnames;&nbsp;this&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;prune&nbsp;the<br>
+search,&nbsp;or&nbsp;to&nbsp;impose&nbsp;a&nbsp;specific&nbsp;order&nbsp;of&nbsp;visiting.&nbsp;&nbsp;Modifying&nbsp;dirnames&nbsp;when<br>
+topdown&nbsp;is&nbsp;false&nbsp;is&nbsp;ineffective,&nbsp;since&nbsp;the&nbsp;directories&nbsp;in&nbsp;dirnames&nbsp;have<br>
+already&nbsp;been&nbsp;generated&nbsp;by&nbsp;the&nbsp;time&nbsp;dirnames&nbsp;itself&nbsp;is&nbsp;generated.&nbsp;No&nbsp;matter<br>
+the&nbsp;value&nbsp;of&nbsp;topdown,&nbsp;the&nbsp;list&nbsp;of&nbsp;subdirectories&nbsp;is&nbsp;retrieved&nbsp;before&nbsp;the<br>
+tuples&nbsp;for&nbsp;the&nbsp;directory&nbsp;and&nbsp;its&nbsp;subdirectories&nbsp;are&nbsp;generated.<br>
 &nbsp;<br>
 By&nbsp;default&nbsp;errors&nbsp;from&nbsp;the&nbsp;os.<a href="#-listdir">listdir</a>()&nbsp;call&nbsp;are&nbsp;ignored.&nbsp;&nbsp;If<br>
 optional&nbsp;arg&nbsp;'onerror'&nbsp;is&nbsp;specified,&nbsp;it&nbsp;should&nbsp;be&nbsp;a&nbsp;function;&nbsp;it<br>
@@ -970,7 +971,7 @@ Write&nbsp;a&nbsp;string&nbsp;to&nbsp;a&nbsp;file&nbsp;descriptor.</tt></dd></dl
 <strong>curdir</strong> = '.'<br>
 <strong>defpath</strong> = ':/bin:/usr/bin'<br>
 <strong>devnull</strong> = '/dev/null'<br>
-<strong>environ</strong> = {'QT_QPA_PLATFORMTHEME': 'appmenu-qt5', 'XDG_GRE...36:*.spx=00;36:*.xspf=00;36:', 'USER': 'nmiller'}<br>
+<strong>environ</strong> = {'GTK2_MODULES': 'overlay-scrollbar:overlay-scro...ller/miniconda-mio/bin/conda', 'USER': 'nmiller'}<br>
 <strong>extsep</strong> = '.'<br>
 <strong>linesep</strong> = '<font color="#c040c0">\n</font>'<br>
 <strong>name</strong> = 'posix'<br>

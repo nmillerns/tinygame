@@ -9,7 +9,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>random</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.7/random.py">/usr/lib/python2.7/random.py</a><br><a href="http://docs.python.org/library/random">Module Docs</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.7/random.py">/usr/lib/python2.7/random.py</a><br><a href="https://docs.python.org/library/random">Module Docs</a></font></td></tr></table>
     <p><tt><a href="#Random">Random</a>&nbsp;variable&nbsp;generators.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;integers<br>
@@ -189,12 +189,14 @@ To&nbsp;choose&nbsp;a&nbsp;sample&nbsp;in&nbsp;a&nbsp;range&nbsp;of&nbsp;integer
 This&nbsp;is&nbsp;especially&nbsp;fast&nbsp;and&nbsp;space&nbsp;efficient&nbsp;for&nbsp;sampling&nbsp;from&nbsp;a<br>
 large&nbsp;population:&nbsp;&nbsp;&nbsp;<a href="#Random-sample">sample</a>(xrange(10000000),&nbsp;60)</tt></dd></dl>
 
-<dl><dt><a name="Random-seed"><strong>seed</strong></a>(self, a<font color="#909090">=None</font>)</dt><dd><tt>Initialize&nbsp;internal&nbsp;state&nbsp;from&nbsp;hashable&nbsp;object.<br>
+<dl><dt><a name="Random-seed"><strong>seed</strong></a>(self, a<font color="#909090">=None</font>)</dt><dd><tt>Initialize&nbsp;internal&nbsp;state&nbsp;of&nbsp;the&nbsp;random&nbsp;number&nbsp;generator.<br>
 &nbsp;<br>
 None&nbsp;or&nbsp;no&nbsp;argument&nbsp;seeds&nbsp;from&nbsp;current&nbsp;time&nbsp;or&nbsp;from&nbsp;an&nbsp;operating<br>
 system&nbsp;specific&nbsp;randomness&nbsp;source&nbsp;if&nbsp;available.<br>
 &nbsp;<br>
-If&nbsp;a&nbsp;is&nbsp;not&nbsp;None&nbsp;or&nbsp;an&nbsp;int&nbsp;or&nbsp;long,&nbsp;hash(a)&nbsp;is&nbsp;used&nbsp;instead.</tt></dd></dl>
+If&nbsp;a&nbsp;is&nbsp;not&nbsp;None&nbsp;or&nbsp;is&nbsp;an&nbsp;int&nbsp;or&nbsp;long,&nbsp;hash(a)&nbsp;is&nbsp;used&nbsp;instead.<br>
+Hash&nbsp;values&nbsp;for&nbsp;some&nbsp;types&nbsp;are&nbsp;nondeterministic&nbsp;when&nbsp;the<br>
+PYTHONHASHSEED&nbsp;environment&nbsp;variable&nbsp;is&nbsp;enabled.</tt></dd></dl>
 
 <dl><dt><a name="Random-setstate"><strong>setstate</strong></a>(self, state)</dt><dd><tt>Restore&nbsp;internal&nbsp;state&nbsp;from&nbsp;object&nbsp;returned&nbsp;by&nbsp;<a href="#Random-getstate">getstate</a>().</tt></dd></dl>
 
@@ -653,12 +655,14 @@ selection&nbsp;in&nbsp;the&nbsp;sample.<br>
 To&nbsp;choose&nbsp;a&nbsp;sample&nbsp;in&nbsp;a&nbsp;range&nbsp;of&nbsp;integers,&nbsp;use&nbsp;xrange&nbsp;as&nbsp;an&nbsp;argument.<br>
 This&nbsp;is&nbsp;especially&nbsp;fast&nbsp;and&nbsp;space&nbsp;efficient&nbsp;for&nbsp;sampling&nbsp;from&nbsp;a<br>
 large&nbsp;population:&nbsp;&nbsp;&nbsp;<a href="#-sample">sample</a>(xrange(10000000),&nbsp;60)</tt></dd></dl>
- <dl><dt><a name="-seed"><strong>seed</strong></a>(self, a<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Initialize&nbsp;internal&nbsp;state&nbsp;from&nbsp;hashable&nbsp;object.<br>
+ <dl><dt><a name="-seed"><strong>seed</strong></a>(self, a<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Initialize&nbsp;internal&nbsp;state&nbsp;of&nbsp;the&nbsp;random&nbsp;number&nbsp;generator.<br>
 &nbsp;<br>
 None&nbsp;or&nbsp;no&nbsp;argument&nbsp;seeds&nbsp;from&nbsp;current&nbsp;time&nbsp;or&nbsp;from&nbsp;an&nbsp;operating<br>
 system&nbsp;specific&nbsp;randomness&nbsp;source&nbsp;if&nbsp;available.<br>
 &nbsp;<br>
-If&nbsp;a&nbsp;is&nbsp;not&nbsp;None&nbsp;or&nbsp;an&nbsp;int&nbsp;or&nbsp;long,&nbsp;hash(a)&nbsp;is&nbsp;used&nbsp;instead.</tt></dd></dl>
+If&nbsp;a&nbsp;is&nbsp;not&nbsp;None&nbsp;or&nbsp;is&nbsp;an&nbsp;int&nbsp;or&nbsp;long,&nbsp;hash(a)&nbsp;is&nbsp;used&nbsp;instead.<br>
+Hash&nbsp;values&nbsp;for&nbsp;some&nbsp;types&nbsp;are&nbsp;nondeterministic&nbsp;when&nbsp;the<br>
+PYTHONHASHSEED&nbsp;environment&nbsp;variable&nbsp;is&nbsp;enabled.</tt></dd></dl>
  <dl><dt><a name="-setstate"><strong>setstate</strong></a>(self, state)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>Restore&nbsp;internal&nbsp;state&nbsp;from&nbsp;object&nbsp;returned&nbsp;by&nbsp;<a href="#-getstate">getstate</a>().</tt></dd></dl>
  <dl><dt><a name="-shuffle"><strong>shuffle</strong></a>(self, x, random<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> method of <a href="random.html#Random">Random</a> instance</font></font></dt><dd><tt>x,&nbsp;random=random.random&nbsp;-&gt;&nbsp;shuffle&nbsp;list&nbsp;x&nbsp;in&nbsp;place;&nbsp;return&nbsp;None.<br>
 &nbsp;<br>
