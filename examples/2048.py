@@ -69,8 +69,8 @@ class TwentyFourtyEightGameUI():
 		self.win = False
 		self.highscore = tg.HighScoresGUI(tg.HighScoresDB("examples/data/2048/scores.txt")) # Load a GUI object for high scores with data from file
 		self.coords = [] # the set of all coordinates pointing into the internal 4x4 grid
-		for x in xrange(0, self.grid.width):
-			for y in xrange(0, self.grid.height):
+		for x in range(0, self.grid.width):
+			for y in range(0, self.grid.height):
 				self.coords.append((x,y)) 
 
 	def intro(self):
@@ -130,23 +130,23 @@ class TwentyFourtyEightGameUI():
 		self.score += 2*2**(ord(tile)+1) # score the power of two just achived... +1 for 0 offeset
 
 	def slide_up(self):
-		for x in xrange(0, self.grid.width):
-			col = [self.grid[x, y] for y in xrange(0,self.grid.height) if self.grid[x, y] != ' ' ]
-			for y in xrange(0, self.grid.height):
+		for x in range(0, self.grid.width):
+			col = [self.grid[x, y] for y in range(0,self.grid.height) if self.grid[x, y] != ' ' ]
+			for y in range(0, self.grid.height):
 				self.grid[x, y] = ' '
-			for i in xrange(0, len(col)):
+			for i in range(0, len(col)):
 				self.grid[x, i] = col[i]
 	def slide_down(self):
-		for x in xrange(0, self.grid.width):
-			col = [self.grid[x, y] for y in xrange(0,self.grid.height) if self.grid[x, y] != ' ' ]
-			for y in xrange(0, self.grid.height):
+		for x in range(0, self.grid.width):
+			col = [self.grid[x, y] for y in range(0,self.grid.height) if self.grid[x, y] != ' ' ]
+			for y in range(0, self.grid.height):
 				self.grid[x, y] = ' '
-			for i in xrange(0, len(col)):
+			for i in range(0, len(col)):
 				self.grid[x, self.grid.height-len(col)+i] = col[i]
 
 	def combine_down(self):
-		for x in xrange(0, self.grid.width):
-			for y in xrange(self.grid.height-1 -1, -1, -1):
+		for x in range(0, self.grid.width):
+			for y in range(self.grid.height-1 -1, -1, -1):
 				me = self.grid[x,y]
 				if me == ' ': continue
 				below = self.grid[x, y+1]
@@ -155,8 +155,8 @@ class TwentyFourtyEightGameUI():
 					self.grid[x,y] = ' '
 					self.score_tile(me)
 	def combine_up(self):
-		for x in xrange(0, self.grid.width):
-			for y in xrange(1, self.grid.height):
+		for x in range(0, self.grid.width):
+			for y in range(1, self.grid.height):
 				me = self.grid[x,y]
 				if me == ' ': continue
 				above = self.grid[x, y-1]
@@ -166,24 +166,24 @@ class TwentyFourtyEightGameUI():
 					self.score_tile(me)
 
 	def slide_left(self):
-		for y in xrange(0, self.grid.height):
-			row = [self.grid[x, y] for x in xrange(0,self.grid.width) if self.grid[x, y] != ' ' ]
-			for x in xrange(0, self.grid.width):
+		for y in range(0, self.grid.height):
+			row = [self.grid[x, y] for x in range(0,self.grid.width) if self.grid[x, y] != ' ' ]
+			for x in range(0, self.grid.width):
 				self.grid[x, y] = ' '
-			for i in xrange(0, len(row)):
+			for i in range(0, len(row)):
 				self.grid[i, y] = row[i]
 
 	def slide_right(self):
-		for y in xrange(0, self.grid.height):
-			row = [self.grid[x, y] for x in xrange(0,self.grid.width) if self.grid[x, y] != ' ' ]
-			for x in xrange(0, self.grid.width):
+		for y in range(0, self.grid.height):
+			row = [self.grid[x, y] for x in range(0,self.grid.width) if self.grid[x, y] != ' ' ]
+			for x in range(0, self.grid.width):
 				self.grid[x, y] = ' '
-			for i in xrange(0, len(row)):
+			for i in range(0, len(row)):
 				self.grid[self.grid.width-len(row)+i, y] = row[i]
 
 	def combine_right(self):
-		for y in xrange(0, self.grid.height):
-			for x in xrange(self.grid.width-1 - 1, -1, -1):
+		for y in range(0, self.grid.height):
+			for x in range(self.grid.width-1 - 1, -1, -1):
 				tile = self.grid[x,y]
 				if tile == ' ': continue
 				right_tile = self.grid[x+1, y]
@@ -193,8 +193,8 @@ class TwentyFourtyEightGameUI():
 					self.score_tile(tile)
 
 	def combine_left(self):
-		for y in xrange(0, self.grid.height):
-			for x in xrange(1, self.grid.width):
+		for y in range(0, self.grid.height):
+			for x in range(1, self.grid.width):
 				tile = self.grid[x,y]
 				if tile == ' ': continue
 				left_tile = self.grid[x - 1, y]
@@ -218,8 +218,8 @@ class TwentyFourtyEightGameUI():
 		Returns True iff a valid move exists on this game's grid which would change the grid.
 		This is true when there is at least one empty tile which could be slid into. Otherwise there must be adjacent values to combine
 		"""
-		for x in xrange(0, self.grid.width):
-			for y in xrange(0, self.grid.height):
+		for x in range(0, self.grid.width):
+			for y in range(0, self.grid.height):
 				if self.grid[x,y] == ' ': return True # if there is an empty tile, sliding another aligned tile through that space is a valid move
 				if x < self.grid.width-1 and self.grid[x,y] == self.grid[x+1,y]: return True # if we can check to the right, do so and see if there are adjacent tiles that could be combinded
 				if y < self.grid.height-1 and self.grid[x,y] == self.grid[x,y+1]: return True # if we can check up one, do so and see if there are adjacent tiles that could be combinded
@@ -286,8 +286,8 @@ class TwentyFourtyEightGameUI():
 		Draws the tiles of the grid on this game UI screen
 		"""
 		self.screen.fill(' ') # clear out the screen
-		for x in xrange(0, self.grid.width):
-			for y in xrange(0, self.grid.height):
+		for x in range(0, self.grid.width):
+			for y in range(0, self.grid.height):
 				tile = self.grid[x, y]
 				if tile == ' ': continue
 				if ord(tile) >= 10: self.win = True
@@ -301,7 +301,7 @@ class TwentyFourtyEightGameUI():
 		"""
 		The UI plays a round of 2048 game. 
 		"""
-		for i in xrange(0, 2): self.insert_random() # start with 2 random tiles
+		for i in range(0, 2): self.insert_random() # start with 2 random tiles
 
 		while not self.done: # play forever until something happens
 			self.render_grid() # render the grid to the screeen

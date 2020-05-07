@@ -7,7 +7,7 @@ You continually update the character map and show it once per time slice / frame
 
 import os
 import sys
-from character_map import *
+from tinygame.character_map import *
 
 # This submodule makes use of ANSI control sequences to position characters on the terminal display
 # See http://en.wikipedia.org/wiki/ANSI_escape_code
@@ -62,10 +62,11 @@ class CharacterDisplay(CharacterMap): # Inherit from the CharacterMap class.
 			sys.stdout.flush() # flush the output so it is shown by the OS immediately instead of waiting for enough data
 			self.dirty = False # We have just updated the console so obviously the screen is not dirty
 
-	def __setitem__(self, (x, y), value):
+	def __setitem__(self, x_y, value):
 		"""
 		Same as setting a value in a normal character map. See CharacterMap
 		"""
+		x, y = x_y
 		if self[x,y] != value:
 			CharacterMap.__setitem__(self, (x, y), value)
 			self.dirty = True # same except we now know the screen data is now different so set the dirty bit

@@ -11,12 +11,12 @@ class Paddle():
 		self.x = x # sets initial location
 		self.y = y
 		self.width = width # sets the width
-		self.appearance = ''.join(['=' for i in xrange(0, self.width)]) # sets the appearance of the paddle as a sequence of ='s
+		self.appearance = ''.join(['=' for i in range(0, self.width)]) # sets the appearance of the paddle as a sequence of ='s
 	def draw(self, character_map):
 		"""
 		Draws the appearance of the paddle (a sequence of='s) on the given character map
 		"""
-		character_map.write_text(self.x - self.width / 2, self.y, self.appearance)
+		character_map.write_text(self.x - self.width // 2, self.y, self.appearance)
 
 class FallingBrick():
 	"""
@@ -213,8 +213,8 @@ class BreakoutGameUI():
 			if k == tg.keyboard.KEY_ESCAPE:
 				self.done = True
 				break
-			if paddle.x - paddle.width/2 < 1: paddle.x = 1 + paddle.width/2
-			if paddle.x + paddle.width/2 > self.screen.width - 1: paddle.x = self.screen.width - 1 - paddle.width/2
+			if paddle.x - paddle.width//2 < 1: paddle.x = 1 + paddle.width//2
+			if paddle.x + paddle.width//2 > self.screen.width - 1: paddle.x = self.screen.width - 1 - paddle.width//2
 
 			self.screen.draw_image(0, 0, self.bg)
 			

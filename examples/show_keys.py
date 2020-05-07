@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import sys
 sys.path.extend(['.', '..'])
 import tinygame as tg

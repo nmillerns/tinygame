@@ -9,7 +9,7 @@ import fcntl	# module to manipulate a file descriptor (ie the standard input fil
 import sys, os	# opersting system wrapper module
 import select	# a module exposing the lowleve select() call which allows a program to monitor multiple file  descriptors,  waiting  until  one or more of the file descriptors become "ready" for some class of I/O operation (e.g., input possible).
 
-from character_display import ESCAPE, CSI # we read ANSI escape sequences for special keys similar to printing them for display. See character_display.py
+from tinygame.character_display import ESCAPE, CSI # we read ANSI escape sequences for special keys similar to printing them for display. See character_display.py
 
 KEY_ESCAPE = ESCAPE
 KEY_TAB = chr(9)
