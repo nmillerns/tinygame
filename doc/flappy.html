@@ -53,11 +53,10 @@ y:&nbsp;y&nbsp;position&nbsp;of&nbsp;the&nbsp;<a href="#Bird">Bird</a>&nbsp;on&n
 &nbsp;<br>
 return:&nbsp;CharacterMap&nbsp;you&nbsp;may&nbsp;use&nbsp;to&nbsp;draw&nbsp;the&nbsp;animated&nbsp;<a href="#Bird">Bird</a></tt></dd></dl>
 
-<dl><dt><a name="Bird-apply_force"><strong>apply_force</strong></a>(self, (Fx, Fy))</dt><dd><tt>Applies&nbsp;the&nbsp;given&nbsp;force&nbsp;to&nbsp;accelerate&nbsp;the&nbsp;<a href="#Bird">Bird</a>.&nbsp;In&nbsp;particular&nbsp;the&nbsp;force&nbsp;of&nbsp;gravity&nbsp;can&nbsp;accelerate&nbsp;it&nbsp;downward.<br>
+<dl><dt><a name="Bird-apply_force"><strong>apply_force</strong></a>(self, Fx_Fy)</dt><dd><tt>Applies&nbsp;the&nbsp;given&nbsp;force&nbsp;to&nbsp;accelerate&nbsp;the&nbsp;<a href="#Bird">Bird</a>.&nbsp;In&nbsp;particular&nbsp;the&nbsp;force&nbsp;of&nbsp;gravity&nbsp;can&nbsp;accelerate&nbsp;it&nbsp;downward.<br>
 Note&nbsp;the&nbsp;flapping&nbsp;the&nbsp;wings&nbsp;imparts&nbsp;an&nbsp;impulse.&nbsp;See&nbsp;Bitd.<a href="#Bird-flap">flap</a>(...)<br>
 &nbsp;<br>
-Fx:&nbsp;The&nbsp;x&nbsp;component&nbsp;of&nbsp;the&nbsp;force.&nbsp;Note&nbsp;this&nbsp;is&nbsp;usually&nbsp;0&nbsp;since&nbsp;the&nbsp;<a href="#Bird">Bird</a>&nbsp;should&nbsp;maintain&nbsp;a&nbsp;fixed&nbsp;x&nbsp;position&nbsp;as&nbsp;the&nbsp;world&nbsp;scrolls&nbsp;by<br>
-Fy:&nbsp;The&nbsp;y&nbsp;component&nbsp;of&nbsp;the&nbsp;force&nbsp;to&nbsp;apply</tt></dd></dl>
+Fx_Fy:&nbsp;a&nbsp;pair.&nbsp;The&nbsp;x,&nbsp;and&nbsp;y&nbsp;component&nbsp;of&nbsp;the&nbsp;force.&nbsp;Note&nbsp;x&nbsp;is&nbsp;usually&nbsp;0&nbsp;since&nbsp;the&nbsp;<a href="#Bird">Bird</a>&nbsp;should&nbsp;maintain&nbsp;a&nbsp;fixed&nbsp;x&nbsp;position&nbsp;as&nbsp;the&nbsp;world&nbsp;scrolls&nbsp;by</tt></dd></dl>
 
 <dl><dt><a name="Bird-collision"><strong>collision</strong></a>(self, character_map)</dt><dd><tt>Determines&nbsp;if&nbsp;the&nbsp;<a href="#Bird">Bird</a>&nbsp;would&nbsp;collide&nbsp;with&nbsp;any&nbsp;of&nbsp;the&nbsp;non-blank&nbsp;characters&nbsp;on&nbsp;the&nbsp;given&nbsp;CharacterMap.<br>
 In&nbsp;particular,&nbsp;the&nbsp;character_map&nbsp;should&nbsp;be&nbsp;a&nbsp;collision&nbsp;mask&nbsp;with&nbsp;pipes&nbsp;and&nbsp;ground&nbsp;drawn&nbsp;on.<br>
