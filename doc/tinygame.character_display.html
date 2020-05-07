@@ -58,7 +58,7 @@ You&nbsp;continually&nbsp;update&nbsp;the&nbsp;character&nbsp;map&nbsp;and&nbsp;
 width:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;representing&nbsp;the&nbsp;desired&nbsp;width&nbsp;of&nbsp;the&nbsp;display<br>
 height:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;representing&nbsp;the&nbsp;desired&nbsp;height&nbsp;of&nbsp;the&nbsp;display</tt></dd></dl>
 
-<dl><dt><a name="CharacterDisplay-__setitem__"><strong>__setitem__</strong></a>(self, (x, y), value)</dt><dd><tt>Same&nbsp;as&nbsp;setting&nbsp;a&nbsp;value&nbsp;in&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
+<dl><dt><a name="CharacterDisplay-__setitem__"><strong>__setitem__</strong></a>(self, x_y, value)</dt><dd><tt>Same&nbsp;as&nbsp;setting&nbsp;a&nbsp;value&nbsp;in&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
 
 <dl><dt><a name="CharacterDisplay-draw_image"><strong>draw_image</strong></a>(self, x, y, character_map, chromakey<font color="#909090">=None</font>)</dt><dd><tt>Same&nbsp;as&nbsp;drawing&nbsp;onto&nbsp;a&nbsp;a&nbsp;normal&nbsp;character&nbsp;map.&nbsp;See&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a></tt></dd></dl>
 
@@ -81,13 +81,13 @@ WARNING!&nbsp;If&nbsp;you&nbsp;change&nbsp;and&nbsp;show&nbsp;the&nbsp;screen&nb
 Methods inherited from <a href="tinygame.character_map.html#CharacterMap">tinygame.character_map.CharacterMap</a>:<br>
 <dl><dt><a name="CharacterDisplay-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Compares&nbsp;the&nbsp;content&nbsp;of&nbsp;two&nbsp;character&nbsp;maps&nbsp;to&nbsp;see&nbsp;if&nbsp;they&nbsp;are&nbsp;identical</tt></dd></dl>
 
-<dl><dt><a name="CharacterDisplay-__getitem__"><strong>__getitem__</strong></a>(self, (x, y))</dt><dd><tt>An&nbsp;item&nbsp;getter&nbsp;operator&nbsp;override.&nbsp;&nbsp;It&nbsp;overrides&nbsp;the&nbsp;square&nbsp;bracket&nbsp;index&nbsp;operator.&nbsp;<br>
+<dl><dt><a name="CharacterDisplay-__getitem__"><strong>__getitem__</strong></a>(self, x_y)</dt><dd><tt>An&nbsp;item&nbsp;getter&nbsp;operator&nbsp;override.&nbsp;&nbsp;It&nbsp;overrides&nbsp;the&nbsp;square&nbsp;bracket&nbsp;index&nbsp;operator.&nbsp;<br>
 &nbsp;<br>
 The&nbsp;(x,y)&nbsp;pair&nbsp;argument&nbsp;lets&nbsp;you&nbsp;call&nbsp;it&nbsp;with&nbsp;a&nbsp;coordinate&nbsp;in&nbsp;the&nbsp;brackets.<br>
 eg<br>
 peek&nbsp;=&nbsp;mymap[10,12]&nbsp;#&nbsp;calls&nbsp;this&nbsp;method&nbsp;with&nbsp;x=10,y=12<br>
 &nbsp;<br>
-(x,y):&nbsp;an&nbsp;integer&nbsp;pair&nbsp;specifing&nbsp;the&nbsp;coordinate&nbsp;you&nbsp;want&nbsp;to&nbsp;get<br>
+x_y:&nbsp;an&nbsp;integer&nbsp;pair&nbsp;specifing&nbsp;the&nbsp;coordinate&nbsp;you&nbsp;want&nbsp;to&nbsp;get<br>
 return:&nbsp;a&nbsp;single&nbsp;character&nbsp;string&nbsp;representing&nbsp;the&nbsp;value&nbsp;in&nbsp;the&nbsp;character&nbsp;map.&nbsp;eg&nbsp;'*'</tt></dd></dl>
 
 <dl><dt><a name="CharacterDisplay-__ne__"><strong>__ne__</strong></a>(self, other)</dt><dd><tt>Compares&nbsp;the&nbsp;content&nbsp;of&nbsp;two&nbsp;character&nbsp;maps&nbsp;to&nbsp;see&nbsp;if&nbsp;they&nbsp;are&nbsp;identical</tt></dd></dl>
@@ -104,10 +104,10 @@ return:&nbsp;a&nbsp;string&nbsp;representation&nbsp;of&nbsp;this&nbsp;map</tt></
 &nbsp;<br>
 A&nbsp;new&nbsp;<a href="tinygame.character_map.html#CharacterMap">CharacterMap</a>&nbsp;of&nbsp;the&nbsp;same&nbsp;heght&nbsp;and&nbsp;width&nbsp;returned&nbsp;and&nbsp;all&nbsp;the&nbsp;data&nbsp;of&nbsp;self&nbsp;is&nbsp;copied&nbsp;to&nbsp;it</tt></dd></dl>
 
-<dl><dt><a name="CharacterDisplay-scroll_right"><strong>scroll_right</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Rolls&nbsp;the&nbsp;colums&nbsp;of&nbsp;this&nbsp;chacter&nbsp;map&nbsp;left&nbsp;amount&nbsp;columns.&nbsp;<br>
+<dl><dt><a name="CharacterDisplay-scroll_right"><strong>scroll_right</strong></a>(self, amount<font color="#909090">=1</font>)</dt><dd><tt>Rolls&nbsp;the&nbsp;colums&nbsp;of&nbsp;this&nbsp;chacter&nbsp;map&nbsp;right&nbsp;amount&nbsp;columns.&nbsp;<br>
 &nbsp;<br>
 The&nbsp;columns&nbsp;which&nbsp;were&nbsp;"scrolled&nbsp;off"&nbsp;the&nbsp;right&nbsp;roll&nbsp;around&nbsp;and&nbsp;appear&nbsp;on&nbsp;the&nbsp;left.<br>
-amount:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;less&nbsp;than&nbsp;self.<strong>width</strong>&nbsp;specifying&nbsp;how&nbsp;many&nbsp;rows&nbsp;to&nbsp;scroll&nbsp;off&nbsp;the&nbsp;left</tt></dd></dl>
+amount:&nbsp;a&nbsp;positive&nbsp;integer&nbsp;less&nbsp;than&nbsp;self.<strong>width</strong>&nbsp;specifying&nbsp;how&nbsp;many&nbsp;rows&nbsp;to&nbsp;scroll&nbsp;off&nbsp;the&nbsp;right</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
